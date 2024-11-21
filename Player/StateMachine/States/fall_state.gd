@@ -20,4 +20,3 @@ func update(delta: float):
 	
 func handle_animation():
 	player.anim.play("fall")
-	player.handle_flip_h()

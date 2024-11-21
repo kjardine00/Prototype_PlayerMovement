@@ -16,7 +16,6 @@ func exit_state():
 func update(delta: float):
 	player.get_wall_direction()
 	player.handle_gravity(delta, player.GRAVITY_JUMP)
-	player.handle_flip_h()
 	handle_wall_kick_movement()
 	handle_wall_jump_end()
 	handle_animation()
