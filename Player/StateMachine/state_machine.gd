@@ -29,4 +29,4 @@ func change_state(next_state):
 		current_state = next_state
 		prev_state.exit_state()
 		current_state.enter_state()
-		print("From: " + prev_state.name + " To: " + current_state.name)
+		#print("From: " + prev_state.name + " To: " + current_state.name)

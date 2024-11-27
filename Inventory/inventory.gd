@@ -12,6 +12,11 @@ class_name Inv
 
 
 func swap_active():
-	var prev_active = active_item
-	active_item = stowed_item
-	stowed_item = prev_active
+	if active_item.can_stow:
+		var prev_active = active_item
+		active_item = stowed_item
+		stowed_item = prev_active
+	else:
+		pass
+		## TODO somehow tell the player the item they want to stow can't be
+		## OBJ shake, noise, etc

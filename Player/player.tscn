@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dpgg3aujritit"]
+[gd_scene load_steps=24 format=3 uid="uid://dpgg3aujritit"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_20bt8"]
 [ext_resource type="Texture2D" uid="uid://be0tkmfjafi5x" path="res://Player/Sprites/Character base.png" id="1_oph37"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://Player/StateMachine/States/wall_jump_state.gd" id="8_2bkxe"]
 [ext_resource type="Script" path="res://Player/StateMachine/States/wallslide_state.gd" id="9_xa8so"]
 [ext_resource type="PackedScene" uid="uid://bky3owklv4i7s" path="res://Player/Components/player_interact_area_2d.tscn" id="10_a0os3"]
-[ext_resource type="Texture2D" uid="uid://bigypix0h82p8" path="res://Inventory/Items/Weapons/Sword/sword_icon.png" id="12_8uicf"]
 [ext_resource type="PackedScene" uid="uid://fu1btk5yh1xq" path="res://Common/Components/sword_attack_comp.tscn" id="13_2e5dk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5joj1"]
@@ -257,12 +256,6 @@ target_position = Vector2(4, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInteractArea2D"]
 shape = SubResource("CircleShape2D_hm74x")
 debug_color = Color(0.965701, 0, 0.485083, 0.42)
-
-[node name="WeaponSprite" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(12, 0)
-rotation = 0.785398
-texture = ExtResource("12_8uicf")
 
 [node name="SwordAttackComponent" parent="." instance=ExtResource("13_2e5dk")]
 collision_layer = 2

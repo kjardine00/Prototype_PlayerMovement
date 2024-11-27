@@ -9,7 +9,6 @@ class_name Player
 @onready var jump_buffer: Timer = $Timers/JumpBuffer
 @onready var wall_kick_left: RayCast2D = $RayCasts/WallJump/WallKickLeft
 @onready var wall_kick_right: RayCast2D = $RayCasts/WallJump/WallKickRight
-@onready var weapon_sprite: Sprite2D = $WeaponSprite
 
 #endregion
 
@@ -181,6 +180,7 @@ func handle_equip_item(item):
 		
 func handle_interact_action():
 	interact_area.interact(self)
+		
 
 #endregion
 
@@ -190,7 +190,6 @@ func handle_attack_action():
 	if INVENTORY.active_item:
 		attack_component.attack(INVENTORY.active_item)
 
-	
 #endregion
 
 func get_input():

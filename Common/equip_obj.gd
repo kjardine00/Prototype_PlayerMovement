@@ -22,6 +22,8 @@ func _interaction_signal(interactor: Player):
 		if CAN_EQUIP:
 			interactor.handle_equip_item(inv_item)
 			self.visible = false
+			var collider = self.get_node("CollisionShape2D")
+			collider.disabled = true
 	else: 
 		pass
 		#TODO: Add thud sound and an obj shake

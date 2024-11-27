@@ -2,10 +2,12 @@ extends Area2D
 class_name Attack_Component
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var sprite_2d_2: Sprite2D = $Sprite2D2
-@onready var timer: Timer = $Timer
+@onready var weapon_sprite: Sprite2D = $WeaponSprite
 
-@export var anim_timer: float = 0.1
+#OLD NO ANIMATION Sprite
+@onready var sprite_2d_2: Sprite2D = $Sprite2D2
+
+const sword_anim_1 = "sword_slash"
 
 var player: Player
 
@@ -17,15 +19,11 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func attack(item: InvItem):
-
-	sprite_2d_2.visible = true
 	if player.handle_direction():
-		sprite_2d_2.position.x = -12
-		sprite_2d_2.rotation = PI * 1.25
+		#weapon_sprite.position.x = -6
+		weapon_sprite.flip_h = true
 	elif not player.handle_direction():
-		sprite_2d_2.position.x = 12
-		sprite_2d_2.rotation = PI * 0.25
-	timer.start(anim_timer)
-
-func _on_timer_timeout() -> void:
-	sprite_2d_2.visible = false
+		#weapon_sprite.position.x = 6
+		weapon_sprite.flip_h = false
+		
+	animation_player.play(sword_anim_1)

@@ -3,13 +3,13 @@ class_name Player_Interaction_Area2D
 
 var selected_interactable : InteractComponent
 var nearby_interactables : Array[InteractComponent]
-var player: Player
+var player : Player
 
 func _ready():
 	var player = get_parent()
 
 ## The player interacts with the obj on press of the interact button
-func interact(player: Player):
+func interact(player):
 	print(str(selected_interactable))
 	if selected_interactable:
 		selected_interactable.interaction_signal(player)
