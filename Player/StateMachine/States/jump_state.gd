@@ -3,8 +3,8 @@ extends State
 ## JUMP State
 
 func enter_state():
+	player.velocity.y = 0
 	player.velocity.y += player.JUMP_VELOCITY
-	
 	
 func exit_state():
 	pass

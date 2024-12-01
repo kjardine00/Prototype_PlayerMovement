@@ -10,6 +10,7 @@ class_name State_Machine
 @export var FALL : State
 @export var WALL_JUMP : State
 @export var WALL_SLIDE : State
+@export var CLIMB : State
 
 var current_state: State
 var prev_state: State

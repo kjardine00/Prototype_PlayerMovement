@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dpgg3aujritit"]
+[gd_scene load_steps=25 format=3 uid="uid://dpgg3aujritit"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_20bt8"]
 [ext_resource type="Texture2D" uid="uid://be0tkmfjafi5x" path="res://Player/Sprites/Character base.png" id="1_oph37"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Player/StateMachine/States/wall_jump_state.gd" id="8_2bkxe"]
 [ext_resource type="Script" path="res://Player/StateMachine/States/wallslide_state.gd" id="9_xa8so"]
 [ext_resource type="PackedScene" uid="uid://bky3owklv4i7s" path="res://Player/Components/player_interact_area_2d.tscn" id="10_a0os3"]
+[ext_resource type="Script" path="res://Player/StateMachine/States/climb_state.gd" id="11_nh6pr"]
 [ext_resource type="PackedScene" uid="uid://fu1btk5yh1xq" path="res://Common/Components/sword_attack_comp.tscn" id="13_2e5dk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5joj1"]
@@ -173,13 +174,8 @@ collision_layer = 2
 script = ExtResource("1_20bt8")
 interact_area = NodePath("PlayerInteractArea2D")
 attack_component = NodePath("SwordAttackComponent")
-MOVE_SPEED = 275
-ACCELERATION = 60
-DECELERATION = 120
-GRAVITY_JUMP = 550
-WALL_JUMP_VELOCITY = -230
-WALL_KICK_ACCEL = 10
-WALL_KICK_DECEL = 12
+AIR_ACCEL = 20
+AIR_DECEL = 25
 WALL_SLIDE_SPEED = 65
 WALL_JUMP = true
 WALL_SLIDE = true
@@ -199,7 +195,7 @@ libraries = {
 "": SubResource("AnimationLibrary_uu6t2")
 }
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player_character", "IDLE", "RUN", "JUMP", "FALL", "WALL_JUMP", "WALL_SLIDE")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player_character", "IDLE", "RUN", "JUMP", "FALL", "WALL_JUMP", "WALL_SLIDE", "CLIMB")]
 script = ExtResource("2_emkbt")
 player_character = NodePath("..")
 IDLE = NodePath("Idle")
@@ -208,6 +204,7 @@ JUMP = NodePath("Jump")
 FALL = NodePath("Fall")
 WALL_JUMP = NodePath("WallJump")
 WALL_SLIDE = NodePath("Wallslide")
+CLIMB = NodePath("Climb")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("4_hu13h")
@@ -226,6 +223,9 @@ script = ExtResource("8_2bkxe")
 
 [node name="Wallslide" type="Node" parent="StateMachine"]
 script = ExtResource("9_xa8so")
+
+[node name="Climb" type="Node" parent="StateMachine"]
+script = ExtResource("11_nh6pr")
 
 [node name="Timers" type="Node" parent="."]
 
@@ -250,8 +250,10 @@ position = Vector2(3, 8)
 target_position = Vector2(4, 0)
 
 [node name="GrabPos" type="Marker2D" parent="."]
+position = Vector2(8, 0)
 
 [node name="PlayerInteractArea2D" parent="." instance=ExtResource("10_a0os3")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInteractArea2D"]
 shape = SubResource("CircleShape2D_hm74x")

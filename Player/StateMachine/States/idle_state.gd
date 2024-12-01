@@ -12,6 +12,7 @@ func update(delta: float):
 	player.handle_falling()
 	player.handle_jump()
 	player.h_movement()
+	player.handle_climb()
 	handle_run()
 	handle_animation()
 	

@@ -18,11 +18,11 @@ class_name Player
 
 #region Movement Variables
 @export_group("Player Movement Properties")
-@export var MOVE_SPEED = 350
-@export var ACCELERATION = 50
-@export var DECELERATION = 100
-@export var AIR_ACCEL = 50
-@export var AIR_DECEL = 120
+@export var MOVE_SPEED = 150
+@export var ACCELERATION = 40
+@export var DECELERATION = 50
+@export var AIR_ACCEL = 15
+@export var AIR_DECEL = 20
 
 @export var GRAVITY_JUMP = 600
 @export var GRAVITY_FALL = 700
@@ -35,12 +35,17 @@ class_name Player
 @export var JUMP_BUFFER_TIME = 0.15
 @export var COYOTE_TIME = 0.1
 
-@export var WALL_JUMP_VELOCITY = -170
-@export var WALL_JUMP_H_SPEED = 170
+@export var WALL_JUMP_VELOCITY = -190
+@export var WALL_JUMP_H_SPEED = 120
 @export var WALL_JUMP_Y_SPEED_PEAK = 0
 @export var WALL_KICK_ACCEL = 4
 @export var WALL_KICK_DECEL = 5
 @export var WALL_SLIDE_SPEED = 40
+
+@export var CAN_CLIMB : bool = false
+@export var CLIMB_SPEED = 30
+@export var CLIMB_ACCEL = 4
+@export var CLIMB_DECEL = 5
 
 var jumps_taken = 0
 var move_direction_x = 0
@@ -61,7 +66,9 @@ var wall_direction = Vector2.ZERO
 #region Input Variables
 # Joystick / WASD
 var move_up = false
+var move_up_tap = false
 var move_down = false
+var move_down_tap = false
 var move_left = false
 var move_right = false
 # 4 Controller Buttons / LMB SPACE RMB F
@@ -76,6 +83,7 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	
 	get_input()
 	
 	state_machine.current_state.update(delta)
@@ -151,7 +159,18 @@ func get_wall_direction():
 		wall_direction = Vector2.RIGHT
 	else: 
 		wall_direction = Vector2.ZERO
-
+	
+func handle_climb():
+	if CAN_CLIMB && move_up:
+		if !action_down:
+			state_machine.change_state(state_machine.CLIMB)
+	
+func handle_stop_climbing():
+	if action_down:
+		state_machine.change_state(state_machine.JUMP)
+	elif !CAN_CLIMB:
+		state_machine.change_state(state_machine.FALL)
+	
 #endregion
 
 func actions_update(delta):
@@ -194,7 +213,9 @@ func handle_attack_action():
 
 func get_input():
 	move_up = Input.is_action_pressed("move_up")
+	move_up_tap = Input.is_action_just_pressed("move_up")
 	move_down = Input.is_action_pressed("move_down")
+	move_down_tap = Input.is_action_just_pressed("move_down")
 	move_left = Input.is_action_pressed("move_left")
 	move_right = Input.is_action_pressed("move_right")
 	action_left_tap = Input.is_action_just_pressed("action_left")

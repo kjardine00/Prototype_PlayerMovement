@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://brjvj7uj3ono0"]
+
+[ext_resource type="Script" path="res://LevelGeneration/level_generator.gd" id="1_t6tjb"]
+
+[node name="LevelGenerator" type="Node2D"]
+script = ExtResource("1_t6tjb")
+
+[node name="GeneratedRooms" type="Node2D" parent="."]
+
+[node name="Player" type="Node2D" parent="."]

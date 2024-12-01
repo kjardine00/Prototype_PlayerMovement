@@ -13,6 +13,7 @@ func update(delta: float):
 	player.h_movement(player.AIR_ACCEL, player.AIR_DECEL)
 	player.handle_landing()
 	player.handle_jump()
+	player.handle_climb()
 	player.handle_jump_buffer()
 	player.handle_wall_jump()
 	player.handle_wall_slide()
