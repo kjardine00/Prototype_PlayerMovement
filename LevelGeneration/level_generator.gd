@@ -1,4 +1,5 @@
 extends Node2D
+class_name LevelGen
 
 @onready var generated_rooms: Node2D = $GeneratedRooms
 @onready var player: Node2D = $Player
@@ -49,16 +50,18 @@ func generate_rooms():
 	## TODO Adjust this value to match better what the generation should look like
 	if min_num_dead_ends > 15:
 		min_num_dead_ends = 15
-	
+		
+	var gen_attempts = 0 
 	while end_rooms.size() < min_num_dead_ends or end_rooms.has(starting_room_pos):
-		print("NEW GENERATION ATTEMPT")
+		gen_attempts += 1
 		rooms.clear()
 		end_rooms.clear()
 		var WALKER = Walker.new(starting_room_pos, borders)
 		rooms = WALKER.walk(total_rooms)
 		end_rooms = WALKER.get_end_rooms()
 		WALKER.call_deferred("queue_free")
-		
+	
+	print("NEW GENERATION ATTEMPT TOOK " + str(gen_attempts) + " ATTEMPTS")
 	rooms_positions = rooms.duplicate()
 	
 	if START_ROOM:

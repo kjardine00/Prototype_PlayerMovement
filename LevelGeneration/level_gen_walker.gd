@@ -87,8 +87,8 @@ func step() -> bool:
 func change_direction():
 	steps_since_turn = 0
 	var directions = DIRECTIONS.duplicate()
-	direction.shuffle()
-	direction = direction.pop_front()
+	directions.shuffle()
+	direction = directions.pop_front()
 	while not borders.has_point(position + direction):
 		direction = directions.pop_front()
 
