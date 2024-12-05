@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://c880e8jbr3rfv"]
+[gd_scene load_steps=11 format=4 uid="uid://c880e8jbr3rfv"]
 
 [ext_resource type="PackedScene" uid="uid://bvuo47w1i00ll" path="res://LevelGeneration/Rooms/Assets/room_tile_map.tscn" id="1_egsnu"]
+[ext_resource type="Script" path="res://LevelGeneration/Rooms/Components/room.gd" id="1_env2n"]
 [ext_resource type="Texture2D" uid="uid://cybqo5gdr788l" path="res://Common/EnviromentObj/ClimbableObj/Ladder/ladder wip.png" id="2_lyp8s"]
 [ext_resource type="Script" path="res://Common/EnviromentObj/ClimbableObj/climbable_area.gd" id="3_1rf2i"]
+[ext_resource type="PackedScene" uid="uid://bh8ux4tsny25k" path="res://LevelGeneration/Rooms/Components/Doorways/doorways.tscn" id="5_st6ts"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cypyx"]
 texture = ExtResource("2_lyp8s")
@@ -20,7 +22,10 @@ size = Vector2(8, 144)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wn76"]
 size = Vector2(8, 79.5)
 
-[node name="NormalRoom1" type="Node2D"]
+[node name="NormalRoom1" type="Node2D" node_paths=PackedStringArray("tilemaplayer", "doorways")]
+script = ExtResource("1_env2n")
+tilemaplayer = NodePath("Tilemaps/Foreground")
+doorways = NodePath("Doorways")
 
 [node name="Tilemaps" type="Node2D" parent="."]
 
@@ -69,3 +74,9 @@ script = ExtResource("3_1rf2i")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tilemaps/Ladder/Ladder4"]
 position = Vector2(0, 15.75)
 shape = SubResource("RectangleShape2D_5wn76")
+
+[node name="Doorways" parent="." instance=ExtResource("5_st6ts")]
+left = true
+up = true
+right = true
+down = true

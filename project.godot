@@ -15,11 +15,23 @@ run/main_scene="res://Main/PrototypeWorld.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Events="*res://Main/Managers/events.gd"
+
 [display]
 
 window/size/resizable=false
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
+
+[file_customization]
+
+folder_colors={
+"res://Common/": "yellow",
+"res://LevelGeneration/": "blue",
+"res://Player/": "green"
+}
 
 [input]
 

@@ -9,7 +9,8 @@ script = ExtResource("1_2dgb8")
 level_generator = NodePath("LevelGenerator")
 
 [node name="LevelGenerator" parent="." instance=ExtResource("2_66bxt")]
-starting_room_pos = Vector2(10, 1)
+starting_room_pos = Vector2(5, 1)
+total_rooms = 40
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

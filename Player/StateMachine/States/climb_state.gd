@@ -5,10 +5,10 @@ var move_direction_y
 
 
 func enter_state():
-	pass
+	player.velocity.y = 0
 	
 func exit_state():
-	player.velocity.y = 0
+	pass
 	
 func update(delta: float):
 	handle_climb_movement()

@@ -9,7 +9,7 @@ var rooms_positions = []
 var end_rooms = []
 
 var room_size := Vector2(656, 384)
-var borders := Rect2(1, 1, 20, 20)
+var borders := Rect2(1, 1, 9, 9)
 
 @export_category("Properties")
 @export var starting_room_pos = Vector2()
@@ -28,7 +28,7 @@ var borders := Rect2(1, 1, 20, 20)
 @export var boss_rooms: int
 
 func _ready() -> void:
-	call_deferred("generate_level")
+	call_deferred("generate_rooms")
 	
 	# Gets the correct size of the rooms
 	if NORMAL_ROOMS.size() != 0:
@@ -45,6 +45,8 @@ func generate_rooms():
 	random.randomize()
 	
 	total_rooms = randi_range(total_rooms / 1.1, total_rooms * 1.2)
+	print(str(total_rooms))
+	
 	var min_num_dead_ends = ceil(total_rooms / 3.0) + 1
 	
 	## TODO Adjust this value to match better what the generation should look like

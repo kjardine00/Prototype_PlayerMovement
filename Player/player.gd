@@ -18,18 +18,28 @@ class_name Player
 
 #region Movement Variables
 @export_group("Player Movement Properties")
+##Horizontal Movement Speed
 @export var MOVE_SPEED = 150
+##How fast the player gets to top ground H movement speed
 @export var ACCELERATION = 40
+##How fast the player goes to 0 ground H movement speed
 @export var DECELERATION = 50
+##How fast the player gets to top air H movement speed
 @export var AIR_ACCEL = 15
+##How fast the player goes to 0 air H movement speed
 @export var AIR_DECEL = 20
 
+##Gravity applied while jumping
 @export var GRAVITY_JUMP = 600
+##Gravity applied while falling
 @export var GRAVITY_FALL = 700
+##The faster velocity for falling
 @export var MAX_FALL_VEL = 700
 
+##How much the player will jump
 @export var JUMP_VELOCITY = -240
 @export var JUMP_MULT = 0.5
+##Number of jumps the player has
 @export var MAX_JUMPS = 1
 
 @export var JUMP_BUFFER_TIME = 0.15
