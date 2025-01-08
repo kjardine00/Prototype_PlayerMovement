@@ -23,7 +23,8 @@ func update(delta: float):
 	handle_animation()
 	
 func handle_animation():
-	player.anim.play("wall_slide")
+		pass
+	#player.anim.play("wall_slide")
 
 func handle_wall_slide_movement():
 	if player.wall_direction == Vector2.ZERO:

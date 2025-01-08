@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func _interaction_signal(interactor: Player):
 	print("obj interaction signal")
-	var player_inv = interactor.INVENTORY	
+	var player_inv = interactor.INVENTORY
 	
 	if player_inv.active_item == null:
 		if CAN_EQUIP:

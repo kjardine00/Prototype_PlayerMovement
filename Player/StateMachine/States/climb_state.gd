@@ -19,12 +19,13 @@ func update(delta: float):
 	handle_animation()
 	
 func handle_animation():
-	if player.velocity.y > 0:
-		player.anim.speed_scale = -1
-	else:
-		player.anim.speed_scale = 1
-	#player.anim.play("climb")
-	pass
+		pass
+	##if player.velocity.y > 0:
+		#player.anim.speed_scale = -1
+	#else:
+		#player.anim.speed_scale = 1
+	##player.anim.play("climb")
+	#pass
 
 func handle_climb_movement():
 	if player.CAN_CLIMB:

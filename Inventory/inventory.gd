@@ -9,7 +9,9 @@ class_name Inv
 
 @export_category("Inventory")
 @export var head : InvItem
-
+@export var body : InvItem
+@export var back : InvItem
+@export var feet : InvItem
 
 func swap_active():
 	if active_item.can_stow:

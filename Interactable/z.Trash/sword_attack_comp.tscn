@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://fu1btk5yh1xq"]
 
 [ext_resource type="Texture2D" uid="uid://dbifhbadfs0e8" path="res://Inventory/Items/Weapons/Sword/Sword Swing.png" id="1_a74gq"]
-[ext_resource type="Script" path="res://Common/Components/sword_attack_comp.gd" id="1_ud6gq"]
+[ext_resource type="Script" path="res://Interactable/z.Trash/sword_attack_comp.gd" id="1_ud6gq"]
 [ext_resource type="Texture2D" uid="uid://bigypix0h82p8" path="res://Inventory/Items/Weapons/Sword/sword_icon.png" id="3_2b8it"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ha0"]

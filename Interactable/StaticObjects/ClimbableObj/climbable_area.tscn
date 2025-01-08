@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bp22uvlm08iev"]
 
-[ext_resource type="Script" path="res://Common/EnviromentObj/ClimbableObj/climbable_area.gd" id="1_iju17"]
+[ext_resource type="Script" path="res://Interactable/StaticObjects/ClimbableObj/climbable_area.gd" id="1_iju17"]
 
 [node name="ClimbableArea" type="Area2D"]
 collision_mask = 2

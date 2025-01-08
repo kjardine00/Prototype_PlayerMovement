@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bvuo47w1i00ll" path="res://LevelGeneration/Rooms/Assets/room_tile_map.tscn" id="1_egsnu"]
 [ext_resource type="Script" path="res://LevelGeneration/Rooms/Components/room.gd" id="1_env2n"]
-[ext_resource type="Texture2D" uid="uid://cybqo5gdr788l" path="res://Common/EnviromentObj/ClimbableObj/Ladder/ladder wip.png" id="2_lyp8s"]
-[ext_resource type="Script" path="res://Common/EnviromentObj/ClimbableObj/climbable_area.gd" id="3_1rf2i"]
+[ext_resource type="Texture2D" uid="uid://cybqo5gdr788l" path="res://Interactable/StaticObjects/ClimbableObj/Ladder/ladder wip.png" id="2_lyp8s"]
+[ext_resource type="Script" path="res://Interactable/StaticObjects/ClimbableObj/climbable_area.gd" id="3_1rf2i"]
 [ext_resource type="PackedScene" uid="uid://bh8ux4tsny25k" path="res://LevelGeneration/Rooms/Components/Doorways/doorways.tscn" id="5_st6ts"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cypyx"]

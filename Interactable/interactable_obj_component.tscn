@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://beio544i7xoy1"]
 
-[ext_resource type="Script" path="res://Common/Components/interactable_obj_component.gd" id="1_epibo"]
+[ext_resource type="Script" path="res://Interactable/interactable_obj_component.gd" id="1_epibo"]
 
 [node name="InteractableObjComponent" type="Area2D"]
 collision_layer = 4

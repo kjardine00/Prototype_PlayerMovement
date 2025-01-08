@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://LevelGeneration/Rooms/start_room.gd" id="1_1rjlw"]
 [ext_resource type="PackedScene" uid="uid://bvuo47w1i00ll" path="res://LevelGeneration/Rooms/Assets/room_tile_map.tscn" id="1_ddswh"]
-[ext_resource type="Texture2D" uid="uid://cybqo5gdr788l" path="res://Common/EnviromentObj/ClimbableObj/Ladder/ladder wip.png" id="2_3mvvy"]
+[ext_resource type="Texture2D" uid="uid://cybqo5gdr788l" path="res://Interactable/StaticObjects/ClimbableObj/Ladder/ladder wip.png" id="2_3mvvy"]
 [ext_resource type="PackedScene" uid="uid://bh8ux4tsny25k" path="res://LevelGeneration/Rooms/Components/Doorways/doorways.tscn" id="2_5pxjd"]
-[ext_resource type="Script" path="res://Common/EnviromentObj/ClimbableObj/climbable_area.gd" id="3_t04e2"]
+[ext_resource type="Script" path="res://Interactable/StaticObjects/ClimbableObj/climbable_area.gd" id="3_t04e2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cypyx"]
 texture = ExtResource("2_3mvvy")

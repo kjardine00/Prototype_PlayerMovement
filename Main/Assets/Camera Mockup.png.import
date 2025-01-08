@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgub0vp78v6"
-path="res://.godot/imported/Block_Tilemap.png-861a05d6969f73ae1a631b5d887c8c23.ctex"
+uid="uid://dqsrtuvifbb2n"
+path="res://.godot/imported/Camera Mockup.png-60dc120384a0f30f96cca0582103cf98.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Main/Assets/Block_Tilemap.png"
-dest_files=["res://.godot/imported/Block_Tilemap.png-861a05d6969f73ae1a631b5d887c8c23.ctex"]
+source_file="res://Main/Assets/Camera Mockup.png"
+dest_files=["res://.godot/imported/Camera Mockup.png-60dc120384a0f30f96cca0582103cf98.ctex"]
 
 [params]
 

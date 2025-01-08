@@ -20,4 +20,5 @@ func update(delta: float):
 	handle_animation()
 	
 func handle_animation():
-	player.anim.play("fall")
+		pass
+	#player.anim.play("fall")

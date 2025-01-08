@@ -3,7 +3,7 @@ class_name Player
 
 #region Node References
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var anim: AnimationPlayer = $AnimationPlayer
+#@onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var state_machine: State_Machine = $StateMachine
 @onready var coyote_timer: Timer = $Timers/CoyoteTimer
 @onready var jump_buffer: Timer = $Timers/JumpBuffer
@@ -72,6 +72,7 @@ var wall_direction = Vector2.ZERO
 
 @export_group("Inventory")
 @export var INVENTORY: Inv
+@export var active_empty : bool = true
 
 #region Input Variables
 # Joystick / WASD
@@ -208,6 +209,10 @@ func handle_equip_item(item):
 		INVENTORY.active_item = item
 		
 func handle_interact_action():
+	if INVENTORY.active_item == null:
+		active_empty = true
+	else:
+		active_empty = false
 	interact_area.interact(self)
 		
 

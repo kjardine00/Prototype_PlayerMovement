@@ -21,10 +21,11 @@ func update(delta: float):
 	handle_animation()
 	
 func handle_animation():
-	if not player.move_left and player.move_right and should_enable_walk_kick:
-		player.anim.play("wall_kick")
-	else:
-		player.anim.play("wall_jump")
+		pass
+	##if not player.move_left and player.move_right and should_enable_walk_kick:
+		#player.anim.play("wall_kick")
+	#else:
+		#player.anim.play("wall_jump")
 
 func should_only_jump_button_wall_kick(should_enable : bool): 
 	should_enable_walk_kick = should_enable

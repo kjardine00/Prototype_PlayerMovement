@@ -19,7 +19,8 @@ func update(delta: float):
 	handle_animation()
 	
 func handle_animation():
-	player.anim.play("jump")
+		pass
+	#player.anim.play("jump")
 
 func handle_jump_to_fall():
 	if player.velocity.y >= 0:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cybqo5gdr788l"
-path="res://.godot/imported/ladder wip.png-a579083d32613583f4bc3c1f5ea694d6.ctex"
+uid="uid://be0tkmfjafi5x"
+path="res://.godot/imported/Character base.png-390df9f0bd77130699e0a7643b1d9436.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Common/EnviromentObj/ClimbableObj/Ladder/ladder wip.png"
-dest_files=["res://.godot/imported/ladder wip.png-a579083d32613583f4bc3c1f5ea694d6.ctex"]
+source_file="res://Player/Assets/Character base.png"
+dest_files=["res://.godot/imported/Character base.png-390df9f0bd77130699e0a7643b1d9436.ctex"]
 
 [params]
 

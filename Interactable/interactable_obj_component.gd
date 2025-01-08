@@ -9,7 +9,7 @@ func interaction_signal(interactor: CharacterBody2D):
 	interact.emit(interactor)
 
 # the player has left the interaction area, exit functionality
-func stop_interacting(_user: Node2D):
-	stop_interact.emit()
+func stop_interacting(interactor: CharacterBody2D):
+	stop_interact.emit(interactor)
 	printerr("Nothing should trigger rn")
 	pass

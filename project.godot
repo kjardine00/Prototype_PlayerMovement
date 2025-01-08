@@ -21,16 +21,22 @@ Events="*res://Main/Managers/events.gd"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/resizable=false
-window/stretch/mode="canvas_items"
-window/stretch/scale_mode="integer"
 
 [file_customization]
 
 folder_colors={
-"res://Common/": "yellow",
+"res://Interactable/": "yellow",
+"res://Interactable/NPCs/": "yellow",
+"res://Interactable/Pickup_able/": "orange",
+"res://Interactable/z.Trash/": "pink",
+"res://Inventory/": "red",
 "res://LevelGeneration/": "blue",
-"res://Player/": "green"
+"res://Main/": "orange",
+"res://Player/": "green",
+"res://Trash/": "pink"
 }
 
 [input]

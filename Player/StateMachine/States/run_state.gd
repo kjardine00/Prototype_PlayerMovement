@@ -18,8 +18,9 @@ func update(delta: float):
 	handle_animation()
 	handle_idle()
 	
-func handle_animation():
-	player.anim.play("run")
+func handle_animation():	
+	pass
+	#player.anim.play("run")
 
 func handle_idle():
 	if player.move_direction_x == 0:
