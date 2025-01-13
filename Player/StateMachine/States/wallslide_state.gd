@@ -15,23 +15,20 @@ func exit_state():
 	pass
 	
 func update(delta: float):
-	player.get_wall_direction()
-	player.handle_landing()
-	player.handle_climb()
-	player.handle_wall_jump()
+	player.movement_controller.get_wall_direction()
+	player.movement_controller.handle_landing()
+	player.movement_controller.handle_climb()
+	player.movement_controller.handle_wall_jump()
 	handle_wall_slide_movement()
-	handle_animation()
-	
-func handle_animation():
-		pass
-	#player.anim.play("wall_slide")
+	handle_animation("wall_slide")
+
 
 func handle_wall_slide_movement():
 	if player.wall_direction == Vector2.ZERO:
-		state_machine.change_state(state_machine.FALL)
+		player.state_machine.change_state(player.state_machine.FALL)
 	
-	if ((player.wall_direction == Vector2.LEFT and player.move_left) or (player.wall_direction == Vector2.RIGHT and player.move_right)):
-		if not player.action_down:
+	if ((player.wall_direction == Vector2.LEFT and player.input_controller.left_hold) or (player.wall_direction == Vector2.RIGHT and player.input_controller.right_hold)):
+		if not player.input_controller.action_down_hold:
 			player.velocity.y = player.WALL_SLIDE_SPEED
 	else:
-		state_machine.change_state(state_machine.FALL)
+		player.state_machine.change_state(player.state_machine.FALL)

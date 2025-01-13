@@ -9,16 +9,12 @@ func exit_state():
 	pass
 	
 func update(delta: float):
-	player.handle_gravity(delta, player.GRAVITY_FALL)
-	player.h_movement(player.AIR_ACCEL, player.AIR_DECEL)
-	player.handle_landing()
-	player.handle_jump()
-	player.handle_climb()
-	player.handle_jump_buffer()
-	player.handle_wall_jump()
-	player.handle_wall_slide()
-	handle_animation()
-	
-func handle_animation():
-		pass
-	#player.anim.play("fall")
+	player.movement_controller.handle_gravity(delta, player.movement_controller.gravity)
+	player.movement_controller.h_movement(delta)
+	player.movement_controller.handle_landing()
+	player.movement_controller.handle_jump()
+	player.movement_controller.handle_climb()
+	player.movement_controller.handle_jump_buffer()
+	player.movement_controller.handle_wall_jump()
+	player.movement_controller.handle_wall_slide()
+	handle_animation("fall")

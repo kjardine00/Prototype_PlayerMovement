@@ -409,6 +409,13 @@ texture = ExtResource("1_6ciub")
 
 [node name="Player" parent="." instance=ExtResource("2_e38gt")]
 position = Vector2(688, 896)
+MOVE_SPEED = 1000
+ACCELERATION = 50
+DECELERATION = 65
+AIR_ACCEL = 30
+AIR_DECEL = 40
+GRAVITY_JUMP = 800
+JUMP_VELOCITY = -500
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 

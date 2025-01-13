@@ -1,16 +1,18 @@
 extends CharacterBody2D
 class_name Box_Obj
 
+@export var debug: bool
+
 @export_category("Connections")
 @export var interact_component : InteractComponent
+
+@export_category("Properties")
+@export var GRAVITY_JUMP = 600
 
 @export_category("Pick Up Variables")
 @export var CAN_EQUIP: bool = false
 @export var CAN_STOW: bool = false
 @export var EQUIPPED: bool = false
-
-@export_category("Properties")
-@export var GRAVITY_JUMP = 600
 
 
 var picked_up = false
@@ -19,19 +21,27 @@ func _ready() -> void:
 	interact_component.interact.connect(_interaction_signal)
 	interact_component.stop_interact.connect(_stop_interacting_signal)
 
+
 func _physics_process(delta: float) -> void:
-	handle_gravity(delta)
+	
+	if not is_on_floor() && not picked_up:
+		handle_gravity(delta)
 	
 	move_and_slide()
+	print(str(velocity))
 	
 func handle_gravity(delta, g: float = GRAVITY_JUMP):
-	velocity.y += g * delta
-
+	
+		velocity.y += g * delta
+		
+#region Interaction Signal Handling
 func _interaction_signal(interactor: Player):
 	interact(interactor)
 
 func _stop_interacting_signal():
 	pass
+
+#endregion
 
 func interact(interactor: Player):
 	## Setup so when the player presses interact this function is called to set the global position of this obj to the players marker2D

@@ -18,14 +18,7 @@ func update(delta: float):
 	player.handle_gravity(delta, player.GRAVITY_JUMP)
 	handle_wall_kick_movement()
 	handle_wall_jump_end()
-	handle_animation()
-	
-func handle_animation():
-		pass
-	##if not player.move_left and player.move_right and should_enable_walk_kick:
-		#player.anim.play("wall_kick")
-	#else:
-		#player.anim.play("wall_jump")
+	handle_animation("wall_jump")
 
 func should_only_jump_button_wall_kick(should_enable : bool): 
 	should_enable_walk_kick = should_enable

@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://dpgg3aujritit"]
+[gd_scene load_steps=17 format=3 uid="uid://dpgg3aujritit"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_20bt8"]
 [ext_resource type="Script" path="res://Player/StateMachine/state_machine.gd" id="2_emkbt"]
 [ext_resource type="Resource" uid="uid://mguuqbasgl7" path="res://Player/Components/player_inventory.tres" id="2_vm81h"]
-[ext_resource type="Script" path="res://Player/movement_controller.gd" id="3_2xqet"]
 [ext_resource type="Texture2D" uid="uid://1lj0btpdq2hh" path="res://Player/Assets/Player Size.png" id="3_qcew3"]
 [ext_resource type="Script" path="res://Player/input_controller.gd" id="4_701wm"]
 [ext_resource type="Script" path="res://Player/StateMachine/States/idle_state.gd" id="4_hu13h"]
@@ -23,36 +22,27 @@ height = 142.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_hm74x"]
 radius = 32.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_controller", "anim_controller", "input_controller", "interact_area", "state_machine")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("input_controller", "interact_area")]
 collision_layer = 2
 collision_mask = 77
 script = ExtResource("1_20bt8")
-movement_controller = NodePath("MovementController")
-anim_controller = NodePath("AnimationController")
 input_controller = NodePath("InputController")
 interact_area = NodePath("PlayerInteractArea2D")
-state_machine = NodePath("StateMachine")
+MOVE_SPEED = 200
+MAX_FALL_VEL = 7000
+JUMP_VELOCITY = -260
+WALL_KICK_ACCEL = 10
+WALL_KICK_DECEL = 15
+WALL_SLIDE_SPEED = 50
+WALL_JUMP = true
+WALL_SLIDE = true
 INVENTORY = ExtResource("2_vm81h")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5joj1")
 
-[node name="MovementController" type="Node2D" parent="." node_paths=PackedStringArray("player")]
-script = ExtResource("3_2xqet")
-player = NodePath("..")
-MAX_SPEED = 550.0
-JUMP_HEIGHT = 4.0
-gravityScale = 18.0
-
-[node name="CoyoteTimer" type="Timer" parent="MovementController"]
-one_shot = true
-
-[node name="JumpBuffer" type="Timer" parent="MovementController"]
-one_shot = true
-
-[node name="InputController" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+[node name="InputController" type="Node2D" parent="."]
 script = ExtResource("4_701wm")
-player = NodePath("..")
 
 [node name="AnimationController" type="Node2D" parent="."]
 script = ExtResource("5_dn68y")
@@ -90,11 +80,18 @@ script = ExtResource("8_2bkxe")
 
 [node name="Wallslide" type="Node" parent="StateMachine"]
 script = ExtResource("9_xa8so")
+wall_magnet_speed = null
 
 [node name="Climb" type="Node" parent="StateMachine"]
 script = ExtResource("11_nh6pr")
 
 [node name="Timers" type="Node" parent="."]
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="JumpBuffer" type="Timer" parent="Timers"]
+one_shot = true
 
 [node name="RayCasts" type="Node2D" parent="."]
 

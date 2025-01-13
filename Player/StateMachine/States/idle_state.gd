@@ -9,17 +9,13 @@ func exit_state():
 	pass
 	
 func update(delta: float):
-	player.handle_falling()
-	player.handle_jump()
-	player.h_movement()
-	player.handle_climb()
+	player.movement_controller.handle_falling()
+	player.movement_controller.handle_jump()
+	player.movement_controller.h_movement(delta)
+	player.movement_controller.handle_climb()
 	handle_run()
-	handle_animation()
-	
-func handle_animation():
-	pass
-	#player.anim.play("idle")
+	handle_animation("idle")
 
 func handle_run():
-	if player.move_direction_x != 0:
+	if player.input_controller.h_move_axis != 0:
 		state_machine.change_state(state_machine.RUN)
