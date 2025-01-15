@@ -23,6 +23,7 @@ var action_up_hold = false
 var action_up_press = false
 var action_down_hold = false
 var action_down_press = false
+var action_down_release = false
 var action_left_hold = false
 var action_left_press = false
 var action_right_hold = false
@@ -87,6 +88,7 @@ func handle_input():
 	action_up_press = Input.is_action_just_pressed("action_up")
 	action_down_hold = Input.is_action_pressed("action_down")
 	action_down_press = Input.is_action_just_pressed("action_down")
+	action_down_release = Input.is_action_just_released("action_down")
 	action_left_hold = Input.is_action_pressed("action_left")
 	action_left_press = Input.is_action_just_pressed("action_left")
 	action_right_hold = Input.is_action_pressed("action_right")
@@ -98,17 +100,20 @@ func handle_input():
 func actions_update():
 	##Triangle, X, Y, F
 	if action_up_press:
+		print("ACTION UP")
 		player.handle_interact_action()
 		
 	## X, B, A, SPACE
 	if action_down_press:
-		print("X")
+		print("ACTION DOWN")
+		
 	##Circle, A, B, RMB
 	if action_right_press:
-		print("CIRCLE")
+		print("ACTION RIGHT")
 	
 	##Square, Y, X, LMB
 	if action_left_press:
+		print("ACTION LEFT")
 		if player.state_machine.current_state != player.state_machine.WALL_SLIDE:
 			player.handle_attack_action()
 	

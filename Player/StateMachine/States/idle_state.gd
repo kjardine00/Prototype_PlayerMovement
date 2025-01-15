@@ -9,11 +9,6 @@ func exit_state():
 	pass
 	
 func update(delta: float):
-	player.movement_controller.handle_falling()
-	player.movement_controller.handle_jump()
-	player.movement_controller.h_movement(delta)
-	player.movement_controller.handle_climb()
-	handle_run()
 	handle_animation("idle")
 
 func handle_run():

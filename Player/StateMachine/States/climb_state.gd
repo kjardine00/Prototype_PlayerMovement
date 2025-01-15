@@ -11,11 +11,7 @@ func exit_state():
 	pass
 	
 func update(delta: float):
-	handle_climb_movement()
-	player.h_movement(delta, player.CLIMB_ACCEL, player.CLIMB_DECEL)
-	player.handle_stop_climbing()
-	player.handle_jump()
-	#player.handle_landing()
+	
 	handle_animation("climb")
 
 

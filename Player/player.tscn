@@ -17,8 +17,8 @@
 [ext_resource type="Script" path="res://Player/StateMachine/States/climb_state.gd" id="11_nh6pr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5joj1"]
-radius = 48.0
-height = 142.0
+radius = 35.0
+height = 140.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hm74x"]
 radius = 32.0
@@ -32,7 +32,17 @@ anim_controller = NodePath("AnimationController")
 input_controller = NodePath("InputController")
 interact_area = NodePath("PlayerInteractArea2D")
 state_machine = NodePath("StateMachine")
+WALL_JUMP = false
 INVENTORY = ExtResource("2_vm81h")
+
+[node name="AnimationController" type="Node2D" parent="."]
+script = ExtResource("5_dn68y")
+
+[node name="PlayerSprite" type="Sprite2D" parent="AnimationController"]
+scale = Vector2(0.822222, 1)
+texture = ExtResource("3_qcew3")
+
+[node name="PlayerAnimations" type="AnimationPlayer" parent="AnimationController"]
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5joj1")
@@ -40,27 +50,31 @@ shape = SubResource("CapsuleShape2D_5joj1")
 [node name="MovementController" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("3_2xqet")
 player = NodePath("..")
-MAX_SPEED = 550.0
-JUMP_HEIGHT = 4.0
-gravityScale = 18.0
+accel_time = 0.1
+deccel_time = 0.1
+jump_height = 4.915
+gravity_strength = 18.0
+terminal_velocity = 1000
+variable_jump_cut_factor = 5.0
 
-[node name="CoyoteTimer" type="Timer" parent="MovementController"]
-one_shot = true
+[node name="L_Raycast" type="RayCast2D" parent="MovementController"]
+position = Vector2(-35, -50)
+target_position = Vector2(0, -50)
+collision_mask = 13
 
-[node name="JumpBuffer" type="Timer" parent="MovementController"]
-one_shot = true
+[node name="M_Raycast" type="RayCast2D" parent="MovementController"]
+position = Vector2(0, -50)
+target_position = Vector2(0, -50)
+collision_mask = 13
+
+[node name="R_Raycast" type="RayCast2D" parent="MovementController"]
+position = Vector2(35, -50)
+target_position = Vector2(0, -50)
+collision_mask = 13
 
 [node name="InputController" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("4_701wm")
 player = NodePath("..")
-
-[node name="AnimationController" type="Node2D" parent="."]
-script = ExtResource("5_dn68y")
-
-[node name="PlayerSprite" type="Sprite2D" parent="AnimationController"]
-texture = ExtResource("3_qcew3")
-
-[node name="PlayerAnimations" type="AnimationPlayer" parent="AnimationController"]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player_character", "IDLE", "RUN", "JUMP", "FALL", "WALL_JUMP", "WALL_SLIDE", "CLIMB")]
 script = ExtResource("2_emkbt")
@@ -93,22 +107,6 @@ script = ExtResource("9_xa8so")
 
 [node name="Climb" type="Node" parent="StateMachine"]
 script = ExtResource("11_nh6pr")
-
-[node name="Timers" type="Node" parent="."]
-
-[node name="RayCasts" type="Node2D" parent="."]
-
-[node name="WallJump" type="Node2D" parent="RayCasts"]
-
-[node name="WallKickLeft" type="RayCast2D" parent="RayCasts/WallJump"]
-self_modulate = Color(0, 1, 0, 1)
-position = Vector2(-40, 8)
-target_position = Vector2(-10, 0)
-
-[node name="WallKickRight" type="RayCast2D" parent="RayCasts/WallJump"]
-self_modulate = Color(0, 1, 0, 1)
-position = Vector2(40, 8)
-target_position = Vector2(10, 0)
 
 [node name="PlayerInteractArea2D" parent="." instance=ExtResource("10_a0os3")]
 visible = false

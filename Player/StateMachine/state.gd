@@ -15,3 +15,6 @@ func update(delta: float):
 	
 func handle_animation(anim_name : String):
 	state_machine.player_character.anim_controller.play_anim(anim_name)
+
+func handle_idle():
+	pass

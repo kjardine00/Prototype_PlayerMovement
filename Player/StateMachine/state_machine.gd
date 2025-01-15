@@ -31,3 +31,5 @@ func change_state(next_state):
 		prev_state.exit_state()
 		current_state.enter_state()
 		print("From: " + prev_state.name + " To: " + current_state.name)
+		#print(str(player_character.is_on_floor()))
+		#print(str(player_character.movement_controller.jump_count))

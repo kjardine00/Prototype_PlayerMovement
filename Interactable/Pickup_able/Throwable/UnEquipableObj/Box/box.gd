@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 		handle_gravity(delta)
 	
 	move_and_slide()
-	print(str(velocity))
+	#print(str(velocity))
 	
 func handle_gravity(delta, g: float = GRAVITY_JUMP):
 	

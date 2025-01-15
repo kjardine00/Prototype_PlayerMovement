@@ -3,18 +3,12 @@ extends State
 ## JUMP State
 
 func enter_state():
-	player.movement_controller.jump()
+	pass
 	
 func exit_state():
 	pass
 	
 func update(delta: float):
-	player.movement_controller.handle_gravity(delta)
-	player.movement_controller.h_movement(delta)
-	player.movement_controller.handle_jump()
-	player.movement_controller.handle_wall_jump()
-	player.movement_controller.handle_wall_slide()
-	handle_jump_to_fall()
 	handle_animation("jump")
 
 

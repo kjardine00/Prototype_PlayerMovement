@@ -3,53 +3,47 @@ class_name Movement_Controller
 
 @export var player : Player
 
-@onready var coyote_timer: Timer = $CoyoteTimer
-@onready var jump_buffer: Timer = $JumpBuffer
+var wall_dir = Vector2.ZERO
 
 #region L/R Movement
 @export_category("L/R Movement")
 ##Horizontal Max Movement Speed
-@export_range(100, 1000) var MAX_SPEED : float = 500
+@export_range(200, 600) var h_speed : float = 425
 ##How fast the player gets to top ground H movement speed
-@export_range(0, 4) var TIME_TO_REACH_MAX_SPEED : float = .2
+@export_range(0, 4) var accel_time : float = 0
 ##How fast the player goes to 0 ground H movement speed
-@export_range(0, 4) var TIME_TO_REACH_ZERO_SPEED : float = .2
+@export_range(0, 4) var deccel_time : float = 0
 #endregion
 
 #region Jumping/Gravity
 @export_category("Jumping and Gravity")
 ##The peak height of the player's jump
-@export_range(1, 100) var JUMP_HEIGHT: float = 2.0
+@export_range(1, 20
+) var jump_height: float = 1.5
 ##How many jumps the player can do before needing to touch the ground again. Giving more than 1 jump disables jump buffering and coyote time.
-@export_range(0, 3) var NUM_JUMPS: int = 1
+@export_range(0, 3) var num_jumps: int = 1
 ##The strength at which the player will be pulled to the ground.
-@export_range(0, 100) var gravityScale: float = 20.0
+@export_range(0, 100) var gravity_strength: float = 20.0
 ##The faster velocity for falling
-@export_range(0, 1000) var MAX_FALL_VEL = 500
+@export_range(600, 1200) var terminal_velocity = 800
 ##Your player will move this amount faster when falling providing a less floaty jump curve.
-@export_range(0.5, 3) var DESC_GRAVITY_FACTOR: float = 1.3
-##Enabling this toggle makes it so that when the player releases the jump key while still ascending, their vertical velocity will cut by the height cut, providing variable jump height.
-@export var VAR_JUMP_HEIGHT: bool = true
+@export_range(0.5, 3) var desc_gravity_factor: float = 2.3
 ##How much the jump height is cut by.
-@export_range(1, 10) var JUMP_VAR: float = 2
+@export_range(1, 10) var variable_jump_cut_factor: float = 2
 ##How much extra time (in seconds) the player will be given to jump after falling off an edge. This is set to 0.2 seconds by default.
-@export_range(0, 0.5) var COYOTE_TIME: float = 0.2
+@export_range(0, 0.5) var coyote_time: float = 0.2
 ##The window of time (in seconds) that the player can press the jump button before hitting the ground and still have their input registered as a jump. This is set to 0.2 seconds by default.
-@export_range(0, 0.5) var JUMP_BUFFERING: float = 0.2
+@export_range(0, 0.5) var jump_buffer_time: float = 0.2
 #endregion
 
 #region Wall Jumping
 @export_category("Wall Jumping")
-##Allows your player to jump off of walls. Without a Wall Kick Angle, the player will be able to scale the wall.
-@export var WALL_JUMP: bool = false
 ##How long the player's movement input will be ignored after wall jumping.
-@export_range(0, 0.5) var INPUT_PAUSE_AFTER_WALL_JUMP: float = 0.1
+@export_range(0, 0.5) var input_pause_after_wall_jump: float = 0.1
 ##The angle at which your player will jump away from the wall. 0 is straight away from the wall, 90 is straight up. Does not account for gravity
-@export_range(0, 90) var WALL_KICK_ANGLE: float = 60.0
+@export_range(35, 70) var wall_kick_angle: float = 45.0
 ##The player's gravity will be divided by this number when touch a wall and descending. Set to 1 by default meaning no change will be made to the gravity and there is effectively no wall sliding. THIS IS OVERRIDDED BY WALL LATCH.
-@export_range(1, 20) var WALL_SLIDING: float = 1.0
-##If enabled, the player's gravity will be set to 0 when touching a wall and descending. THIS WILL OVERRIDE WALLSLIDING.
-@export var WALL_LATCHING: bool = false
+@export_range(1, 5) var wall_slide_gravity: float = 3
 #endregion
 
 #region Dashing
@@ -67,15 +61,15 @@ class_name Movement_Controller
 #region Corner Cutting/Jump Correction
 @export_category("Corner Cutting/Jump Correct")
 ##If the player's head is blocked by a jump but only by a little, the player will be nudged in the right direction and their jump will execute as intended.
-@export var ENABLE_CORNER_CUTTING: bool = false
+@export var corner_cutting: bool = true
 ##How many pixels the player will be pushed (per frame) if corner cutting is needed to correct a jump.
-@export_range(1, 5) var CORRECTION_AMOUNT: float = 1.5
+@export_range(1, 5) var corner_correction: float = 1.5
 ##Raycast used for corner cutting calculations. Place above and to the left of the players head point up. ALL ARE NEEDED FOR IT TO WORK.
-@export var L_Raycast: RayCast2D
+@export var L_raycast: RayCast2D
 ##Raycast used for corner cutting calculations. Place above of the players head point up. ALL ARE NEEDED FOR IT TO WORK.
-@export var M_Raycast: RayCast2D
+@export var M_raycast: RayCast2D
 ##Raycast used for corner cutting calculations. Place above and to the right of the players head point up. ALL ARE NEEDED FOR IT TO WORK.
-@export var R_Raycast: RayCast2D
+@export var R_raycast: RayCast2D
 #endregion
 
 #region Down Input
@@ -90,38 +84,36 @@ class_name Movement_Controller
 #region Set Variables
 #Variables determined by the developer set ones.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var maxSpeedLock: float
-var appliedTerminalVelocity: float
+var applied_gravity: float
+var max_speed_locked: float
+var applied_terminal_vel: float
 
-var friction: float
 var acceleration: float
 var deceleration: float
-var instantAccel: bool = false
-var instantStop: bool = false
+var instant_accel: bool = false
+var instant_stop: bool = false
 
-var jumpMagnitude: float = 500.0
-var jumpCount: int
-var jumpWasPressed: bool = false
-var coyoteActive: bool = false
+var jump_strength: float = 500.0
+var jump_count: int
+
+var jump_was_pressed: bool = false
+var coyote_active: bool = false
+var gravity_active: bool = true
+
 var dashMagnitude: float
-var gravityActive: bool = true
-var dashing: bool = false
 var dashCount: int
+var dashing: bool = false
 var rolling: bool = false
+
+var wall_slide_speed = gravity / wall_slide_gravity
 
 var twoWayDashHorizontal
 var twoWayDashVertical
 var eightWayDash
 
-var wasMovingR: bool
-var wasPressingR: bool
+var h_direction = 1
 var movementInputMonitoring: Vector2 = Vector2(true, true) #movementInputMonitoring.x addresses right direction while .y addresses left direction
 var x_move_axis
-
-var latched
-var wasLatched
-var crouching
-var groundPounding
 
 #endregion
 
@@ -129,46 +121,45 @@ func _ready() -> void:
 	_update_data()
 
 func _update_data():
-	acceleration = MAX_SPEED / TIME_TO_REACH_MAX_SPEED
-	deceleration = -MAX_SPEED / TIME_TO_REACH_ZERO_SPEED
+	acceleration = h_speed / accel_time
+	deceleration = -h_speed / deccel_time
 	
-	jumpMagnitude = (10.0 * JUMP_HEIGHT) * gravityScale
-	jumpCount = NUM_JUMPS
+	jump_strength = (10.0 * jump_height) * gravity_strength
+	jump_count = num_jumps
 	
-	dashMagnitude = MAX_SPEED * DASH_LENGTH
+	dashMagnitude = h_speed * DASH_LENGTH
 	dashCount = DASHES
 	
-	maxSpeedLock = MAX_SPEED
+	max_speed_locked = h_speed
 	
-	#animScaleLock = abs(anim.scale)
-	#colliderScaleLockY = col.scale.y
-	#colliderPosLockY = col.position.y
-	
-	if TIME_TO_REACH_MAX_SPEED == 0:
-		instantAccel = true
-		TIME_TO_REACH_MAX_SPEED = 1
-	elif TIME_TO_REACH_MAX_SPEED < 0:
-		TIME_TO_REACH_MAX_SPEED = abs(TIME_TO_REACH_MAX_SPEED)
-		instantAccel = false
+	#region Divide by 0 protection
+	if accel_time == 0:
+		instant_accel = true
+		accel_time = 1
+	elif accel_time < 0:
+		accel_time = abs(accel_time)
+		instant_accel = false
 	else:
-		instantAccel = false
+		instant_accel = false
 		
-	if TIME_TO_REACH_ZERO_SPEED == 0:
-		instantStop = true
-		TIME_TO_REACH_ZERO_SPEED = 1
-	elif TIME_TO_REACH_MAX_SPEED < 0:
-		TIME_TO_REACH_MAX_SPEED = abs(TIME_TO_REACH_MAX_SPEED)
-		instantStop = false
+	if deccel_time == 0:
+		instant_stop = true
+		deccel_time = 1
+	elif accel_time < 0:
+		accel_time = abs(accel_time)
+		instant_stop = false
 	else:
-		instantStop = false
-		
-	if NUM_JUMPS > 1:
-		JUMP_BUFFERING = 0
-		COYOTE_TIME = 0
+		instant_stop = false
+	#endregion
 	
-	JUMP_BUFFERING = abs(JUMP_BUFFERING)
-	COYOTE_TIME = abs(COYOTE_TIME)
+	if num_jumps > 1:
+		jump_buffer_time = 0
+		coyote_time = 0
 	
+	jump_buffer_time = abs(jump_buffer_time)
+	coyote_time = abs(coyote_time)
+	
+	#region decide on dash type
 	twoWayDashHorizontal = false
 	twoWayDashVertical = false
 	eightWayDash = false
@@ -183,127 +174,183 @@ func _update_data():
 		twoWayDashVertical = true
 	elif DASH_TYPE == 4:
 		eightWayDash = true
-
+	#endregion
+	
 func _physics_process(delta: float) -> void:
-	handle_max_fall_vel()
+	_gravity()
+	_horizontal_movement(delta)
+	_handle_jumping()
+	
 	player.move_and_slide()
 
-func h_movement(delta, accel: float = acceleration, decel: float = deceleration):
-	if player.input_controller.right_hold and player.input_controller.left_hold:
-		if !instantStop:
-			_decelerate(delta, false)
-		else:
-			player.velocity.x = -0.1
-	elif player.input_controller.right_hold:
-		if player.velocity.x > MAX_SPEED or instantAccel:
-			player.velocity.x = MAX_SPEED
-		else: 
-			player.velocity.x += acceleration * delta
-		if player.velocity.x < 0:
-			if !instantStop:
-				_decelerate(delta, false)
-			else:
-				player.velocity.x = -0.1
-	elif player.input_controller.left_hold:
-		if player.velocity.x < -MAX_SPEED or instantAccel:
-			player.velocity.x = -MAX_SPEED
-		else:
-			player.velocity.x -= acceleration * delta
-		if player.velocity.x > 0:
-			if !instantStop:
-				_decelerate(delta, false)
-			else:
-				player.velocity.x = 0.1
+#region Always applying to the player
+## Apply gravity to the player checking conditions
+func _gravity():
+	if player.velocity.y > 0:
+		applied_gravity = gravity_strength * desc_gravity_factor
+	else: 
+		applied_gravity = gravity_strength
+
+	if player.is_on_wall():
+		jump_count = num_jumps
+		applied_terminal_vel = terminal_velocity / wall_slide_gravity
+		if wall_slide_gravity != 1 and player.velocity.y > 0:
+			applied_gravity = applied_gravity / wall_slide_gravity
+	elif !player.is_on_wall():
+		applied_terminal_vel = terminal_velocity
 	
+	if gravity_active:
+		if player.velocity.y < applied_terminal_vel:
+			player.velocity.y += applied_gravity
+		elif player.velocity.y > applied_terminal_vel:
+			player.velocity.y = applied_terminal_vel
+
+func _horizontal_movement(delta):
+	## if player is holding both directions
+	if player.input_controller.right_hold and player.input_controller.left_hold:
+		_decelerate(delta)
+	## if player is moving L/R
+	elif player.input_controller.right_hold and movementInputMonitoring:
+		_accelerate(delta, 1)
+		if player.velocity.x < 0:
+			_decelerate(delta)
+	elif player.input_controller.left_hold and movementInputMonitoring:
+		_accelerate(delta, -1)
+		if player.velocity.x > 0:
+			_decelerate(delta)
+	## if the player holds neither directions
 	if !(player.input_controller.left_hold or player.input_controller.right_hold):
-		if !instantStop:
-			_decelerate(delta, false)
-		else:
-			player.velocity.x = 0
-			
-	#if player.input_controller.h_move_axis:
-		#player.velocity.x = move_toward(player.velocity.x, player.input_controller.h_move_axis * MAX_SPEED, accel)
-	#else: 
-		#player.velocity.x = move_toward(player.velocity.x, player.input_controller.h_move_axis * MAX_SPEED, decel)
+		_decelerate(delta)
+	
+	if player.velocity.x > 0:
+		h_direction = 1
+	elif player.velocity.x < 0:
+		h_direction = -1
 		
-func _decelerate(delta, vertical: bool):
-	if !vertical:
-		if (abs(player.velocity.x) > 0) and (abs(player.velocity.x) <= abs(deceleration * delta)):
+	#if rightTap:
+		#wasPressingR = true
+	#if leftTap:
+		#wasPressingR = false
+
+func _accelerate(delta, dir):
+	if abs(player.velocity.x) > h_speed or instant_accel:
+		player.velocity.x = h_speed * dir
+	else: 
+		player.velocity.x += acceleration * delta * dir
+
+func _decelerate(delta):
+	if !instant_stop:
+		if (abs(player.velocity.x) > 0) and (abs(player.velocity.x) <= abs(deceleration * delta)) and movementInputMonitoring:
 			player.velocity.x = 0 
 		elif player.velocity.x > 0:
 			player.velocity.x += deceleration * delta
 		elif player.velocity.x < 0:
 			player.velocity.x -= deceleration * delta
-	elif vertical and player.velocity.y > 0:
-		player.velocity.y += deceleration * delta
-	
-func handle_gravity(delta, g: float = gravity):
-	player.velocity.y += g * delta
-
-func handle_falling():
-	if not player.is_on_floor():
-		coyote_timer.start(COYOTE_TIME)
-		player.state_machine.change_state(player.state_machine.FALL)
-	
-func handle_jump():
-	if player.is_on_floor():
-		if jumpCount > 0:
-			if player.input_controller.action_down_press or jump_buffer.time_left > 0:
-				jump_buffer.stop()
-				player.state_machine.change_state(player.state_machine.JUMP)
 	else:
-		if jumpCount > 0 and player.input_controller.action_down_press:
-			player.state_machine.change_state(player.state_machine.JUMP)
+		player.velocity.x = 0
+#endregion
+
+func _handle_jumping():
+	#Short hop function
+	if player.input_controller.action_down_release and player.velocity.y < 0:
+		player.velocity.y = player.velocity.y / variable_jump_cut_factor
+	
+	if jump_count == 1:
+		if !player.is_on_floor() and !player.is_on_wall():
+			print("jump here")
+			if coyote_time > 0:
+				coyote_active = true
+				_coyote_time()
 		
-		if coyote_timer.time_left > 0: 
-			if player.input_controller.action_down_press and jumpCount > 0:
-				coyote_timer.stop()
-				player.state_machine.change_state(player.state_machine.JUMP)
+		if player.input_controller.action_down_press and !player.is_on_wall():
+			if coyote_active:
+				coyote_active = true
+				_jump()
+			if jump_buffer_time > 0:
+				jump_was_pressed = true
+				_buffer_jump()
+			elif jump_buffer_time == 0 and coyote_time == 0 and player.is_on_floor():
+				_jump()
+		elif player.input_controller.action_down_press and player.is_on_wall() and !player.is_on_floor():
+			_wall_jump()
+		elif player.input_controller.action_down_press:
+			_jump()
 
-func jump():
-	player.velocity.y = -jumpMagnitude
-	jumpCount += -1
-	
-func handle_landing():
 	if player.is_on_floor():
-		jumpCount = NUM_JUMPS
-		player.state_machine.change_state(player.state_machine.IDLE)
-	
-func handle_jump_buffer():
-	if player.input_controller.action_down_press:
-		jump_buffer.start(JUMP_BUFFERING)	
-	
-func handle_max_fall_vel():
-	if player.velocity.y > MAX_FALL_VEL: player.velocity.y = MAX_FALL_VEL
-	
-func handle_wall_jump():
-	if WALL_JUMP:
-		get_wall_direction()
-		if (player.input_controller.action_down_press or jump_buffer.time_left > 0) and (player.wall_direction != Vector2.ZERO):
-			player.state_machine.change_state(player.state_machine.WALL_JUMP)
-	
-func handle_wall_slide():
-	if player.WALL_SLIDE:
-		get_wall_direction()
-		if (player.wall_direction == Vector2.LEFT and player.input_controller.left_hold) or (player.wall_direction == Vector2.RIGHT and player.input_controller.right_hold):
-			if !player.input_controller.action_down:
-				player.state_machine.change_state(player.state_machine.WALL_SLIDE)
+		jump_count = num_jumps
+		if coyote_time > 0:
+			coyote_active = true
+		else:
+			coyote_active = false
+		if jump_was_pressed:
+			_jump()
+			
+	elif jump_count > 1:
+		if player.is_on_floor():
+			jump_count = num_jumps
+		if player.input_controller.action_down_press and jump_count > 0:
+			player.velocity.y = - jump_strength
+			jump_count -= 1
 
-func get_wall_direction():
-	if player.wall_kick_left.is_colliding():
-		player.wall_direction = Vector2.LEFT
-	elif player.wall_kick_right.is_colliding():
-		player.wall_direction = Vector2.RIGHT
-	else: 
-		player.wall_direction = Vector2.ZERO
-	
-func handle_climb():
-	if player.CAN_CLIMB && player.input_controller.up_hold:
-		if !player.input_controller.action_down:
-			player.state_machine.change_state(player.state_machine.CLIMB)
-	
-func handle_stop_climbing():
-	if player.input_controller.action_down:
-		player.state_machine.change_state(player.state_machine.JUMP)
-	elif !player.CAN_CLIMB:
-		player.state_machine.change_state(player.state_machine.FALL)
+func _jump():
+	if jump_count > 0:
+		
+		player.velocity.y = -jump_strength
+		jump_count += -1
+		print("reg jump" + str(player.movement_controller.jump_count))
+		##TODO investigate this next line and if I need it
+		jump_was_pressed = false
+
+func _wall_jump():
+	if player.WALL_JUMP:
+		
+		var h_wall_kick = abs(jump_strength * cos(wall_kick_angle * (PI / 180)))
+		var v_wall_kick = abs(jump_strength * sin(wall_kick_angle * (PI / 180)))
+		
+		player.velocity.y = -v_wall_kick
+		player.velocity.x = -h_wall_kick * h_direction
+		
+		jump_count += -1
+		
+		if input_pause_after_wall_jump != 0:
+			movementInputMonitoring = Vector2(false, false)
+			_input_pause_reset(input_pause_after_wall_jump)
+
+#region Timers
+func _input_pause_reset(time):
+	await get_tree().create_timer(time).timeout
+	movementInputMonitoring = Vector2(true, true)
+
+func _buffer_jump():
+	await get_tree().create_timer(jump_buffer_time).timeout
+	jump_was_pressed = false
+
+func _coyote_time():
+	await get_tree().create_timer(coyote_time).timeout
+	coyote_active = false
+	jump_count += -1
+#endregion
+
+func _corner_cutting():
+	if corner_cutting:
+		pass
+		if player.velocity.y < 0 and L_raycast.is_colliding() and !R_raycast.is_colliding() and !M_raycast.is_colliding():
+			player.position.x += corner_correction
+		if player.velocity.y < 0 and !L_raycast.is_colliding() and R_raycast.is_colliding() and !M_raycast.is_colliding():
+			player.position.x -= corner_correction
+
+
+
+
+##=================PREVIOUS==CODE=================================================================
+
+#func handle_climb():
+	#if player.CAN_CLIMB && player.input_controller.up_hold:
+		#if !player.input_controller.action_down:
+			#player.state_machine.change_state(player.state_machine.CLIMB)
+	#
+#func handle_stop_climbing():
+	#if player.input_controller.action_down:
+		#player.state_machine.change_state(player.state_machine.JUMP)
+	#elif !player.CAN_CLIMB:
+		#player.state_machine.change_state(player.state_machine.FALL)
