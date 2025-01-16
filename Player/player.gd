@@ -11,7 +11,6 @@ class_name Player
 
 #region Movement Variables
 @export_category("Movement Variables to be depreciated/refactored")
-
 #@export var CAN_CLIMB : bool = false
 #@export var CLIMB_SPEED = 30
 #@export var CLIMB_ACCEL = 4
@@ -24,6 +23,7 @@ var wall_direction = Vector2.ZERO
 #endregion
 
 @export_group("Abilities Enabled")
+@export var ROLL: bool
 @export var WALL_JUMP : bool = true
 @export var DASH: bool
 

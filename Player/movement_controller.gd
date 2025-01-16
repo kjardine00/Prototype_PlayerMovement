@@ -13,6 +13,9 @@ var wall_dir = Vector2.ZERO
 @export_range(0, 4) var accel_time : float = 0
 ##How fast the player goes to 0 ground H movement speed
 @export_range(0, 4) var deccel_time : float = 0
+
+##How long the player will roll for
+@export_range(1.25, 4) var roll_duration: float = 2
 #endregion
 
 #region Jumping/Gravity
@@ -49,13 +52,13 @@ var wall_dir = Vector2.ZERO
 #region Dashing
 @export_category("Dashing")
 ##The type of dashes the player can do.
-@export_enum("None", "Horizontal", "Vertical", "Four Way", "Eight Way") var DASH_TYPE: int
+@export_enum("None", "Horizontal", "Vertical", "Four Way", "Eight Way") var dash_type: int
 ##How many dashes the player can do before needing to hit the ground.
-@export_range(0, 10) var DASHES: int = 1
+@export_range(0, 10) var num_dashes: int = 1
 ##If enabled, pressing the opposite direction of a dash, during a dash, will zero the player's velocity.
-@export var DASH_CANCEL: bool = true
+@export var dash_cancel: bool = true
 ##How far the player will dash. One of the dashing toggles must be on for this to be used.
-@export_range(1.5, 4) var DASH_LENGTH: float = 2.5
+@export_range(1.5, 4) var dash_length: float = 2.5
 #endregion
 
 #region Corner Cutting/Jump Correction
@@ -76,9 +79,7 @@ var wall_dir = Vector2.ZERO
 @export_category("Down Input")
 ##Holding down will crouch the player. Crouching script may need to be changed depending on how your player's size proportions are. It is built for 32x player's sprites.
 @export var CROUCH: bool = false
-##Holding down and pressing the input for "roll" will execute a roll if the player is grounded. Assign a "roll" input in project settings input.
-@export var CAN_ROLL: bool
-@export_range(1.25, 2) var ROLL_LENGTH: float = 2
+
 #endregion
 
 #region Set Variables
@@ -101,15 +102,15 @@ var coyote_active: bool = false
 var gravity_active: bool = true
 
 var dashMagnitude: float
-var dashCount: int
+var dash_count: int
 var dashing: bool = false
 var rolling: bool = false
 
 var wall_slide_speed = gravity / wall_slide_gravity
 
-var twoWayDashHorizontal
-var twoWayDashVertical
-var eightWayDash
+var two_way_dash_h
+var two_way_dash_v
+var eight_way_dash
 
 var h_direction = 1
 var movementInputMonitoring: Vector2 = Vector2(true, true) #movementInputMonitoring.x addresses right direction while .y addresses left direction
@@ -127,8 +128,8 @@ func _update_data():
 	jump_strength = (10.0 * jump_height) * gravity_strength
 	jump_count = num_jumps
 	
-	dashMagnitude = h_speed * DASH_LENGTH
-	dashCount = DASHES
+	dashMagnitude = h_speed * dash_length
+	dash_count = num_dashes
 	
 	max_speed_locked = h_speed
 	
@@ -160,26 +161,28 @@ func _update_data():
 	coyote_time = abs(coyote_time)
 	
 	#region decide on dash type
-	twoWayDashHorizontal = false
-	twoWayDashVertical = false
-	eightWayDash = false
-	if DASH_TYPE == 0:
+	two_way_dash_h = false
+	two_way_dash_v = false
+	eight_way_dash = false
+	if dash_type == 0:
 		pass
-	if DASH_TYPE == 1:
-		twoWayDashHorizontal = true
-	elif DASH_TYPE == 2:
-		twoWayDashVertical = true
-	elif DASH_TYPE == 3:
-		twoWayDashHorizontal = true
-		twoWayDashVertical = true
-	elif DASH_TYPE == 4:
-		eightWayDash = true
+	if dash_type == 1:
+		two_way_dash_h = true
+	elif dash_type == 2:
+		two_way_dash_v = true
+	elif dash_type == 3:
+		two_way_dash_h = true
+		two_way_dash_v = true
+	elif dash_type == 4:
+		eight_way_dash = true
 	#endregion
 	
 func _physics_process(delta: float) -> void:
 	_gravity()
 	_horizontal_movement(delta)
+	_handle_rolling()
 	_handle_jumping()
+	_handle_dashing()
 	
 	player.move_and_slide()
 
@@ -316,20 +319,53 @@ func _wall_jump():
 			movementInputMonitoring = Vector2(false, false)
 			_input_pause_reset(input_pause_after_wall_jump)
 
-#region Timers
-func _input_pause_reset(time):
-	await get_tree().create_timer(time).timeout
-	movementInputMonitoring = Vector2(true, true)
+func _handle_dashing():
+	if player.DASH:
+		if player.is_on_floor():
+			dash_count = num_dashes
+	
+	if eight_way_dash and player.input_controller.action_right_press and dash_count > 0: #and !rolling
+		var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		_dash("eight_way")
+		#if (!player.input_controller.left_hold and !player.input_controller.right_hold and !player.input_controller.up_hold and !player.input_controller.down_hold):
+			#player.velocity.x = dashMagnitude * h_direction
+		#elif (!player.input_controller.right_hold and !player.input_controller.right_hold and !player.input_controller.right_hold and !player.input_controller.right_hold) and !was_moving_R:
+			#player.velocity.x = -dashMagnitude
+		
+	if two_way_dash_v and player.input_controller.action_right_press and dash_count > 0:
+		if player.input_controller.up_hold:
+			_dash("v_two_way")
+	
+	if two_way_dash_h and player.input_controller.action_right_press and dash_count > 0:
+		if h_direction != 0 and !(player.input_controller.up_hold or player.input_controller.down_hold):
+			_dash("h_two_way")
+			
+	_dash_cancel()
 
-func _buffer_jump():
-	await get_tree().create_timer(jump_buffer_time).timeout
-	jump_was_pressed = false
+func _dash(type_dash):
+	var dash_time = 0.0625 * dash_length
 
-func _coyote_time():
-	await get_tree().create_timer(coyote_time).timeout
-	coyote_active = false
-	jump_count += -1
-#endregion
+	_dashing_time(dash_time)
+	_pause_gravity(dash_time)
+	
+	match type_dash:
+		"eight_way":
+			var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+			player.velocity = dashMagnitude * input_direction
+		"v_two_way":
+			player.velocity = Vector2(0 , -dashMagnitude)
+		"h_two_way":
+			player.velocity = Vector2(dashMagnitude * h_direction, 0)
+
+	dash_count += -1
+	movementInputMonitoring = Vector2(false, false)
+	_input_pause_reset(dash_time)
+	
+func _dash_cancel():
+	if dashing and player.velocity.x > 0 and player.input_controller.left_press and dash_cancel:
+		player.velocity.x = 0 
+	if dashing and player.velocity.x < 0 and player.input_controller.right_press and dash_cancel:
+		player.velocity.x = 0 
 
 func _corner_cutting():
 	if corner_cutting:
@@ -339,7 +375,54 @@ func _corner_cutting():
 		if player.velocity.y < 0 and !L_raycast.is_colliding() and R_raycast.is_colliding() and !M_raycast.is_colliding():
 			player.position.x -= corner_correction
 
+func _handle_rolling():
+	if player.ROLL: 
+		if player.is_on_floor() and player.input_controller.action_right_press:
+			_rolling_time(roll_duration * 0.25)
+			if !player.input_controller.up_hold:
+				print("roll")
+				player.velocity = Vector2(max_speed_locked * roll_duration * h_direction, 0)
+				dash_count += -1
+				movementInputMonitoring = Vector2(false, false)
+				_input_pause_reset(roll_duration * 0.0625)
+				
+	if player.ROLL and rolling:
+		#functionality to have the player get i-frames
+		#move this to Roll state
+		pass
 
+#region Timers
+func _input_pause_reset(time):
+	await get_tree().create_timer(time).timeout
+	movementInputMonitoring = Vector2(true, true)
+
+func _rolling_time(time):
+	rolling = true
+	await get_tree().create_timer(time).timeout
+	rolling = false	
+
+func _buffer_jump():
+	await get_tree().create_timer(jump_buffer_time).timeout
+	jump_was_pressed = false
+
+func _coyote_time():
+	await get_tree().create_timer(coyote_time).timeout
+	coyote_active = false
+	jump_count += -1
+
+func _dashing_time(time):
+	dashing = true
+	await get_tree().create_timer(time).timeout
+	dashing = false
+	if !player.is_on_floor():
+		player.velocity.y = -gravity_strength * 10
+		
+func _pause_gravity(time):
+	gravity_active = false
+	await get_tree().create_timer(time).timeout
+	gravity_active = true
+
+#endregion
 
 
 ##=================PREVIOUS==CODE=================================================================
