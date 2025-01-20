@@ -10,29 +10,28 @@ var wall_dir = Vector2.ZERO
 ##Horizontal Max Movement Speed
 @export_range(200, 600) var h_speed : float = 425
 ##How fast the player gets to top ground H movement speed
-@export_range(0, 4) var accel_time : float = 0
+@export_range(0, 4) var accel_time : float = 0.1
 ##How fast the player goes to 0 ground H movement speed
-@export_range(0, 4) var deccel_time : float = 0
+@export_range(0, 4) var deccel_time : float = 0.1
 
 ##How long the player will roll for
-@export_range(1.25, 4) var roll_duration: float = 2
+@export_range(1.25, 4) var roll_duration: float = 3
 #endregion
 
 #region Jumping/Gravity
 @export_category("Jumping and Gravity")
 ##The peak height of the player's jump
-@export_range(1, 20
-) var jump_height: float = 1.5
+@export_range(1, 20) var jump_height: float = 5
 ##How many jumps the player can do before needing to touch the ground again. Giving more than 1 jump disables jump buffering and coyote time.
 @export_range(0, 3) var num_jumps: int = 1
 ##The strength at which the player will be pulled to the ground.
-@export_range(0, 100) var gravity_strength: float = 20.0
+@export_range(0, 100) var gravity_strength: float = 18.0
 ##The faster velocity for falling
-@export_range(600, 1200) var terminal_velocity = 800
+@export_range(600, 1200) var terminal_velocity = 1000
 ##Your player will move this amount faster when falling providing a less floaty jump curve.
 @export_range(0.5, 3) var desc_gravity_factor: float = 2.3
 ##How much the jump height is cut by.
-@export_range(1, 10) var variable_jump_cut_factor: float = 2
+@export_range(1, 10) var variable_jump_cut_factor: float = 5
 ##How much extra time (in seconds) the player will be given to jump after falling off an edge. This is set to 0.2 seconds by default.
 @export_range(0, 0.5) var coyote_time: float = 0.2
 ##The window of time (in seconds) that the player can press the jump button before hitting the ground and still have their input registered as a jump. This is set to 0.2 seconds by default.
@@ -58,7 +57,7 @@ var wall_dir = Vector2.ZERO
 ##If enabled, pressing the opposite direction of a dash, during a dash, will zero the player's velocity.
 @export var dash_cancel: bool = true
 ##How far the player will dash. One of the dashing toggles must be on for this to be used.
-@export_range(1.5, 4) var dash_length: float = 2.5
+@export_range(1.5, 4) var dash_length: float = 3
 #endregion
 
 #region Corner Cutting/Jump Correction
@@ -260,7 +259,6 @@ func _handle_jumping():
 	
 	if jump_count == 1:
 		if !player.is_on_floor() and !player.is_on_wall():
-			print("jump here")
 			if coyote_time > 0:
 				coyote_active = true
 				_coyote_time()
@@ -300,7 +298,7 @@ func _jump():
 		
 		player.velocity.y = -jump_strength
 		jump_count += -1
-		print("reg jump" + str(player.movement_controller.jump_count))
+		#print("reg jump" + str(player.movement_controller.jump_count))
 		##TODO investigate this next line and if I need it
 		jump_was_pressed = false
 
@@ -380,7 +378,7 @@ func _handle_rolling():
 		if player.is_on_floor() and player.input_controller.action_right_press:
 			_rolling_time(roll_duration * 0.25)
 			if !player.input_controller.up_hold:
-				print("roll")
+				#print("roll")
 				player.velocity = Vector2(max_speed_locked * roll_duration * h_direction, 0)
 				dash_count += -1
 				movementInputMonitoring = Vector2(false, false)
@@ -423,7 +421,6 @@ func _pause_gravity(time):
 	gravity_active = true
 
 #endregion
-
 
 ##=================PREVIOUS==CODE=================================================================
 

@@ -64,8 +64,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if left_press: direction.emit(-1)
-	elif right_press: direction.emit(1)
+	if left_press: direction.emit(Vector2.LEFT)
+	elif right_press: direction.emit(Vector2.RIGHT)
 	
 	handle_input()
 	actions_update()

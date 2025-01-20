@@ -10,12 +10,11 @@ func _ready():
 
 ## The player interacts with the obj on press of the interact button
 func interact(player):
-	print(str(selected_interactable))
+	#print(str(selected_interactable))
 	if selected_interactable:
 		selected_interactable.interaction_signal(player)
 	
 func _on_area_entered(area: Area2D) -> void:
-	print(str(area))
 	if area is InteractComponent:
 		nearby_interactables.push_back(area)
 		

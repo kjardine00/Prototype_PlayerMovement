@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv7261mxui4yu"]
+
+[ext_resource type="Texture2D" uid="uid://vl8y674y7uh4" path="res://Interactable/Pickup_able/Throwable/WeaponObj/Sword/Sword.png" id="1_e130i"]
+[ext_resource type="Script" path="res://Interactable/interactable_obj_component.gd" id="2_56wd2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fnptr"]
+size = Vector2(20, 124)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rjjh1"]
+radius = 71.0282
+
+[node name="MedSword" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+rotation = 3.14159
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_e130i")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fnptr")
+
+[node name="InteractComponent" type="Area2D" parent="."]
+script = ExtResource("2_56wd2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent"]
+shape = SubResource("CircleShape2D_rjjh1")
+debug_color = Color(0.955205, 1.15514e-06, 0.544432, 0.42)
