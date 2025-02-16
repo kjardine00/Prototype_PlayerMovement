@@ -10,7 +10,7 @@ func enter_state():
 func exit_state():
 	pass
 	
-func update(delta: float):
+func update(_delta: float):
 	pass
 	
 func handle_animation(anim_name : String):

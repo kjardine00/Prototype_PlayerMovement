@@ -6,7 +6,7 @@ var nearby_interactables : Array[InteractComponent]
 var player : Player
 
 func _ready():
-	var player = get_parent()
+	player = get_parent()
 
 ## The player interacts with the obj on press of the interact button
 func interact(player):

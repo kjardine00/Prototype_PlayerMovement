@@ -8,7 +8,7 @@ func enter_state():
 func exit_state():
 	pass
 	
-func update(delta: float):
+func update(_delta: float):
 	handle_animation("wall_slide")
 
 func _handle_wall_slide_tranisition(delta):

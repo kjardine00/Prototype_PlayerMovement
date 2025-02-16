@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://de6hp8xbwfydi"]
+
+[ext_resource type="PackedScene" uid="uid://c0jhjqwuqnl7b" path="res://UI/HUD/HealthInfo/health_info.tscn" id="1_sbsdl"]
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthInfo" parent="." instance=ExtResource("1_sbsdl")]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 7.5
+offset_right = -1681.0
+offset_bottom = -983.5
+scale = Vector2(2, 2)

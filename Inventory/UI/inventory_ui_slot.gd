@@ -1,10 +1,10 @@
 extends Panel
 
-@onready var item_sprite: Sprite2D = $CenterContainer/Panel/ItemSprite
+@onready var texture_rect: TextureRect = $CenterContainer/Panel/TextureRect
 
 func update(item: InvItem):
 	if not item:
-		item_sprite.visible = false
+		texture_rect.visible = false
 	else: 
-		item_sprite.visible = true
-		item_sprite.texture = item.texture
+		texture_rect.visible = true
+		texture_rect.texture = item.texture

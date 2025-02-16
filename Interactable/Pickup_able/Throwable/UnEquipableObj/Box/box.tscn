@@ -10,6 +10,7 @@ script = ExtResource("2_iw5fo")
 name = "Box"
 texture = ExtResource("2_nbcs0")
 sprite_frames = 0
+can_hold = true
 can_stow = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ldsua"]
@@ -18,10 +19,11 @@ size = Vector2(707.692, 676.923)
 [sub_resource type="CircleShape2D" id="CircleShape2D_rfikd"]
 radius = 118.068
 
-[node name="Box" type="CharacterBody2D" node_paths=PackedStringArray("interact_component") groups=["env_object"]]
+[node name="Box" type="CharacterBody2D" node_paths=PackedStringArray("hitbox", "interact_component") groups=["env_object"]]
 collision_layer = 4
 collision_mask = 127
 script = ExtResource("1_i2w15")
+hitbox = NodePath("Hitbox")
 interact_component = NodePath("InteractableObjComponent")
 inv_item_resource = SubResource("Resource_es5c0")
 

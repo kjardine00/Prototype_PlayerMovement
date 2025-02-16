@@ -15,5 +15,5 @@ func update_slots():
 	inventory_ui_slot_1.update(inv.active_item)
 	inventory_ui_slot_2.update(inv.stowed_item)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	update_slots()

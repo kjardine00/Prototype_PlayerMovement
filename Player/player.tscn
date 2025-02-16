@@ -4,9 +4,8 @@
 [ext_resource type="Script" path="res://Player/StateMachine/state_machine.gd" id="2_emkbt"]
 [ext_resource type="Resource" uid="uid://mguuqbasgl7" path="res://Player/Components/player_inventory.tres" id="2_vm81h"]
 [ext_resource type="Script" path="res://Player/Controllers/movement_controller.gd" id="3_2xqet"]
-[ext_resource type="Texture2D" uid="uid://1lj0btpdq2hh" path="res://Player/Assets/Player Size.png" id="3_qcew3"]
+[ext_resource type="Texture2D" uid="uid://c184d85kquqpd" path="res://Player/Assets/Scribble Character.png" id="3_xkjs2"]
 [ext_resource type="Script" path="res://Player/Controllers/input_controller.gd" id="4_701wm"]
-[ext_resource type="Texture2D" uid="uid://k5ax2m4473ov" path="res://Player/Assets/Main_Character.png" id="4_dcv7d"]
 [ext_resource type="Script" path="res://Player/StateMachine/States/idle_state.gd" id="4_hu13h"]
 [ext_resource type="Script" path="res://Player/StateMachine/States/run_state.gd" id="5_26c4l"]
 [ext_resource type="Script" path="res://Player/Controllers/animation_controller.gd" id="5_dn68y"]
@@ -16,6 +15,7 @@
 [ext_resource type="Script" path="res://Player/StateMachine/States/wallslide_state.gd" id="9_xa8so"]
 [ext_resource type="PackedScene" uid="uid://bky3owklv4i7s" path="res://Player/Components/player_interact_area_2d.tscn" id="10_a0os3"]
 [ext_resource type="Script" path="res://Player/StateMachine/States/climb_state.gd" id="11_nh6pr"]
+[ext_resource type="Script" path="res://Player/Controllers/inventory_controller.gd" id="17_h63h6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5joj1"]
 radius = 35.0
@@ -27,25 +27,24 @@ radius = 32.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_woubw"]
 size = Vector2(36, 30)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_controller", "anim_controller", "input_controller", "interact_area", "state_machine")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_controller", "anim_controller", "input_controller", "inv_controller", "interact_area", "state_machine")]
 collision_layer = 2
 collision_mask = 73
 script = ExtResource("1_20bt8")
 movement_controller = NodePath("MovementController")
 anim_controller = NodePath("AnimationController")
 input_controller = NodePath("InputController")
+inv_controller = NodePath("InventoryController")
 interact_area = NodePath("PlayerInteractArea2D")
 state_machine = NodePath("StateMachine")
-DASH = true
-INVENTORY = ExtResource("2_vm81h")
 
 [node name="AnimationController" type="Node2D" parent="."]
 script = ExtResource("5_dn68y")
 
 [node name="PlayerSprite" type="Sprite2D" parent="AnimationController"]
 position = Vector2(2, 0.396445)
-scale = Vector2(0.178914, 0.207116)
-texture = ExtResource("4_dcv7d")
+scale = Vector2(1.77273, 2.05216)
+texture = ExtResource("3_xkjs2")
 
 [node name="PlayerAnimations" type="AnimationPlayer" parent="AnimationController"]
 
@@ -117,14 +116,6 @@ visible = false
 shape = SubResource("CircleShape2D_hm74x")
 debug_color = Color(0.965701, 0, 0.485083, 0.42)
 
-[node name="GrabPos" type="Marker2D" parent="."]
-position = Vector2(55, 0)
-
-[node name="debug_box" type="Sprite2D" parent="GrabPos"]
-visible = false
-scale = Vector2(0.111111, 0.0533333)
-texture = ExtResource("3_qcew3")
-
 [node name="EnvironmentObjDetector" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 4
@@ -135,11 +126,11 @@ position = Vector2(0, 65)
 shape = SubResource("RectangleShape2D_woubw")
 debug_color = Color(0.368899, 0.478102, 1, 0.42)
 
-[node name="InventoryController" type="Node2D" parent="."]
-
-[node name="ActiveItem" type="Node2D" parent="InventoryController"]
-
-[node name="StowedItem" type="Node2D" parent="InventoryController"]
+[node name="InventoryController" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(55, 0)
+script = ExtResource("17_h63h6")
+INVENTORY = ExtResource("2_vm81h")
+player = NodePath("..")
 
 [connection signal="area_entered" from="PlayerInteractArea2D" to="PlayerInteractArea2D" method="_on_area_entered"]
 [connection signal="area_exited" from="PlayerInteractArea2D" to="PlayerInteractArea2D" method="_on_area_exited"]

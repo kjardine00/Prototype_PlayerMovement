@@ -10,14 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Prototype_Template"
-run/main_scene="res://Main/PrototypeWorld.tscn"
+config/name="Tales of Mud & Steel"
+run/main_scene="res://Testing/PrototypeWorld.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Events="*res://Main/Managers/events.gd"
+Events="*res://World/Managers/events.gd"
 
 [display]
 
@@ -28,20 +28,25 @@ window/size/resizable=false
 [file_customization]
 
 folder_colors={
-"res://Interactable/": "yellow",
+"res://Interactable/": "red",
 "res://Interactable/NPCs/": "yellow",
 "res://Interactable/Pickup_able/": "orange",
-"res://Interactable/z.Trash/": "pink",
-"res://Inventory/": "red",
-"res://LevelGeneration/": "blue",
-"res://Main/": "orange",
-"res://Player/": "green",
-"res://Trash/": "pink"
+"res://Inventory/": "teal",
+"res://Player/": "orange",
+"res://Testing/": "purple",
+"res://UI/": "yellow",
+"res://World/": "green",
+"res://z.Depreciated/": "pink",
+"res://z.Depreciated/sword attack stuff/": "pink"
 }
 
 [global_group]
 
 env_object="If the player should be able to stand on this object and also move it by pushing it"
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 
@@ -108,6 +113,26 @@ enter={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+r1={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":10,"pressure":0.0,"pressed":true,"script":null)
+]
+}
+r2={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":5,"axis_value":1.0,"script":null)
+]
+}
+l1={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":9,"pressure":0.0,"pressed":true,"script":null)
+]
+}
+l2={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":4,"axis_value":1.0,"script":null)
+]
+}
 
 [layer_names]
 
@@ -121,5 +146,4 @@ enter={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
 2d/snap/snap_2d_transforms_to_pixel=true

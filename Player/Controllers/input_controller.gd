@@ -58,18 +58,15 @@ var l2_press = false
 
 #endregion
 
-
 func _ready() -> void:
 	handle_input()
 
-
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if left_press: direction.emit(Vector2.LEFT)
 	elif right_press: direction.emit(Vector2.RIGHT)
 	
 	handle_input()
 	actions_update()
-
 
 func handle_input():
 	h_move_axis = Input.get_axis("move_left", "move_right")
@@ -95,7 +92,14 @@ func handle_input():
 	action_right_press = Input.is_action_just_pressed("action_right")
 
 	# Bumper Buttons
-	
+	r1_hold = Input.is_action_pressed("r1")
+	r1_press = Input.is_action_just_pressed("r1")
+	r2_hold = Input.is_action_pressed("r2")
+	r2_press = Input.is_action_just_pressed("r2")
+	l1_hold = Input.is_action_pressed("l1")
+	l1_press = Input.is_action_just_pressed("l1")
+	l2_hold = Input.is_action_pressed("l2")
+	l2_press = Input.is_action_just_pressed("l2")
 	
 func actions_update():
 	##Triangle, X, Y, F
@@ -109,11 +113,27 @@ func actions_update():
 		
 	##Circle, A, B, RMB
 	if action_right_press:
+		## Use utility equip ability
 		print("ACTION RIGHT")
 	
 	##Square, Y, X, LMB
 	if action_left_press:
+		##Attack with active item
 		print("ACTION LEFT")
-		if player.state_machine.current_state != player.state_machine.WALL_SLIDE:
-			player.handle_attack_action()
+		player.handle_attack_action()
 	
+	if r1_press:
+		##throw held item
+		print("ACTION R1")
+		player.inv_controller.swap_active_item()
+	
+	if r2_press:
+		print("ACTION R2")
+		
+	if l1_press:
+		##Swap active and non active item
+		print("ACTION L1")
+		player.inv_controller.throw_active_item()
+		
+	if l2_press:
+		print("ACTION L2")

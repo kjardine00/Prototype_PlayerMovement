@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn0kasnlxbntm"]
+
+[ext_resource type="Texture2D" uid="uid://d3elvafodw025" path="res://Interactable/StaticObjects/Sign.png" id="1_0jm3f"]
+
+[node name="WoodenSign" type="Sprite2D"]
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("1_0jm3f")

@@ -1,15 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://bv7261mxui4yu"]
+[gd_scene load_steps=8 format=3 uid="uid://bv7261mxui4yu"]
 
 [ext_resource type="Texture2D" uid="uid://vl8y674y7uh4" path="res://Interactable/Pickup_able/Throwable/WeaponObj/Sword/Sword.png" id="1_e130i"]
-[ext_resource type="Script" path="res://Interactable/interactable_obj_component.gd" id="2_56wd2"]
+[ext_resource type="Script" path="res://Interactable/Pickup_able/Throwable/WeaponObj/Sword/med_sword.gd" id="1_lw7jf"]
+[ext_resource type="Script" path="res://Inventory/inventory_item.gd" id="2_553qi"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://Interactable/interactable_obj_component.tscn" id="3_eykk4"]
+
+[sub_resource type="Resource" id="Resource_kgr1x"]
+script = ExtResource("2_553qi")
+name = "Med Sword"
+texture = ExtResource("1_e130i")
+sprite_frames = 0
+can_hold = true
+can_stow = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fnptr"]
 size = Vector2(20, 124)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rjjh1"]
-radius = 71.0282
+[sub_resource type="CircleShape2D" id="CircleShape2D_sclah"]
+radius = 85.0
 
-[node name="MedSword" type="CharacterBody2D"]
+[node name="MedSword" type="CharacterBody2D" node_paths=PackedStringArray("hitbox", "interact_component")]
+collision_layer = 4
+collision_mask = 127
+script = ExtResource("1_lw7jf")
+hitbox = NodePath("Hitbox")
+interact_component = NodePath("InteractableObjComponent")
+inv_item_resource = SubResource("Resource_kgr1x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -2)
@@ -20,9 +36,8 @@ texture = ExtResource("1_e130i")
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fnptr")
 
-[node name="InteractComponent" type="Area2D" parent="."]
-script = ExtResource("2_56wd2")
+[node name="InteractableObjComponent" parent="." instance=ExtResource("3_eykk4")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent"]
-shape = SubResource("CircleShape2D_rjjh1")
-debug_color = Color(0.955205, 1.15514e-06, 0.544432, 0.42)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObjComponent"]
+shape = SubResource("CircleShape2D_sclah")
+debug_color = Color(0.975531, 0, 0.418706, 0.42)
