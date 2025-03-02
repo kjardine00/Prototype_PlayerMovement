@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://q7y6tgcdevf5"]
+
+[ext_resource type="Script" path="res://Items/Weapons/Spear/spear.gd" id="1_ikk5o"]
+[ext_resource type="Texture2D" uid="uid://c7ihsukhfx37b" path="res://Items/Weapons/Spear/item_spear.png" id="1_mul4c"]
+[ext_resource type="Texture2D" uid="uid://b76fmfouawcg2" path="res://Items/Weapons/Spear/spear_icon.png" id="2_5vdul"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://Interactable/interactable_obj_component.tscn" id="2_q3kns"]
+[ext_resource type="Texture2D" uid="uid://m8u1e4j3xmwm" path="res://Items/Weapons/Spear/Testing Spear Hit.png" id="5_2kc16"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_372fv"]
+height = 116.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_frt6n"]
+radius = 100.0
+
+[node name="Spear" type="CharacterBody2D" node_paths=PackedStringArray("interact_component", "hitbox")]
+collision_layer = 4
+collision_mask = 93
+script = ExtResource("1_ikk5o")
+interact_component = NodePath("InteractableObjComponent")
+hitbox = NodePath("Hitbox")
+icon = ExtResource("2_5vdul")
+
+[node name="AttackComponent" type="Node2D" parent="."]
+
+[node name="Attack Animation" type="Sprite2D" parent="AttackComponent"]
+position = Vector2(58, 0)
+texture = ExtResource("5_2kc16")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Area2D" type="Area2D" parent="AttackComponent"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackComponent/Area2D"]
+position = Vector2(-53, -1)
+polygon = PackedVector2Array(49, -60, 160, 0, 49, 61)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_mul4c")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_372fv")
+
+[node name="InteractableObjComponent" parent="." instance=ExtResource("2_q3kns")]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObjComponent"]
+shape = SubResource("CircleShape2D_frt6n")

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://8iuepoytb7a8"]
+
+[ext_resource type="Script" path="res://UI/HUD/Active&StowedItem/item_icon.gd" id="1_qmago"]
+[ext_resource type="Theme" uid="uid://cnqsctu0goje5" path="res://UI/HUD/HUD.tres" id="2_5i7bb"]
+
+[node name="ItemIcon" type="PanelContainer"]
+offset_right = 50.0
+offset_bottom = 50.0
+theme = ExtResource("2_5i7bb")
+script = ExtResource("1_qmago")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 2
+theme = ExtResource("2_5i7bb")
+expand_mode = 1

@@ -5,6 +5,11 @@ var selected_interactable : InteractComponent
 var nearby_interactables : Array[InteractComponent]
 var player : Player
 
+##  NOTE: This takes the possible interactable objects and puts them into an ordered array from 
+## closest to the player to furthest and as the player leaves the interactable area of other obj
+## that obj is removed from the array. When the player uses the interact input that object handles
+## the input for interaction
+
 func _ready():
 	player = get_parent()
 

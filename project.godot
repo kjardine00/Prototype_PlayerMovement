@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Tales of Mud & Steel"
-run/main_scene="res://Testing/PrototypeWorld.tscn"
+run/main_scene="res://World/a.Main/game_controller.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Events="*res://World/Managers/events.gd"
+Global="*res://global.gd"
 
 [display]
 
@@ -32,6 +33,7 @@ folder_colors={
 "res://Interactable/NPCs/": "yellow",
 "res://Interactable/Pickup_able/": "orange",
 "res://Inventory/": "teal",
+"res://Items/": "red",
 "res://Player/": "orange",
 "res://Testing/": "purple",
 "res://UI/": "yellow",

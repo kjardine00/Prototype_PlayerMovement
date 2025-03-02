@@ -11,6 +11,7 @@ func _interact(interactor: Player):
 	match state:
 		states.IDLE:
 			_pick_up(interactor)
+			state = states.PICKED_UP
 		states.PICKED_UP:
 			pass
 		states.THROWN:

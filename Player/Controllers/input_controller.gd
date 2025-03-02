@@ -56,6 +56,9 @@ var l2_press = false
 # Right Joystick
 ## TODO
 
+# Memory of last directional input
+var last_input_direction = Vector2.ZERO
+
 #endregion
 
 func _ready() -> void:
@@ -67,6 +70,7 @@ func _physics_process(_delta: float) -> void:
 	
 	handle_input()
 	actions_update()
+	handle_last_direction_pressed()
 
 func handle_input():
 	h_move_axis = Input.get_axis("move_left", "move_right")
@@ -101,39 +105,56 @@ func handle_input():
 	l2_hold = Input.is_action_pressed("l2")
 	l2_press = Input.is_action_just_pressed("l2")
 	
+func handle_last_direction_pressed():
+	if up_hold:
+		last_input_direction = Vector2.UP
+	elif down_hold:
+		last_input_direction = Vector2.DOWN
+	elif left_hold:
+		last_input_direction = Vector2.LEFT
+	elif right_hold:
+		last_input_direction = Vector2.RIGHT
+	else:
+		last_input_direction = Vector2.ZERO
+
 func actions_update():
 	##Triangle, X, Y, F
 	if action_up_press:
-		print("ACTION UP")
+		#print("ACTION UP")
 		player.handle_interact_action()
 		
 	## X, B, A, SPACE
 	if action_down_press:
-		print("ACTION DOWN")
+		#print("ACTION DOWN")
+		pass
 		
 	##Circle, A, B, RMB
 	if action_right_press:
 		## Use utility equip ability
-		print("ACTION RIGHT")
+		#print("ACTION RIGHT")
+		pass
 	
 	##Square, Y, X, LMB
 	if action_left_press:
 		##Attack with active item
-		print("ACTION LEFT")
-		player.handle_attack_action()
+		#print("ACTION LEFT")
+		
+		player.inv_controller.handle_attack_input(last_input_direction)
 	
 	if r1_press:
 		##throw held item
-		print("ACTION R1")
-		player.inv_controller.swap_active_item()
+		#print("ACTION R1")
+		player.inv_controller.swap_active()
 	
 	if r2_press:
-		print("ACTION R2")
+		#print("ACTION R2")
+		pass
 		
 	if l1_press:
 		##Swap active and non active item
-		print("ACTION L1")
-		player.inv_controller.throw_active_item()
+		#print("ACTION L1")
+		player.inv_controller.handle_throw_drop(last_input_direction)
 		
 	if l2_press:
-		print("ACTION L2")
+		#print("ACTION L2")
+		pass

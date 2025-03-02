@@ -4,6 +4,9 @@ class_name InteractComponent
 signal interact
 signal stop_interact
 
+## NOTE: This handles when the player gives the interact input or leaves the interaction area
+## If the player gives the interact input then that input is sent to the obj's script to handle that input
+
 # the player hits the interaction button, tell the obj that the player is interacting
 func interaction_signal(interactor: CharacterBody2D):
 	interact.emit(interactor)

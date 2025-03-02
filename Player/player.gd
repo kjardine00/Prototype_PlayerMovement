@@ -2,7 +2,6 @@ extends CharacterBody2D
 class_name Player
 
 @onready var hitbox: CollisionShape2D = $Hitbox
-@onready var inventory_controller: Node2D = $InventoryController
 
 @export_category("Connect Nodes")
 @export var movement_controller: Movement_Controller
@@ -13,15 +12,15 @@ class_name Player
 @export var attack_component: Attack_Component
 @export var state_machine: State_Machine
 
-#region Movement Variables
+#region Depreciated Movement Variables
 @export_category("Movement Variables to be depreciated/refactored")
 #@export var CAN_CLIMB : bool = false
 #@export var CLIMB_SPEED = 30
 #@export var CLIMB_ACCEL = 4
 #@export var CLIMB_DECEL = 5
+#endregion
 
 var h_dir
-#endregion
 
 @export_category("Abilities Enabled")
 @export var ROLL: bool
@@ -38,27 +37,11 @@ func _physics_process(_delta: float) -> void:
 func _send_direction_controllers(direction):
 	h_dir = direction
 	anim_controller.facing = direction
-	_grab_pos(direction)
-	
-func _grab_pos(dir):
-	if dir == Vector2.LEFT:
-		inventory_controller.position.x = -55
-	elif dir == Vector2.RIGHT:
-		inventory_controller.position.x = 55
+
 
 #region Interact Logic
 func handle_interact_action():
 	interact_area.interact(self)
-#endregion
-
-#region Attack Btn logic
-## TODO create this controller
-func handle_attack_action():
-	var active_item = inventory_controller.active_item
-	
-	if active_item:
-		if active_item.has_method("attack"):
-			active_item.attack()
 #endregion
 
 #region EnvironmentObjDetector

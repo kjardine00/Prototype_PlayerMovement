@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cp68w82wv11hv"]
+
+[ext_resource type="FontFile" uid="uid://d044rl4wllgtt" path="res://UI/Assets/SkizoCrispyFont-Regular.ttf" id="1_gdkxo"]
+[ext_resource type="StyleBox" uid="uid://bx45rawt7nn6p" path="res://UI/Themes/button_stylebox_flat.tres" id="2_glqgh"]
+[ext_resource type="StyleBox" uid="uid://chahg4jos2q70" path="res://UI/Themes/style_box_flat_pannel_container.tres" id="3_faxuc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a3ry7"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+
+[resource]
+Button/font_sizes/font_size = 30
+Button/fonts/font = ExtResource("1_gdkxo")
+Button/styles/normal = ExtResource("2_glqgh")
+Label/font_sizes/font_size = 40
+Label/fonts/font = ExtResource("1_gdkxo")
+Label/styles/normal = SubResource("StyleBoxEmpty_a3ry7")
+NewGameButton/base_type = &"Button"
+PanelContainer/styles/panel = ExtResource("3_faxuc")
+VBoxContainer/constants/separation = 35

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_20bt8"]
 [ext_resource type="Script" path="res://Player/StateMachine/state_machine.gd" id="2_emkbt"]
-[ext_resource type="Resource" uid="uid://mguuqbasgl7" path="res://Player/Components/player_inventory.tres" id="2_vm81h"]
 [ext_resource type="Script" path="res://Player/Controllers/movement_controller.gd" id="3_2xqet"]
 [ext_resource type="Texture2D" uid="uid://c184d85kquqpd" path="res://Player/Assets/Scribble Character.png" id="3_xkjs2"]
 [ext_resource type="Script" path="res://Player/Controllers/input_controller.gd" id="4_701wm"]
@@ -15,14 +14,15 @@
 [ext_resource type="Script" path="res://Player/StateMachine/States/wallslide_state.gd" id="9_xa8so"]
 [ext_resource type="PackedScene" uid="uid://bky3owklv4i7s" path="res://Player/Components/player_interact_area_2d.tscn" id="10_a0os3"]
 [ext_resource type="Script" path="res://Player/StateMachine/States/climb_state.gd" id="11_nh6pr"]
-[ext_resource type="Script" path="res://Player/Controllers/inventory_controller.gd" id="17_h63h6"]
+[ext_resource type="PackedScene" uid="uid://q7y6tgcdevf5" path="res://Items/Weapons/Spear/spear.tscn" id="16_v64h2"]
+[ext_resource type="PackedScene" uid="uid://ch3cspvl5qxdy" path="res://Player/Controllers/inventory_contoller.tscn" id="17_yoqns"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5joj1"]
 radius = 35.0
 height = 140.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hm74x"]
-radius = 32.0
+radius = 124.101
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_woubw"]
 size = Vector2(36, 30)
@@ -34,7 +34,7 @@ script = ExtResource("1_20bt8")
 movement_controller = NodePath("MovementController")
 anim_controller = NodePath("AnimationController")
 input_controller = NodePath("InputController")
-inv_controller = NodePath("InventoryController")
+inv_controller = NodePath("InventoryContoller")
 interact_area = NodePath("PlayerInteractArea2D")
 state_machine = NodePath("StateMachine")
 
@@ -56,7 +56,7 @@ script = ExtResource("3_2xqet")
 player = NodePath("..")
 jump_height = 4.0
 desc_gravity_factor = 2.5
-dash_type = 4
+dash_type = 3
 
 [node name="L_Raycast" type="RayCast2D" parent="MovementController"]
 position = Vector2(-35, -50)
@@ -126,11 +126,11 @@ position = Vector2(0, 65)
 shape = SubResource("RectangleShape2D_woubw")
 debug_color = Color(0.368899, 0.478102, 1, 0.42)
 
-[node name="InventoryController" type="Node2D" parent="." node_paths=PackedStringArray("player")]
-position = Vector2(55, 0)
-script = ExtResource("17_h63h6")
-INVENTORY = ExtResource("2_vm81h")
-player = NodePath("..")
+[node name="InventoryContoller" parent="." instance=ExtResource("17_yoqns")]
+position = Vector2(67, 4)
+
+[node name="Spear" parent="InventoryContoller" instance=ExtResource("16_v64h2")]
+position = Vector2(1, 1)
 
 [connection signal="area_entered" from="PlayerInteractArea2D" to="PlayerInteractArea2D" method="_on_area_entered"]
 [connection signal="area_exited" from="PlayerInteractArea2D" to="PlayerInteractArea2D" method="_on_area_exited"]

@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://de6hp8xbwfydi"]
+[gd_scene load_steps=5 format=3 uid="uid://de6hp8xbwfydi"]
 
 [ext_resource type="PackedScene" uid="uid://c0jhjqwuqnl7b" path="res://UI/HUD/HealthInfo/health_info.tscn" id="1_sbsdl"]
+[ext_resource type="PackedScene" uid="uid://dha7p46s64ts7" path="res://UI/HUD/Active&StowedItem/active_&_stowed_item.tscn" id="2_sryf6"]
+[ext_resource type="PackedScene" uid="uid://bu5vljpqrff0p" path="res://UI/HUD/EquipmentInventory/equipment_inventory.tscn" id="3_1bry4"]
+[ext_resource type="PackedScene" uid="uid://7apxv8k6kxrl" path="res://UI/HUD/Mini-map/mini_map.tscn" id="4_kyail"]
 
-[node name="Hud" type="Control"]
+[node name="HUD" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,8 +15,49 @@ grow_vertical = 2
 
 [node name="HealthInfo" parent="." instance=ExtResource("1_sbsdl")]
 layout_mode = 1
-offset_left = 11.0
-offset_top = 7.5
-offset_right = -1681.0
-offset_bottom = -983.5
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 scale = Vector2(2, 2)
+
+[node name="Active&StowedItem" parent="." instance=ExtResource("2_sryf6")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -170.0
+offset_right = 30.0
+offset_bottom = -170.0
+grow_vertical = 0
+scale = Vector2(3, 3)
+
+[node name="EquipmentInventory" parent="." instance=ExtResource("3_1bry4")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -212.0
+offset_right = -150.0
+offset_bottom = -212.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2, 2)
+
+[node name="MiniMap" parent="." instance=ExtResource("4_kyail")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_top = 19.0
+offset_right = -230.0
+offset_bottom = 19.0
+grow_horizontal = 0
