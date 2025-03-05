@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bicl44dsx0h7q"]
+
+[ext_resource type="Script" uid="uid://dr45q8iwcd5bi" path="res://z.Depreciated/Interactable/equip_obj.gd" id="1_x7cge"]
+
+[node name="EquipObj" type="CharacterBody2D"]
+script = ExtResource("1_x7cge")

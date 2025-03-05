@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ygyw88akbexx"]
 
-[ext_resource type="Script" path="res://World/a.Main/game_controller.gd" id="1_ork5o"]
+[ext_resource type="Script" uid="uid://04ind527uwo" path="res://World/a.Main/game_controller.gd" id="1_ork5o"]
 [ext_resource type="PackedScene" uid="uid://d32kxipu0bybp" path="res://UI/FX/transition_controller.tscn" id="2_wiax4"]
 [ext_resource type="PackedScene" uid="uid://dpgg3aujritit" path="res://Player/player.tscn" id="2_yb0hg"]
 

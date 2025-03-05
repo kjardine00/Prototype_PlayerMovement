@@ -323,7 +323,7 @@ func _handle_dashing():
 			dash_count = num_dashes
 	
 	if eight_way_dash and player.input_controller.action_right_press and dash_count > 0: #and !rolling
-		var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		#var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		_dash("eight_way")
 		#if (!player.input_controller.left_hold and !player.input_controller.right_hold and !player.input_controller.up_hold and !player.input_controller.down_hold):
 			#player.velocity.x = dashMagnitude * h_direction

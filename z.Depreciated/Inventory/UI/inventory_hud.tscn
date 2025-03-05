@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://clohhxcdqix6x"]
+
+[ext_resource type="Script" uid="uid://dt4vlx2md5yhc" path="res://z.Depreciated/Inventory/UI/inventory_hud.gd" id="1_t48hm"]
+[ext_resource type="PackedScene" uid="uid://bog6lga5mkb0f" path="res://z.Depreciated/Inventory/UI/inventory_ui_slot.tscn" id="2_1d7lb"]
+
+[node name="InventoryHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(7, 7)
+script = ExtResource("1_t48hm")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 36.0
+offset_bottom = 16.0
+columns = 2
+
+[node name="Inventory_UI_slot1" parent="GridContainer" instance=ExtResource("2_1d7lb")]
+layout_mode = 2
+
+[node name="Inventory_UI_slot2" parent="GridContainer" instance=ExtResource("2_1d7lb")]
+layout_mode = 2

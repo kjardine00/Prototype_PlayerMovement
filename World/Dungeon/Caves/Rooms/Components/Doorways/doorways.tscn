@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bh8ux4tsny25k"]
 
-[ext_resource type="Script" path="res://World/Dungeon/Caves/Rooms/Components/Doorways/doorways.gd" id="1_ee2ko"]
+[ext_resource type="Script" uid="uid://io1vl1ua66u8" path="res://World/Dungeon/Caves/Rooms/Components/Doorways/doorways.gd" id="1_ee2ko"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wf4vb"]
 

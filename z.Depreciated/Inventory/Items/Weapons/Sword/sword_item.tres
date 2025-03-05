@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=4 format=3 uid="uid://6ydxgk5tds4a"]
+
+[ext_resource type="Script" uid="uid://cjgigi7b6cy3m" path="res://z.Depreciated/Inventory/inventory_item.gd" id="1_wjlh6"]
+[ext_resource type="Texture2D" uid="uid://bigypix0h82p8" path="res://z.Depreciated/Inventory/Items/Weapons/Sword/sword_icon.png" id="2_cm4dy"]
+[ext_resource type="Texture2D" uid="uid://dbifhbadfs0e8" path="res://z.Depreciated/Inventory/Items/Weapons/Sword/Sword Swing.png" id="2_cmebk"]
+
+[resource]
+script = ExtResource("1_wjlh6")
+name = "Sword"
+texture = ExtResource("2_cm4dy")
+sprite_sheet = ExtResource("2_cmebk")
+sprite_frames = 6
+can_hold = false
+can_stow = true

@@ -1,20 +1,19 @@
-[gd_scene load_steps=20 format=3 uid="uid://dpgg3aujritit"]
+[gd_scene load_steps=19 format=3 uid="uid://dpgg3aujritit"]
 
-[ext_resource type="Script" path="res://Player/player.gd" id="1_20bt8"]
-[ext_resource type="Script" path="res://Player/StateMachine/state_machine.gd" id="2_emkbt"]
-[ext_resource type="Script" path="res://Player/Controllers/movement_controller.gd" id="3_2xqet"]
+[ext_resource type="Script" uid="uid://scuwbtfptbi6" path="res://Player/player.gd" id="1_20bt8"]
+[ext_resource type="Script" uid="uid://bcug3p27tt480" path="res://Player/StateMachine/state_machine.gd" id="2_emkbt"]
+[ext_resource type="Script" uid="uid://y8may6rdnaat" path="res://Player/Controllers/movement_controller.gd" id="3_2xqet"]
 [ext_resource type="Texture2D" uid="uid://c184d85kquqpd" path="res://Player/Assets/Scribble Character.png" id="3_xkjs2"]
-[ext_resource type="Script" path="res://Player/Controllers/input_controller.gd" id="4_701wm"]
-[ext_resource type="Script" path="res://Player/StateMachine/States/idle_state.gd" id="4_hu13h"]
-[ext_resource type="Script" path="res://Player/StateMachine/States/run_state.gd" id="5_26c4l"]
-[ext_resource type="Script" path="res://Player/Controllers/animation_controller.gd" id="5_dn68y"]
-[ext_resource type="Script" path="res://Player/StateMachine/States/fall_state.gd" id="5_n7d0q"]
-[ext_resource type="Script" path="res://Player/StateMachine/States/jump_state.gd" id="6_wnova"]
-[ext_resource type="Script" path="res://Player/StateMachine/States/wall_jump_state.gd" id="8_2bkxe"]
-[ext_resource type="Script" path="res://Player/StateMachine/States/wallslide_state.gd" id="9_xa8so"]
+[ext_resource type="Script" uid="uid://fl82rtx7glgg" path="res://Player/Controllers/input_controller.gd" id="4_701wm"]
+[ext_resource type="Script" uid="uid://do72wb4dko7fq" path="res://Player/StateMachine/States/idle_state.gd" id="4_hu13h"]
+[ext_resource type="Script" uid="uid://cnivmqytdixks" path="res://Player/StateMachine/States/run_state.gd" id="5_26c4l"]
+[ext_resource type="Script" uid="uid://dgbvaiyhld56k" path="res://Player/Controllers/animation_controller.gd" id="5_dn68y"]
+[ext_resource type="Script" uid="uid://brgjrl82iej4c" path="res://Player/StateMachine/States/fall_state.gd" id="5_n7d0q"]
+[ext_resource type="Script" uid="uid://bjaoxygfgenoe" path="res://Player/StateMachine/States/jump_state.gd" id="6_wnova"]
+[ext_resource type="Script" uid="uid://c6rvpdyrs62lu" path="res://Player/StateMachine/States/wall_jump_state.gd" id="8_2bkxe"]
+[ext_resource type="Script" uid="uid://biq3j4pbkii2v" path="res://Player/StateMachine/States/wallslide_state.gd" id="9_xa8so"]
 [ext_resource type="PackedScene" uid="uid://bky3owklv4i7s" path="res://Player/Components/player_interact_area_2d.tscn" id="10_a0os3"]
-[ext_resource type="Script" path="res://Player/StateMachine/States/climb_state.gd" id="11_nh6pr"]
-[ext_resource type="PackedScene" uid="uid://q7y6tgcdevf5" path="res://Items/Weapons/Spear/spear.tscn" id="16_v64h2"]
+[ext_resource type="Script" uid="uid://d4elmvksw1icg" path="res://Player/StateMachine/States/climb_state.gd" id="11_nh6pr"]
 [ext_resource type="PackedScene" uid="uid://ch3cspvl5qxdy" path="res://Player/Controllers/inventory_contoller.tscn" id="17_yoqns"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5joj1"]
@@ -127,10 +126,7 @@ shape = SubResource("RectangleShape2D_woubw")
 debug_color = Color(0.368899, 0.478102, 1, 0.42)
 
 [node name="InventoryContoller" parent="." instance=ExtResource("17_yoqns")]
-position = Vector2(67, 4)
-
-[node name="Spear" parent="InventoryContoller" instance=ExtResource("16_v64h2")]
-position = Vector2(1, 1)
+position = Vector2(0, 0)
 
 [connection signal="area_entered" from="PlayerInteractArea2D" to="PlayerInteractArea2D" method="_on_area_entered"]
 [connection signal="area_exited" from="PlayerInteractArea2D" to="PlayerInteractArea2D" method="_on_area_exited"]

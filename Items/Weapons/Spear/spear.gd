@@ -14,6 +14,8 @@ extends CharacterBody2D
 @export_category("Connections")
 @export var interact_component : InteractComponent
 @export var hitbox : CollisionShape2D
+@export var sprite: Sprite2D
+@export var damage_comp: DamageComp
 
 @export_category("Properties")
 @export_group("UI Elements")
@@ -36,15 +38,22 @@ var applied_terminal_vel: float
 @export var bounciness : float = 0.3
 @export var oriented_throw : bool = true
 
+@export_group("Attack and Damage")
+@export var damage : float
+@export var cooldown : float
+@export var can_damage : bool = false
+@export var spear_range : float = 65
+
 enum states {IDLE, PICKED_UP, THROWN}
 var state
-var picked_up = false
+
 #endregion
 
 func _ready() -> void:
 	interact_component.interact.connect(_interaction_signal)
 	interact_component.stop_interact.connect(_stop_interacting_signal)
 	
+	damage_comp.damage = damage
 	state = states.IDLE
 
 func _gravity():
@@ -93,7 +102,7 @@ func _physics_process(delta: float) -> void:
 			_check_idle()
 			
 #region Pick up
-func _pick_up(interactor):
+func _pick_up(_interactor):
 	if Global.player_inventory.empty_active:
 		reparent(Global.player_inventory.active_item)
 		Global.player_inventory.pickup(self)
@@ -150,21 +159,41 @@ func _check_idle():
 #endregion
 
 #region Attack Logic
-func attack(attack_direction):
+func attack(facing : Vector2 = Vector2.RIGHT, attack_direction : Vector2 = Vector2.ZERO):
 	#TODO 
 	# Play animation
 	# Toggle on Hitbox with damage info
 	# Toggle
 	match attack_direction:
 		Vector2.ZERO:
-			pass
+			h_attack(facing)
 		Vector2.UP:
 			pass
 		Vector2.DOWN:
 			pass
 		Vector2.LEFT:
-			pass
+			h_attack(attack_direction)
 		Vector2.RIGHT:
-			pass
+			h_attack(attack_direction)
 
+func h_attack(dir):
+	if dir == Vector2.LEFT:
+		sprite.flip_h = true
+		damage_comp.position = 50 * dir
+	elif dir == Vector2.RIGHT:
+		sprite.flip_h = false
+		damage_comp.position = 50 * dir
+		
+	var tween = get_tree().create_tween()
+	self.visible = true
+	tween.tween_property(self, "position", Vector2(spear_range, 0) * dir, 0.1)
+	tween.tween_property(self, "position", Vector2(0, 0), 0.1)
+	await get_tree().create_timer(0.2).timeout
+	self.visible = false
+
+func v_attack(dir):
+	var tween = get_tree().create_tween()
+	self.visible = true
+	await get_tree().create_timer(0.2).timeout
+	self.visible = false
 #endregion

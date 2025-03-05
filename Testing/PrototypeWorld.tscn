@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=4 uid="uid://47d42i3fkm4r"]
 
 [ext_resource type="Texture2D" uid="uid://bgub0vp78v6" path="res://World/Assets/Block_Tilemap.png" id="1_ehkbs"]
-[ext_resource type="PackedScene" uid="uid://clohhxcdqix6x" path="res://Inventory/UI/inventory_hud.tscn" id="1_isvjp"]
+[ext_resource type="PackedScene" uid="uid://clohhxcdqix6x" path="res://z.Depreciated/Inventory/UI/inventory_hud.tscn" id="1_isvjp"]
 [ext_resource type="Texture2D" uid="uid://dqsrtuvifbb2n" path="res://World/Assets/Camera Mockup.png" id="1_j81au"]
 [ext_resource type="PackedScene" uid="uid://dpgg3aujritit" path="res://Player/player.tscn" id="2_qrokm"]
-[ext_resource type="Texture2D" uid="uid://cybqo5gdr788l" path="res://Interactable/StaticObjects/ClimbableObj/Ladder/ladder wip.png" id="3_jeu01"]
-[ext_resource type="Script" path="res://Interactable/StaticObjects/ClimbableObj/climbable_area.gd" id="4_ic5qd"]
+[ext_resource type="Texture2D" uid="uid://cybqo5gdr788l" path="res://z.Depreciated/Interactable/StaticObjects/ClimbableObj/Ladder/ladder wip.png" id="3_jeu01"]
+[ext_resource type="Script" uid="uid://p8dbbr8pffi8" path="res://z.Depreciated/Interactable/StaticObjects/ClimbableObj/climbable_area.gd" id="4_ic5qd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rcyn6"]
 texture = ExtResource("1_ehkbs")

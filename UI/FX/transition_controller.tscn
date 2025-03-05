@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d32kxipu0bybp"]
 
-[ext_resource type="Script" path="res://UI/FX/transition_controller.gd" id="1_sbux2"]
+[ext_resource type="Script" uid="uid://bsawtok65yg66" path="res://UI/FX/transition_controller.gd" id="1_sbux2"]
 
 [sub_resource type="Animation" id="Animation_5isac"]
 resource_name = "Fade In"
@@ -49,9 +49,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qyx3m"]
 _data = {
-"Fade In": SubResource("Animation_5isac"),
-"Fade Out": SubResource("Animation_w4gcf"),
-"RESET": SubResource("Animation_0ccqd")
+&"Fade In": SubResource("Animation_5isac"),
+&"Fade Out": SubResource("Animation_w4gcf"),
+&"RESET": SubResource("Animation_0ccqd")
 }
 
 [node name="TransitionController" type="Control" node_paths=PackedStringArray("background", "animation_player")]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=4 uid="uid://yb46lksblg4d"]
 
 [ext_resource type="PackedScene" uid="uid://bvuo47w1i00ll" path="res://World/Dungeon/Caves/Assets/room_tile_map.tscn" id="1_q8odu"]
-[ext_resource type="Texture2D" uid="uid://cybqo5gdr788l" path="res://Interactable/StaticObjects/ClimbableObj/Ladder/ladder wip.png" id="2_4ka2i"]
-[ext_resource type="Script" path="res://Interactable/StaticObjects/ClimbableObj/climbable_area.gd" id="3_evhxu"]
+[ext_resource type="Texture2D" uid="uid://cybqo5gdr788l" path="res://z.Depreciated/Interactable/StaticObjects/ClimbableObj/Ladder/ladder wip.png" id="2_4ka2i"]
+[ext_resource type="Script" uid="uid://p8dbbr8pffi8" path="res://z.Depreciated/Interactable/StaticObjects/ClimbableObj/climbable_area.gd" id="3_evhxu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cypyx"]
 texture = ExtResource("2_4ka2i")

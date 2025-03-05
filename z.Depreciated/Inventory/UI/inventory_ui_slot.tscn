@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://bog6lga5mkb0f"]
+
+[ext_resource type="Script" uid="uid://cojmi3kvvh8xd" path="res://z.Depreciated/Inventory/UI/inventory_ui_slot.gd" id="1_b7t2c"]
+[ext_resource type="Texture2D" uid="uid://da1hcdm3ho2ar" path="res://z.Depreciated/Inventory/UI/UI_pannel.png" id="2_vlwrv"]
+[ext_resource type="Texture2D" uid="uid://b76fmfouawcg2" path="res://Items/Weapons/Spear/spear_icon.png" id="3_6616d"]
+
+[node name="Inventory_UI_slot" type="Panel"]
+custom_minimum_size = Vector2(16, 16)
+offset_right = 16.0
+offset_bottom = 16.0
+script = ExtResource("1_b7t2c")
+
+[node name="Panel" type="Sprite2D" parent="."]
+texture = ExtResource("2_vlwrv")
+centered = false
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(0.35, 0.35)
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_6616d")
+expand_mode = 1

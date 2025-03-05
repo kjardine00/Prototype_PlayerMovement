@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://b50dxhu66k5in"]
+
+[ext_resource type="Script" uid="uid://8jjvg7risyh2" path="res://Enemies/TrainingDummy/enemy_1.gd" id="1_7n2ip"]
+[ext_resource type="Texture2D" uid="uid://buevxebx3l3ve" path="res://Enemies/TrainingDummy/character_squarePurple.png" id="2_a7l84"]
+[ext_resource type="Script" uid="uid://cd8av4s0rykkc" path="res://CommonComponents/Health_Damage/health_component.gd" id="3_a7l84"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6uhsr"]
+radius = 35.0
+height = 110.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7n2ip"]
+size = Vector2(68, 110)
+
+[node name="Enemy1" type="CharacterBody2D" node_paths=PackedStringArray("health_comp")]
+collision_layer = 16
+collision_mask = 125
+script = ExtResource("1_7n2ip")
+health_comp = NodePath("HealthComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.773, 1.773)
+texture = ExtResource("2_a7l84")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_6uhsr")
+
+[node name="HealthComponent" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 512
+script = ExtResource("3_a7l84")
+MAX_HEALTH = 100
+current_health = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
+shape = SubResource("RectangleShape2D_7n2ip")
+debug_color = Color(0.848217, 0.375091, 1.92523e-07, 0.42)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = -104.0
+offset_right = 20.0
+offset_bottom = -64.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+uppercase = true
+
+[connection signal="area_entered" from="HealthComponent" to="HealthComponent" method="_on_area_entered"]
+[connection signal="body_entered" from="HealthComponent" to="HealthComponent" method="_on_body_entered"]

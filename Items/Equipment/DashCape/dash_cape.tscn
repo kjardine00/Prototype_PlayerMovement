@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://2knbqnlw6stu"]
+
+[ext_resource type="Script" uid="uid://d1vi6b4ixe7ai" path="res://z.Depreciated/Interactable/interactable_obj_component.gd" id="1_iq80g"]
+
+[node name="DashCape" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="InteractComponent" type="Area2D" parent="."]
+script = ExtResource("1_iq80g")
+metadata/_custom_type_script = "uid://d1vi6b4ixe7ai"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent"]

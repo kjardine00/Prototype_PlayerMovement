@@ -18,7 +18,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	pass
 
-func attack(item: InvItem):
+func attack(_item: InvItem):
 	if player.handle_direction():
 		#weapon_sprite.position.x = -6
 		weapon_sprite.flip_h = true

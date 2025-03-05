@@ -25,11 +25,13 @@ var foot_icon
 var charm_icon
 #endregion
 
+var facing : Vector2
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.player_inventory = self
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func pickup(item):
@@ -64,7 +66,6 @@ func swap_active():
 		stowed_icon = active_icon
 		active_icon = null
 		
-		var temp_node = active_item_node
 		stowed_item_node = active_item_node
 		active_item_node = null
 		
@@ -79,8 +80,7 @@ func swap_active():
 			
 		active_icon = stowed_icon
 		stowed_icon = null
-		
-		var temp_node = stowed_item_node
+
 		active_item_node = stowed_item_node
 		stowed_item_node = null
 		
@@ -95,7 +95,6 @@ func handle_throw_drop(last_input_dir):
 		active_icon = null
 		empty_active = true
 	
-
 func handle_attack_input(last_input_dir):
 	if active_item_node:
-		active_item_node.attack(last_input_dir)
+		active_item_node.attack(facing, last_input_dir)

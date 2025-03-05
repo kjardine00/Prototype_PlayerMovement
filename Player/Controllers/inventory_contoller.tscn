@@ -1,9 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://ch3cspvl5qxdy"]
 
-[ext_resource type="Script" path="res://Player/Controllers/inventory_contoller.gd" id="1_tdlbx"]
+[ext_resource type="Script" uid="uid://bhcqrqb30cs3f" path="res://Player/Controllers/inventory_contoller.gd" id="1_tdlbx"]
 
 [node name="InventoryContoller" type="Node2D"]
-position = Vector2(55, 0)
 script = ExtResource("1_tdlbx")
 
 [node name="ActiveItem" type="Node2D" parent="."]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://fu1btk5yh1xq"]
 
-[ext_resource type="Texture2D" uid="uid://dbifhbadfs0e8" path="res://Inventory/Items/Weapons/Sword/Sword Swing.png" id="1_a74gq"]
-[ext_resource type="Script" path="res://z.Depreciated/sword attack stuff/sword_attack_comp.gd" id="1_ud6gq"]
-[ext_resource type="Texture2D" uid="uid://bigypix0h82p8" path="res://Inventory/Items/Weapons/Sword/sword_icon.png" id="3_2b8it"]
+[ext_resource type="Texture2D" uid="uid://dbifhbadfs0e8" path="res://z.Depreciated/Inventory/Items/Weapons/Sword/Sword Swing.png" id="1_a74gq"]
+[ext_resource type="Script" uid="uid://ch5j7s52oknjj" path="res://z.Depreciated/sword attack stuff/sword_attack_comp.gd" id="1_ud6gq"]
+[ext_resource type="Texture2D" uid="uid://bigypix0h82p8" path="res://z.Depreciated/Inventory/Items/Weapons/Sword/sword_icon.png" id="3_2b8it"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ha0"]
 size = Vector2(6, 15.5)
@@ -137,8 +137,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_duahl"]
 _data = {
-"RESET": SubResource("Animation_kutet"),
-"sword_slash": SubResource("Animation_eaqa6")
+&"RESET": SubResource("Animation_kutet"),
+&"sword_slash": SubResource("Animation_eaqa6")
 }
 
 [node name="SwordAttackComponent" type="Area2D"]

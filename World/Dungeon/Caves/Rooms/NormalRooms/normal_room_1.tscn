@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=4 uid="uid://c880e8jbr3rfv"]
 
 [ext_resource type="PackedScene" uid="uid://bvuo47w1i00ll" path="res://World/Dungeon/Caves/Assets/room_tile_map.tscn" id="1_egsnu"]
-[ext_resource type="Script" path="res://World/Dungeon/Caves/Rooms/Components/room.gd" id="1_env2n"]
-[ext_resource type="Texture2D" uid="uid://cybqo5gdr788l" path="res://Interactable/StaticObjects/ClimbableObj/Ladder/ladder wip.png" id="2_lyp8s"]
-[ext_resource type="Script" path="res://Interactable/StaticObjects/ClimbableObj/climbable_area.gd" id="3_1rf2i"]
+[ext_resource type="Script" uid="uid://yhmddtbrrht5" path="res://World/Dungeon/Caves/Rooms/Components/room.gd" id="1_env2n"]
+[ext_resource type="Texture2D" uid="uid://cybqo5gdr788l" path="res://z.Depreciated/Interactable/StaticObjects/ClimbableObj/Ladder/ladder wip.png" id="2_lyp8s"]
+[ext_resource type="Script" uid="uid://p8dbbr8pffi8" path="res://z.Depreciated/Interactable/StaticObjects/ClimbableObj/climbable_area.gd" id="3_1rf2i"]
 [ext_resource type="PackedScene" uid="uid://bh8ux4tsny25k" path="res://World/Dungeon/Caves/Rooms/Components/Doorways/doorways.tscn" id="5_st6ts"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cypyx"]

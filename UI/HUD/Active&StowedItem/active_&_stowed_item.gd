@@ -7,7 +7,7 @@ class_name ActiveStowedUI
 func _ready() -> void:
 	update_inventory() 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	update_inventory()
 
 func update_inventory():

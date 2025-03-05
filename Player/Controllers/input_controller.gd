@@ -63,6 +63,7 @@ var last_input_direction = Vector2.ZERO
 
 func _ready() -> void:
 	handle_input()
+	direction.emit(Vector2.RIGHT)
 
 func _physics_process(_delta: float) -> void:
 	if left_press: direction.emit(Vector2.LEFT)

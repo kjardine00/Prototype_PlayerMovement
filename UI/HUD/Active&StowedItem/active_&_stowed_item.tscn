@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dha7p46s64ts7"]
 
-[ext_resource type="Script" path="res://UI/HUD/Active&StowedItem/active_&_stowed_item.gd" id="1_gqoc7"]
+[ext_resource type="Script" uid="uid://bbt7cjdqoluln" path="res://UI/HUD/Active&StowedItem/active_&_stowed_item.gd" id="1_gqoc7"]
 [ext_resource type="PackedScene" uid="uid://8iuepoytb7a8" path="res://UI/HUD/Active&StowedItem/item_icon.tscn" id="2_3moi8"]
 
 [node name="Active&StowedItem" type="Control"]

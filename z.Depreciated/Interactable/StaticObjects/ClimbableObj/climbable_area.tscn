@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp22uvlm08iev"]
+
+[ext_resource type="Script" uid="uid://p8dbbr8pffi8" path="res://z.Depreciated/Interactable/StaticObjects/ClimbableObj/climbable_area.gd" id="1_iju17"]
+
+[node name="ClimbableArea" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_iju17")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

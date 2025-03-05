@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://brjvj7uj3ono0"]
 
-[ext_resource type="Script" path="res://World/Dungeon/RoomGenerator/level_generator.gd" id="1_t6tjb"]
+[ext_resource type="Script" uid="uid://duyu3wx4w01sb" path="res://World/Dungeon/RoomGenerator/level_generator.gd" id="1_t6tjb"]
 [ext_resource type="PackedScene" uid="uid://dpgg3aujritit" path="res://Player/player.tscn" id="2_7c7iy"]
 [ext_resource type="PackedScene" uid="uid://doiqnwrvy7xjn" path="res://World/Dungeon/Caves/Rooms/start_room.tscn" id="3_q6ovf"]
 [ext_resource type="PackedScene" uid="uid://c880e8jbr3rfv" path="res://World/Dungeon/Caves/Rooms/NormalRooms/normal_room_1.tscn" id="4_babtr"]

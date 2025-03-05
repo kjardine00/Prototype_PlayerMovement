@@ -87,11 +87,11 @@ texture = ExtResource("1_oq44w")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Coins" type="Label" parent="MarginContainer/VBoxContainer/Coins"]
+[node name="Amount3" type="Label" parent="MarginContainer/VBoxContainer/Coins"]
 layout_mode = 2
 theme = ExtResource("1_pip72")
-text = "x"
-vertical_alignment = 1
+text = "x
+"
 
 [node name="Amount2" type="Label" parent="MarginContainer/VBoxContainer/Coins"]
 layout_mode = 2
@@ -114,11 +114,11 @@ texture = ExtResource("3_xnb4g")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Coins" type="Label" parent="MarginContainer/VBoxContainer/Keys"]
+[node name="Amount4" type="Label" parent="MarginContainer/VBoxContainer/Keys"]
 layout_mode = 2
 theme = ExtResource("1_pip72")
-text = "x"
-vertical_alignment = 1
+text = "x
+"
 
 [node name="Amount2" type="Label" parent="MarginContainer/VBoxContainer/Keys"]
 layout_mode = 2

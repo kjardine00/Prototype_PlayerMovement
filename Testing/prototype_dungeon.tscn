@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://nibi20vyre40"]
 
-[ext_resource type="Script" path="res://Testing/prototype_dungeon.gd" id="1_bsytu"]
+[ext_resource type="Script" uid="uid://pqy3kgxmyprw" path="res://Testing/prototype_dungeon.gd" id="1_bsytu"]
 [ext_resource type="PackedScene" uid="uid://brjvj7uj3ono0" path="res://World/Dungeon/RoomGenerator/level_generator.tscn" id="2_oyuwd"]
 [ext_resource type="PackedScene" uid="uid://dpgg3aujritit" path="res://Player/player.tscn" id="3_hssqg"]
 [ext_resource type="PackedScene" uid="uid://bl16yukjou057" path="res://Player/Components/player_camera.tscn" id="4_qarao"]

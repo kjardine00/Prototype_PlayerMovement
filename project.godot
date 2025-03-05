@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Tales of Mud & Steel"
 run/main_scene="res://World/a.Main/game_controller.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -29,16 +29,18 @@ window/size/resizable=false
 [file_customization]
 
 folder_colors={
-"res://Interactable/": "red",
-"res://Interactable/NPCs/": "yellow",
-"res://Interactable/Pickup_able/": "orange",
-"res://Inventory/": "teal",
-"res://Items/": "red",
-"res://Player/": "orange",
+"res://CommonComponents/": "blue",
+"res://Enemies/": "red",
+"res://Items/": "orange",
+"res://Player/": "teal",
 "res://Testing/": "purple",
 "res://UI/": "yellow",
 "res://World/": "green",
 "res://z.Depreciated/": "pink",
+"res://z.Depreciated/Interactable/": "red",
+"res://z.Depreciated/Interactable/NPCs/": "yellow",
+"res://z.Depreciated/Interactable/Pickup_able/": "orange",
+"res://z.Depreciated/Inventory/": "teal",
 "res://z.Depreciated/sword attack stuff/": "pink"
 }
 
@@ -145,6 +147,8 @@ l2={
 2d_physics/layer_5="ENEMIES"
 2d_physics/layer_6="NPCS"
 2d_physics/layer_7="DOORS"
+2d_physics/layer_9="HEALTH"
+2d_physics/layer_10="DAMAGE"
 
 [rendering]
 

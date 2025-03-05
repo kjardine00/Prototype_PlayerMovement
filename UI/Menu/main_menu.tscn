@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://djqhknww5vwgg"]
 
-[ext_resource type="Script" path="res://UI/Menu/main_menu.gd" id="1_niepr"]
+[ext_resource type="Script" uid="uid://ddvn1ded0bnph" path="res://UI/Menu/main_menu.gd" id="1_niepr"]
 [ext_resource type="Theme" uid="uid://cp68w82wv11hv" path="res://UI/Themes/menu_theme.tres" id="1_wrnbp"]
 
 [node name="MainMenu" type="CenterContainer"]

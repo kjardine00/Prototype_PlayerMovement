@@ -37,6 +37,7 @@ func _physics_process(_delta: float) -> void:
 func _send_direction_controllers(direction):
 	h_dir = direction
 	anim_controller.facing = direction
+	inv_controller.facing = direction
 
 
 #region Interact Logic

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cc0jv48kjrnvd"]
 
-[ext_resource type="Script" path="res://Testing/LevelGenOverview/level_gen_tester.gd" id="1_2dgb8"]
+[ext_resource type="Script" uid="uid://cb7lkpihjr15k" path="res://Testing/LevelGenOverview/level_gen_tester.gd" id="1_2dgb8"]
 [ext_resource type="PackedScene" uid="uid://brjvj7uj3ono0" path="res://World/Dungeon/RoomGenerator/level_generator.tscn" id="2_66bxt"]
-[ext_resource type="Script" path="res://Testing/LevelGenOverview/level_gen_tester_camera.gd" id="3_iphvb"]
+[ext_resource type="Script" uid="uid://dgfexfeyqu03j" path="res://Testing/LevelGenOverview/level_gen_tester_camera.gd" id="3_iphvb"]
 
 [node name="LevelGenTester" type="Node2D" node_paths=PackedStringArray("level_generator")]
 script = ExtResource("1_2dgb8")

@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=4 uid="uid://2el1vau5oav7"]
 
-[ext_resource type="PackedScene" uid="uid://dvduw4jwlo3s5" path="res://Interactable/StaticObjects/Entrances/DungeonEntrance/dungeon_entrance.tscn" id="1_cmbuw"]
-[ext_resource type="Script" path="res://World/Marshwick/marshwick.gd" id="1_eh04i"]
-[ext_resource type="PackedScene" uid="uid://cn0kasnlxbntm" path="res://Interactable/StaticObjects/wooden_sign.tscn" id="2_5esmc"]
+[ext_resource type="PackedScene" uid="uid://dvduw4jwlo3s5" path="res://z.Depreciated/Interactable/StaticObjects/Entrances/DungeonEntrance/dungeon_entrance.tscn" id="1_cmbuw"]
+[ext_resource type="Script" uid="uid://dmbu206b3w6ju" path="res://World/Marshwick/marshwick.gd" id="1_eh04i"]
+[ext_resource type="PackedScene" uid="uid://cn0kasnlxbntm" path="res://z.Depreciated/Interactable/StaticObjects/wooden_sign.tscn" id="2_5esmc"]
 [ext_resource type="PackedScene" uid="uid://0k2h0m3fb73g" path="res://World/Dungeon/Caves/Assets/grass_tile_map.tscn" id="3_onnt5"]
 [ext_resource type="PackedScene" uid="uid://dpgg3aujritit" path="res://Player/player.tscn" id="4_drbod"]
 [ext_resource type="PackedScene" uid="uid://bl16yukjou057" path="res://Player/Components/player_camera.tscn" id="5_wjaps"]
