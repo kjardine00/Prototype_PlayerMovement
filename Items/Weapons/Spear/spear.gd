@@ -1,14 +1,9 @@
 extends CharacterBody2D
-
-# NOTE: Features to implement
-#var damage
-#var cooldown
-#var icon
-#var attack_anim
+class_name Weapon
+#NOTE: Features to implement
 #var combo_anim
-#var damage_type
 #var rotate on throw
-# TODO rotate when thrown up and it falls down
+#TODO orient correctly when thrown up and it falls down
 
 #region Export VAR
 @export_category("Connections")
@@ -69,14 +64,7 @@ func _gravity():
 			velocity.y = terminal_velocity
 
 #region Interaction Signal Handling
-func _interaction_signal(interactor: Player):
-	_interact(interactor)
-
-func _stop_interacting_signal():
-	pass
-#endregion
-
-func _interact(interactor) -> void:
+func _interaction_signal(interactor: Player) -> void:
 	match state:
 		states.IDLE:
 			_pick_up(interactor)
@@ -85,6 +73,10 @@ func _interact(interactor) -> void:
 			pass
 		states.THROWN:
 			pass
+
+func _stop_interacting_signal():
+	pass
+#endregion
 	
 func _physics_process(delta: float) -> void:
 	match state:
@@ -103,14 +95,17 @@ func _physics_process(delta: float) -> void:
 			
 #region Pick up
 func _pick_up(_interactor):
-	if Global.player_inventory.empty_active:
-		reparent(Global.player_inventory.active_item)
-		Global.player_inventory.pickup(self)
+	if !Global.player_inventory.active_item:
+		#Sends its node and a reference to itself to the inventory controller
+		reparent(Global.player_inventory.active_item_node)
+		Global.player_inventory.set_active(self)
+		#turns the object in the world off
 		set_physics_process(false)
 		global_position = get_parent().global_position
 		state = states.PICKED_UP
 		hitbox.disabled = true
 		self.visible = false
+		rotation = 0
 	else:
 		# TODO: If if feels better to auto stow a new item on pickup if active is full then do that here
 		pass
@@ -179,10 +174,10 @@ func attack(facing : Vector2 = Vector2.RIGHT, attack_direction : Vector2 = Vecto
 func h_attack(dir):
 	if dir == Vector2.LEFT:
 		sprite.flip_h = true
-		damage_comp.position = 50 * dir
+		damage_comp.position = spear_range * dir
 	elif dir == Vector2.RIGHT:
 		sprite.flip_h = false
-		damage_comp.position = 50 * dir
+		damage_comp.position = spear_range * dir
 		
 	var tween = get_tree().create_tween()
 	self.visible = true

@@ -17,8 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://ch3cspvl5qxdy" path="res://Player/Controllers/inventory_contoller.tscn" id="17_yoqns"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5joj1"]
-radius = 35.0
-height = 140.0
+radius = 39.0
+height = 132.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hm74x"]
 radius = 124.101
@@ -126,7 +126,6 @@ shape = SubResource("RectangleShape2D_woubw")
 debug_color = Color(0.368899, 0.478102, 1, 0.42)
 
 [node name="InventoryContoller" parent="." instance=ExtResource("17_yoqns")]
-position = Vector2(0, 0)
 
 [connection signal="area_entered" from="PlayerInteractArea2D" to="PlayerInteractArea2D" method="_on_area_entered"]
 [connection signal="area_exited" from="PlayerInteractArea2D" to="PlayerInteractArea2D" method="_on_area_exited"]

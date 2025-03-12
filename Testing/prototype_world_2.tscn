@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://4wqt2306pk7j"]
+[gd_scene load_steps=7 format=4 uid="uid://4wqt2306pk7j"]
 
 [ext_resource type="PackedScene" uid="uid://d2brr0cdh08i5" path="res://World/Dungeon/Caves/Assets/cave_tile_map.tscn" id="2_nwbii"]
 [ext_resource type="PackedScene" uid="uid://q7y6tgcdevf5" path="res://Items/Weapons/Spear/spear.tscn" id="3_cp1ol"]
 [ext_resource type="PackedScene" uid="uid://dpgg3aujritit" path="res://Player/player.tscn" id="3_mwnra"]
 [ext_resource type="PackedScene" uid="uid://de6hp8xbwfydi" path="res://UI/HUD/hud.tscn" id="4_y5qcx"]
 [ext_resource type="PackedScene" uid="uid://b50dxhu66k5in" path="res://Enemies/TrainingDummy/enemy_1.tscn" id="5_l1hbl"]
+[ext_resource type="PackedScene" uid="uid://2knbqnlw6stu" path="res://Items/Equipment/DashCape/dash_cape.tscn" id="6_2yxn8"]
 
 [node name="PrototypeWorld2" type="Node2D"]
 
@@ -21,6 +22,10 @@ DASH = true
 position = Vector2(832, 983)
 gravity_str = 25.0
 v_throw_velocity = Vector2(0, 1200)
+
+[node name="DashCape" parent="." instance=ExtResource("6_2yxn8")]
+position = Vector2(561, 988)
+scale = Vector2(0.65, 0.65)
 
 [node name="Enemy1" parent="." instance=ExtResource("5_l1hbl")]
 position = Vector2(1134, 926)

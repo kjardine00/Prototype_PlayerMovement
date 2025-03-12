@@ -15,8 +15,6 @@ offset_bottom = 50.0
 
 [node name="ActiveItemSlot" parent="HBoxContainer" instance=ExtResource("2_3moi8")]
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="StowedItemSlot" parent="HBoxContainer" instance=ExtResource("2_3moi8")]
 layout_mode = 2
-size_flags_horizontal = 3

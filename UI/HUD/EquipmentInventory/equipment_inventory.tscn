@@ -1,124 +1,31 @@
 [gd_scene load_steps=3 format=3 uid="uid://bu5vljpqrff0p"]
 
-[ext_resource type="Texture2D" uid="uid://bj6ol54w538ua" path="res://UI/Assets/item_sword.png" id="1_anxj4"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oytkk"]
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[ext_resource type="Script" uid="uid://b32h0lmo8o6bc" path="res://UI/HUD/EquipmentInventory/equipment_inventory.gd" id="1_iixvr"]
+[ext_resource type="PackedScene" uid="uid://8iuepoytb7a8" path="res://UI/HUD/Active&StowedItem/item_icon.tscn" id="2_iixvr"]
 
 [node name="EquipmentInventory" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_iixvr")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 50.0
-offset_bottom = 252.0
+offset_bottom = 216.0
 theme_override_constants/separation = 5
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+[node name="HeadEquipSlot" parent="VBoxContainer" instance=ExtResource("2_iixvr")]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="VBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(50, 50)
+[node name="BodyEquipSlot" parent="VBoxContainer" instance=ExtResource("2_iixvr")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_oytkk")
+size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_anxj4")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
+[node name="FootEquipSlot" parent="VBoxContainer" instance=ExtResource("2_iixvr")]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="VBoxContainer/CenterContainer2"]
-custom_minimum_size = Vector2(50, 50)
+[node name="CharmEquipSlot" parent="VBoxContainer" instance=ExtResource("2_iixvr")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_oytkk")
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer2/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_anxj4")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="CenterContainer3" type="CenterContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Panel" type="Panel" parent="VBoxContainer/CenterContainer3"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_oytkk")
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer3/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_anxj4")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="CenterContainer4" type="CenterContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Panel" type="Panel" parent="VBoxContainer/CenterContainer4"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_oytkk")
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer4/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_anxj4")
-expand_mode = 1
-stretch_mode = 4
+size_flags_vertical = 3

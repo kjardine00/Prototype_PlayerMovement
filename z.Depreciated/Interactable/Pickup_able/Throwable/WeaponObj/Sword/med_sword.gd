@@ -1,5 +1,4 @@
 extends Throwable_obj
-class_name Weapon
 
 func _ready() -> void:
 	super()

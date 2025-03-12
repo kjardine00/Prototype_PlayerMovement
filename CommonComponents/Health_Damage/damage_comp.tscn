@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqd2j7t4fapen"]
+
+[ext_resource type="Script" uid="uid://da2xg768hrb4b" path="res://CommonComponents/Health_Damage/damage_comp.gd" id="1_onffb"]
+
+[node name="DamageComp" type="Area2D" groups=["damage"]]
+collision_layer = 512
+collision_mask = 256
+script = ExtResource("1_onffb")
+damage = 10
+damage_type_enum = 1

@@ -139,7 +139,6 @@ func actions_update():
 	if action_left_press:
 		##Attack with active item
 		#print("ACTION LEFT")
-		
 		player.inv_controller.handle_attack_input(last_input_direction)
 	
 	if r1_press:

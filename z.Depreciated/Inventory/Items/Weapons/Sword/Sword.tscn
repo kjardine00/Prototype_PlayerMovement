@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c2wv3mjb56uli" path="res://z.Depreciated/Inventory/Items/Weapons/Sword/sword.gd" id="1_1jqv2"]
 [ext_resource type="Texture2D" uid="uid://bigypix0h82p8" path="res://z.Depreciated/Inventory/Items/Weapons/Sword/sword_icon.png" id="2_0npxw"]
 [ext_resource type="Resource" uid="uid://6ydxgk5tds4a" path="res://z.Depreciated/Inventory/Items/Weapons/Sword/sword_item.tres" id="2_be1ic"]
-[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://z.Depreciated/Interactable/interactable_obj_component.tscn" id="3_ebru6"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/Object_Interaction_Area2d/interactable_obj_component.tscn" id="3_ebru6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_253t5"]
 radius = 5.0

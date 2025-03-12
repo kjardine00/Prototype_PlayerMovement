@@ -22,10 +22,40 @@ class_name Player
 
 var h_dir
 
-@export_category("Abilities Enabled")
-@export var ROLL: bool
-@export var WALL_JUMP : bool = true
-@export var DASH: bool
+@export_category("Body Equipment Abilities")
+@export_enum ("ROLL", "DASH", "GLIDE", "BLINK", "FLY", "BARRIER") var active_body_equip_ability : int = 0
+
+#region decide on dash type
+var ROLL = false
+var DASH = false
+var GLIDE = false
+var BLINK = false
+var FLY = false
+var BARRIER = false
+
+func update_body_equip_ability():
+	ROLL = false
+	DASH = false
+	GLIDE = false
+	BLINK = false
+	FLY = false
+	BARRIER = false
+	match active_body_equip_ability:
+		0:
+			ROLL = true
+		1:
+			DASH = true
+		2:
+			GLIDE = true
+		3:
+			BLINK = true
+		4:
+			FLY = true
+		5:
+			BARRIER = true
+		6:
+			pass
+#endregion
 
 func _ready() -> void:
 	input_controller.direction.connect(_send_direction_controllers)
@@ -38,7 +68,6 @@ func _send_direction_controllers(direction):
 	h_dir = direction
 	anim_controller.facing = direction
 	inv_controller.facing = direction
-
 
 #region Interact Logic
 func handle_interact_action():

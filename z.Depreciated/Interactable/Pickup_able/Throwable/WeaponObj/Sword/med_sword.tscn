@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://vl8y674y7uh4" path="res://z.Depreciated/Interactable/Pickup_able/Throwable/WeaponObj/Sword/Sword.png" id="1_e130i"]
 [ext_resource type="Script" uid="uid://u5ptkrq0g47l" path="res://z.Depreciated/Interactable/Pickup_able/Throwable/WeaponObj/Sword/med_sword.gd" id="1_lw7jf"]
 [ext_resource type="Script" uid="uid://cjgigi7b6cy3m" path="res://z.Depreciated/Inventory/inventory_item.gd" id="2_553qi"]
-[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://z.Depreciated/Interactable/interactable_obj_component.tscn" id="3_eykk4"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/Object_Interaction_Area2d/interactable_obj_component.tscn" id="3_eykk4"]
 
 [sub_resource type="Resource" id="Resource_kgr1x"]
 script = ExtResource("2_553qi")

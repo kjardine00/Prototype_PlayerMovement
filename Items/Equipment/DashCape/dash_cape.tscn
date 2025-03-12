@@ -1,15 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://2knbqnlw6stu"]
+[gd_scene load_steps=6 format=3 uid="uid://2knbqnlw6stu"]
 
-[ext_resource type="Script" uid="uid://d1vi6b4ixe7ai" path="res://z.Depreciated/Interactable/interactable_obj_component.gd" id="1_iq80g"]
+[ext_resource type="Texture2D" uid="uid://bedhesjsub46j" path="res://Items/Equipment/DashCape/Dash_cape.png" id="1_ocnw5"]
+[ext_resource type="Script" uid="uid://b6h24vl4wafqh" path="res://z.Depreciated/dash_cape.gd" id="1_yax2r"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/Object_Interaction_Area2d/interactable_obj_component.tscn" id="3_yax2r"]
 
-[node name="DashCape" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_yax2r"]
+radius = 55.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fjofj"]
+radius = 143.0
+
+[node name="DashCape" type="CharacterBody2D" node_paths=PackedStringArray("interact_component", "hitbox", "sprite")]
+script = ExtResource("1_yax2r")
+interact_component = NodePath("InteractableObjComponent")
+hitbox = NodePath("Hitbox")
+sprite = NodePath("Sprite2D")
+icon = ExtResource("1_ocnw5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_ocnw5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yax2r")
 
-[node name="InteractComponent" type="Area2D" parent="."]
-script = ExtResource("1_iq80g")
-metadata/_custom_type_script = "uid://d1vi6b4ixe7ai"
+[node name="InteractableObjComponent" parent="." instance=ExtResource("3_yax2r")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObjComponent"]
+shape = SubResource("CircleShape2D_fjofj")
+debug_color = Color(0.974492, 0, 0.426382, 0.42)
