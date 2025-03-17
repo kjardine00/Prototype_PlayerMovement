@@ -1,19 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://dpgg3aujritit"]
+[gd_scene load_steps=17 format=3 uid="uid://dpgg3aujritit"]
 
 [ext_resource type="Script" uid="uid://scuwbtfptbi6" path="res://Player/player.gd" id="1_20bt8"]
 [ext_resource type="Script" uid="uid://bcug3p27tt480" path="res://Player/StateMachine/state_machine.gd" id="2_emkbt"]
-[ext_resource type="Script" uid="uid://y8may6rdnaat" path="res://Player/Controllers/movement_controller.gd" id="3_2xqet"]
 [ext_resource type="Texture2D" uid="uid://c184d85kquqpd" path="res://Player/Assets/Scribble Character.png" id="3_xkjs2"]
-[ext_resource type="Script" uid="uid://fl82rtx7glgg" path="res://Player/Controllers/input_controller.gd" id="4_701wm"]
-[ext_resource type="Script" uid="uid://do72wb4dko7fq" path="res://Player/StateMachine/States/idle_state.gd" id="4_hu13h"]
-[ext_resource type="Script" uid="uid://cnivmqytdixks" path="res://Player/StateMachine/States/run_state.gd" id="5_26c4l"]
+[ext_resource type="Script" uid="uid://do72wb4dko7fq" path="res://Player/StateMachine/States/idling_state.gd" id="4_hu13h"]
+[ext_resource type="Script" uid="uid://cnivmqytdixks" path="res://Player/StateMachine/States/walking_state.gd" id="5_26c4l"]
 [ext_resource type="Script" uid="uid://dgbvaiyhld56k" path="res://Player/Controllers/animation_controller.gd" id="5_dn68y"]
-[ext_resource type="Script" uid="uid://brgjrl82iej4c" path="res://Player/StateMachine/States/fall_state.gd" id="5_n7d0q"]
-[ext_resource type="Script" uid="uid://bjaoxygfgenoe" path="res://Player/StateMachine/States/jump_state.gd" id="6_wnova"]
-[ext_resource type="Script" uid="uid://c6rvpdyrs62lu" path="res://Player/StateMachine/States/wall_jump_state.gd" id="8_2bkxe"]
-[ext_resource type="Script" uid="uid://biq3j4pbkii2v" path="res://Player/StateMachine/States/wallslide_state.gd" id="9_xa8so"]
+[ext_resource type="Script" uid="uid://bhxyr01h11w4h" path="res://Player/Controllers/movement_handler.gd" id="5_lfmf2"]
+[ext_resource type="Script" uid="uid://brgjrl82iej4c" path="res://Player/StateMachine/States/falling_state.gd" id="5_n7d0q"]
+[ext_resource type="Script" uid="uid://bjaoxygfgenoe" path="res://Player/StateMachine/States/jumping_state.gd" id="6_wnova"]
+[ext_resource type="Script" uid="uid://c6rvpdyrs62lu" path="res://Player/StateMachine/States/wall_jumping_state.gd" id="10_5htga"]
 [ext_resource type="PackedScene" uid="uid://bky3owklv4i7s" path="res://Player/Components/player_interact_area_2d.tscn" id="10_a0os3"]
-[ext_resource type="Script" uid="uid://d4elmvksw1icg" path="res://Player/StateMachine/States/climb_state.gd" id="11_nh6pr"]
+[ext_resource type="Script" uid="uid://biq3j4pbkii2v" path="res://Player/StateMachine/States/wall_sliding_state.gd" id="11_p5o4e"]
 [ext_resource type="PackedScene" uid="uid://ch3cspvl5qxdy" path="res://Player/Controllers/inventory_contoller.tscn" id="17_yoqns"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5joj1"]
@@ -26,16 +24,16 @@ radius = 124.101
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_woubw"]
 size = Vector2(36, 30)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_controller", "anim_controller", "input_controller", "inv_controller", "interact_area", "state_machine")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_handler", "anim_controller", "inv_controller", "interact_area", "state_machine")]
 collision_layer = 2
 collision_mask = 73
 script = ExtResource("1_20bt8")
-movement_controller = NodePath("MovementController")
+movement_handler = NodePath("MovementHandler")
 anim_controller = NodePath("AnimationController")
-input_controller = NodePath("InputController")
 inv_controller = NodePath("InventoryContoller")
 interact_area = NodePath("PlayerInteractArea2D")
 state_machine = NodePath("StateMachine")
+num_of_available_jumps = 1
 
 [node name="AnimationController" type="Node2D" parent="."]
 script = ExtResource("5_dn68y")
@@ -50,63 +48,38 @@ texture = ExtResource("3_xkjs2")
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5joj1")
 
-[node name="MovementController" type="Node2D" parent="." node_paths=PackedStringArray("player")]
-script = ExtResource("3_2xqet")
+[node name="MovementHandler" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("5_lfmf2")
 player = NodePath("..")
-jump_height = 4.0
-desc_gravity_factor = 2.5
-dash_type = 3
+move_speed = 500
 
-[node name="L_Raycast" type="RayCast2D" parent="MovementController"]
-position = Vector2(-35, -50)
-target_position = Vector2(0, -50)
-collision_mask = 13
+[node name="InventoryContoller" parent="." instance=ExtResource("17_yoqns")]
 
-[node name="M_Raycast" type="RayCast2D" parent="MovementController"]
-position = Vector2(0, -50)
-target_position = Vector2(0, -50)
-collision_mask = 13
-
-[node name="R_Raycast" type="RayCast2D" parent="MovementController"]
-position = Vector2(35, -50)
-target_position = Vector2(0, -50)
-collision_mask = 13
-
-[node name="InputController" type="Node2D" parent="." node_paths=PackedStringArray("player")]
-script = ExtResource("4_701wm")
-player = NodePath("..")
-
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player_character", "IDLE", "RUN", "JUMP", "FALL", "WALL_JUMP", "WALL_SLIDE", "CLIMB")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player_character", "IDLING", "WALKING", "JUMPING", "FALLING")]
 script = ExtResource("2_emkbt")
 player_character = NodePath("..")
-IDLE = NodePath("Idle")
-RUN = NodePath("Run")
-JUMP = NodePath("Jump")
-FALL = NodePath("Fall")
-WALL_JUMP = NodePath("WallJump")
-WALL_SLIDE = NodePath("Wallslide")
-CLIMB = NodePath("Climb")
+IDLING = NodePath("Idling")
+WALKING = NodePath("Walking")
+JUMPING = NodePath("Jumping")
+FALLING = NodePath("Falling")
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idling" type="Node" parent="StateMachine"]
 script = ExtResource("4_hu13h")
 
-[node name="Run" type="Node" parent="StateMachine"]
+[node name="Walking" type="Node" parent="StateMachine"]
 script = ExtResource("5_26c4l")
 
-[node name="Jump" type="Node" parent="StateMachine"]
+[node name="Jumping" type="Node" parent="StateMachine"]
 script = ExtResource("6_wnova")
 
-[node name="Fall" type="Node" parent="StateMachine"]
+[node name="Falling" type="Node" parent="StateMachine"]
 script = ExtResource("5_n7d0q")
 
-[node name="WallJump" type="Node" parent="StateMachine"]
-script = ExtResource("8_2bkxe")
+[node name="WallJumping" type="Node" parent="StateMachine"]
+script = ExtResource("10_5htga")
 
-[node name="Wallslide" type="Node" parent="StateMachine"]
-script = ExtResource("9_xa8so")
-
-[node name="Climb" type="Node" parent="StateMachine"]
-script = ExtResource("11_nh6pr")
+[node name="WallSliding" type="Node" parent="StateMachine"]
+script = ExtResource("11_p5o4e")
 
 [node name="PlayerInteractArea2D" parent="." instance=ExtResource("10_a0os3")]
 visible = false
@@ -116,6 +89,7 @@ shape = SubResource("CircleShape2D_hm74x")
 debug_color = Color(0.965701, 0, 0.485083, 0.42)
 
 [node name="EnvironmentObjDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 4
 
@@ -124,8 +98,6 @@ visible = false
 position = Vector2(0, 65)
 shape = SubResource("RectangleShape2D_woubw")
 debug_color = Color(0.368899, 0.478102, 1, 0.42)
-
-[node name="InventoryContoller" parent="." instance=ExtResource("17_yoqns")]
 
 [connection signal="area_entered" from="PlayerInteractArea2D" to="PlayerInteractArea2D" method="_on_area_entered"]
 [connection signal="area_exited" from="PlayerInteractArea2D" to="PlayerInteractArea2D" method="_on_area_exited"]

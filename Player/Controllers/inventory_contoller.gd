@@ -108,6 +108,7 @@ func swap_active():
 		
 		set_active(temp_stowed)
 		set_stowed(null)
+		
 #region Active & Stowed Actions
 func handle_throw_drop(last_input_dir):
 	if active_item:

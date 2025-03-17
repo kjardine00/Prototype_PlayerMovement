@@ -3,7 +3,7 @@ class_name Weapon
 #NOTE: Features to implement
 #var combo_anim
 #var rotate on throw
-#TODO orient correctly when thrown up and it falls down
+#TODO orient correctly when thrown
 
 #region Export VAR
 @export_category("Connections")

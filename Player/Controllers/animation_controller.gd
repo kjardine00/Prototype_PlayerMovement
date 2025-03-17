@@ -20,24 +20,10 @@ class_name Animation_Controller
 
 var facing
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	if facing:
-		player_sprite.flip_h = handle_direction()
-
 func play_anim(animation_name : String):
 	if anim_player.has_animation(animation_name):
 		anim_player.play(animation_name)
 
-
-func handle_direction():
-	if facing == Vector2.RIGHT:
-		return false
-	elif facing == Vector2.LEFT:
-		return true
+func handle_direction(x_dir):
+	if x_dir != 0:
+		player_sprite.flip_h = x_dir < 0

@@ -2,30 +2,24 @@ extends CharacterBody2D
 class_name Player
 
 @onready var hitbox: CollisionShape2D = $Hitbox
+@onready var camera_2d: Camera2D = $Camera2D
 
 @export_category("Connect Nodes")
-@export var movement_controller: Movement_Controller
+@export var movement_handler: MovementHandler
 @export var anim_controller: Animation_Controller
-@export var input_controller: Input_Controller
 @export var inv_controller: Inventory_Controller
 @export var interact_area: Player_Interaction_Area2D
-@export var attack_component: Attack_Component
+#@export var attack_component: Attack_Component
 @export var state_machine: State_Machine
 
-#region Depreciated Movement Variables
-@export_category("Movement Variables to be depreciated/refactored")
-#@export var CAN_CLIMB : bool = false
-#@export var CLIMB_SPEED = 30
-#@export var CLIMB_ACCEL = 4
-#@export var CLIMB_DECEL = 5
-#endregion
+@export_category("Properties")
+@export var max_jumps : int = 1
+@export var num_of_available_jumps : int
 
-var h_dir
-
+#region Apply Ability type
 @export_category("Body Equipment Abilities")
 @export_enum ("ROLL", "DASH", "GLIDE", "BLINK", "FLY", "BARRIER") var active_body_equip_ability : int = 0
 
-#region decide on dash type
 var ROLL = false
 var DASH = false
 var GLIDE = false
@@ -58,20 +52,50 @@ func update_body_equip_ability():
 #endregion
 
 func _ready() -> void:
-	input_controller.direction.connect(_send_direction_controllers)
+	reset_num_jumps()
+	
+	InputHandler.movement_input.connect(on_movement_input)
+	InputHandler.jump.connect(on_jump_input)
+	InputHandler.jump_released.connect(on_jump_released_input)
+	InputHandler.interact.connect(func(): interact_area.interact(self))
+	InputHandler.attack.connect(on_attack_input)
+	InputHandler.swap_active.connect(on_swap_active_input)
+	InputHandler.throw_drop.connect(on_throw_drop_input)
+	InputHandler.use_ability.connect(on_use_ability_input)
+	InputHandler.use_charm.connect(on_use_charm_input)
 
-func _physics_process(_delta: float) -> void:
-	#state_machine.current_state.update(delta)
+func _physics_process(delta: float) -> void:
+	state_machine.current_state.update(delta)
+
+func reset_num_jumps():
+	num_of_available_jumps = max_jumps
+	
+#region Handle Inputs
+func on_movement_input(direction):
+	state_machine.handle_movement_input(direction)
+	anim_controller.handle_direction(direction.x)
+
+func on_jump_input():
+	state_machine.handle_jump_input()
+	
+func on_jump_released_input():
+	state_machine.handle_jump_released()
+
+func on_attack_input(direction):
+	inv_controller.handle_attack_input(direction)
+
+func on_swap_active_input():
+	inv_controller.swap_active()
+
+func on_throw_drop_input(direction):
+	inv_controller.handle_throw_drop(direction)
+	
+func on_use_ability_input():
+	inv_controller.handle_ability_input()
+	
+func on_use_charm_input():
+	print_debug("Charm Used")
 	pass
-
-func _send_direction_controllers(direction):
-	h_dir = direction
-	anim_controller.facing = direction
-	inv_controller.facing = direction
-
-#region Interact Logic
-func handle_interact_action():
-	interact_area.interact(self)
 #endregion
 
 #region EnvironmentObjDetector

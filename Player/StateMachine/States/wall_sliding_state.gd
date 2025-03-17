@@ -11,15 +11,19 @@ func exit_state():
 func update(_delta: float):
 	handle_animation("wall_slide")
 
+func handle_jump_input():
+	player.movement_handler.wall_jump(state_machine.input_direction)
+
 func _handle_wall_slide_tranisition(delta):
 	##If the player is no longer in contact with the wall -> fall state
-	if player.movement_controller.wall_dir == Vector2.ZERO:
+	if state_machine.input_direction == Vector2.ZERO:
 		player.state_machine.change_state(player.state_machine.FALL)
 	
 ## check if the player is in contact with either wall side and holding the coresponding direction otherwise -> fall state
-	if (player.movement_controller.wall_dir == Vector2.LEFT and player.input_controller.left_hold):
-		player.movement_controller.wall_slide(delta)
-	elif (player.movement_controller.wall_dir == Vector2.RIGHT and player.input_controller.right_hold):
-		player.movement_controller.wall_slide(delta)
+	if player.is_on_wall():
+		if (state_machine.input_direction == Vector2.LEFT):
+			state_machine.change_state(state_machine.WALL_SLIDING)
+		elif (state_machine.input_direction == Vector2.RIGHT):
+			state_machine.change_state(state_machine.WALL_SLIDING)
 	else:
-		player.state_machine.change_state(player.state_machine.FALL)
+		state_machine.change_state(state_machine.FALL)

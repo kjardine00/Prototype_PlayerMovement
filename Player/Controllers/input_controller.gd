@@ -122,7 +122,8 @@ func actions_update():
 	##Triangle, X, Y, F
 	if action_up_press:
 		#print("ACTION UP")
-		player.handle_interact_action()
+		pass
+		#player.handle_interact_action()
 		
 	## X, B, A, SPACE
 	if action_down_press:
