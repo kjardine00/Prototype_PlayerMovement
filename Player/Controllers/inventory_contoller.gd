@@ -1,6 +1,9 @@
 extends Node2D
 class_name Inventory_Controller
 
+signal enable_head_ability(ability_type)
+signal enable_body_ability(ability_type: BodyEquip.AbilityType)
+
 #region Inventory Slots
 @onready var active_item_node: Node2D = $ActiveItem
 @onready var stowed_item_node: Node2D = $StowedItem
@@ -122,8 +125,11 @@ func handle_attack_input(last_input_dir):
 #endregion
 
 #region Handle Equipment Actions
-func handle_ability_input():
-	if body_equip:
-		body_equip.ability()
 
+func handle_head_abilities(ability):
+	enable_head_ability.emit(ability)
+
+func handle_body_abilities(ability: BodyEquip.AbilityType):
+	print_debug(ability, "signal is being emitted from inventory controller")
+	enable_body_ability.emit(ability)
 #endregion

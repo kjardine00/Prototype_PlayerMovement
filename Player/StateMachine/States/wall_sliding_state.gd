@@ -3,27 +3,20 @@ extends State
 ## WALL_SLIDE State
 
 func enter_state():
-	pass
+	player.reset_num_jumps()
 	
 func exit_state():
 	pass
 	
-func update(_delta: float):
+func update(delta: float):
+	super(delta)
 	handle_animation("wall_slide")
+	handle_fall_transition()
 
 func handle_jump_input():
-	player.movement_handler.wall_jump(state_machine.input_direction)
+	state_machine.change_state(state_machine.WALL_JUMPING)
 
-func _handle_wall_slide_tranisition(delta):
+func handle_fall_transition():
 	##If the player is no longer in contact with the wall -> fall state
-	if state_machine.input_direction == Vector2.ZERO:
-		player.state_machine.change_state(player.state_machine.FALL)
-	
-## check if the player is in contact with either wall side and holding the coresponding direction otherwise -> fall state
-	if player.is_on_wall():
-		if (state_machine.input_direction == Vector2.LEFT):
-			state_machine.change_state(state_machine.WALL_SLIDING)
-		elif (state_machine.input_direction == Vector2.RIGHT):
-			state_machine.change_state(state_machine.WALL_SLIDING)
-	else:
-		state_machine.change_state(state_machine.FALL)
+	if state_machine.input_direction == Vector2.ZERO or !player.wall_detector.is_colliding():
+		player.state_machine.change_state(player.state_machine.FALLING)

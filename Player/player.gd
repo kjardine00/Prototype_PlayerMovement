@@ -11,44 +11,18 @@ class_name Player
 @export var interact_area: Player_Interaction_Area2D
 #@export var attack_component: Attack_Component
 @export var state_machine: State_Machine
+@export var wall_detector: RayCast2D
 
 @export_category("Properties")
 @export var max_jumps : int = 1
 @export var num_of_available_jumps : int
 
+@export_category("Boolean Modifiers")
+@export var wall_jump : bool = false
+
 #region Apply Ability type
-@export_category("Body Equipment Abilities")
-@export_enum ("ROLL", "DASH", "GLIDE", "BLINK", "FLY", "BARRIER") var active_body_equip_ability : int = 0
-
-var ROLL = false
-var DASH = false
-var GLIDE = false
-var BLINK = false
-var FLY = false
-var BARRIER = false
-
-func update_body_equip_ability():
-	ROLL = false
-	DASH = false
-	GLIDE = false
-	BLINK = false
-	FLY = false
-	BARRIER = false
-	match active_body_equip_ability:
-		0:
-			ROLL = true
-		1:
-			DASH = true
-		2:
-			GLIDE = true
-		3:
-			BLINK = true
-		4:
-			FLY = true
-		5:
-			BARRIER = true
-		6:
-			pass
+@export_category("Equipment Abilities")
+@export var body_ability : BodyEquip.AbilityType = BodyEquip.AbilityType.ROLL
 #endregion
 
 func _ready() -> void:
@@ -63,21 +37,29 @@ func _ready() -> void:
 	InputHandler.throw_drop.connect(on_throw_drop_input)
 	InputHandler.use_ability.connect(on_use_ability_input)
 	InputHandler.use_charm.connect(on_use_charm_input)
+	
+	inv_controller.enable_head_ability.connect(handle_enable_head_ability)
+	inv_controller.enable_body_ability.connect(handle_enable_body_ability)
 
 func _physics_process(delta: float) -> void:
 	state_machine.current_state.update(delta)
 
 func reset_num_jumps():
 	num_of_available_jumps = max_jumps
-	
+
 #region Handle Inputs
 func on_movement_input(direction):
 	state_machine.handle_movement_input(direction)
 	anim_controller.handle_direction(direction.x)
+	
+	if direction.x > 0:
+		wall_detector.target_position.x = 50
+	elif direction.x < 0: 
+		wall_detector.target_position.x = -50
 
 func on_jump_input():
 	state_machine.handle_jump_input()
-	
+	#
 func on_jump_released_input():
 	state_machine.handle_jump_released()
 
@@ -91,11 +73,20 @@ func on_throw_drop_input(direction):
 	inv_controller.handle_throw_drop(direction)
 	
 func on_use_ability_input():
-	inv_controller.handle_ability_input()
+	state_machine.handle_ability_input()
 	
-func on_use_charm_input():
+func on_use_charm_input(direction):
 	print_debug("Charm Used")
 	pass
+#endregion
+
+#region Enable / Disable Abilities
+func handle_enable_head_ability(ability):
+	if ability == "Wall Jump":
+		wall_jump = true
+	
+func handle_enable_body_ability(ability: BodyEquip.AbilityType):
+	body_ability = ability
 #endregion
 
 #region EnvironmentObjDetector

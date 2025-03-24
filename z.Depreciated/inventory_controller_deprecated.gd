@@ -1,5 +1,4 @@
 extends Node2D
-class_name InventoryController
 
 @export var INVENTORY: Inv
 @export var player: Player

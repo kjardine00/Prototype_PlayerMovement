@@ -1,5 +1,5 @@
 extends Node
-#TODO Probably needs to be an autoload?
+
 ##These are the games contexts for inputs
 enum DEVICE { KEYBOARD, JOYPAD }
 enum CONTEXT { GAMEPLAY, MENU, DIALOGUE, CUTSCENE }
@@ -20,7 +20,7 @@ signal interact
 signal attack(direction : Vector2)
 signal swap_active
 signal throw_drop(direction : Vector2)
-signal use_ability(direction : Vector2)
+signal use_ability
 signal use_charm(direction : Vector2)
 ##TODO rename this last btn input to its function before implemenation
 #signal extra_btn
@@ -93,14 +93,6 @@ func get_last_dir_input(event) -> Vector2:
 
 #region handle input based on context
 func handle_gameplay_input(event):
-	#if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-		#var h_axis = Vector2(Input.get_axis("move_left", "move_right"), 0)
-		#h_move.emit(h_axis)
-		#
-	#if Input.is_action_pressed("move_up") or Input.is_action_pressed("move_down"):
-		#var v_axis = Vector2(Input.get_axis("move_up", "move_down"), 0)
-		#v_move.emit(v_axis)
-	
 	var raw_direction = Vector2(
 		Input.get_axis("move_left", "move_right"),
 		Input.get_axis("move_up", "move_down")
@@ -134,7 +126,7 @@ func handle_gameplay_input(event):
 		throw_drop.emit(get_last_dir_input(event))
 		
 	if Input.is_action_just_pressed("use_ability"):
-		use_ability.emit(get_last_dir_input(event))
+		use_ability.emit()
 		
 	if Input.is_action_just_pressed("use_charm"):
 		use_charm.emit(get_last_dir_input(event))

@@ -15,6 +15,7 @@ script = ExtResource("1_yax2r")
 interact_component = NodePath("InteractableObjComponent")
 hitbox = NodePath("Hitbox")
 sprite = NodePath("Sprite2D")
+equip_slot = 1
 icon = ExtResource("1_ocnw5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -25,6 +26,7 @@ texture = ExtResource("1_ocnw5")
 shape = SubResource("CircleShape2D_yax2r")
 
 [node name="InteractableObjComponent" parent="." instance=ExtResource("3_yax2r")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObjComponent"]
 shape = SubResource("CircleShape2D_fjofj")

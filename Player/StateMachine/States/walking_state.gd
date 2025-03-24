@@ -8,8 +8,8 @@ func enter_state():
 func exit_state():
 	pass
 	
-func update(_delta: float):
-	player.movement_handler.set_x_direction(state_machine.input_direction.x)
+func update(delta: float):
+	super(delta)
 	transition_to_falling()
 
 func transition_to_falling():

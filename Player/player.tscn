@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dpgg3aujritit"]
+[gd_scene load_steps=18 format=3 uid="uid://dpgg3aujritit"]
 
 [ext_resource type="Script" uid="uid://scuwbtfptbi6" path="res://Player/player.gd" id="1_20bt8"]
 [ext_resource type="Script" uid="uid://bcug3p27tt480" path="res://Player/StateMachine/state_machine.gd" id="2_emkbt"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://c6rvpdyrs62lu" path="res://Player/StateMachine/States/wall_jumping_state.gd" id="10_5htga"]
 [ext_resource type="PackedScene" uid="uid://bky3owklv4i7s" path="res://Player/Components/player_interact_area_2d.tscn" id="10_a0os3"]
 [ext_resource type="Script" uid="uid://biq3j4pbkii2v" path="res://Player/StateMachine/States/wall_sliding_state.gd" id="11_p5o4e"]
+[ext_resource type="Script" uid="uid://c7hrqv7xc7g6x" path="res://Player/dashing_state.gd" id="13_gu6f8"]
 [ext_resource type="PackedScene" uid="uid://ch3cspvl5qxdy" path="res://Player/Controllers/inventory_contoller.tscn" id="17_yoqns"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5joj1"]
@@ -24,7 +25,7 @@ radius = 124.101
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_woubw"]
 size = Vector2(36, 30)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_handler", "anim_controller", "inv_controller", "interact_area", "state_machine")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_handler", "anim_controller", "inv_controller", "interact_area", "state_machine", "wall_detector")]
 collision_layer = 2
 collision_mask = 73
 script = ExtResource("1_20bt8")
@@ -33,7 +34,18 @@ anim_controller = NodePath("AnimationController")
 inv_controller = NodePath("InventoryContoller")
 interact_area = NodePath("PlayerInteractArea2D")
 state_machine = NodePath("StateMachine")
+wall_detector = NodePath("WallDetector")
 num_of_available_jumps = 1
+
+[node name="WallDetector" type="RayCast2D" parent="."]
+target_position = Vector2(50, 0)
+
+[node name="CurrentState" type="Label" parent="."]
+offset_left = -30.0
+offset_top = -97.0
+offset_right = 49.0
+offset_bottom = -74.6667
+text = "State"
 
 [node name="AnimationController" type="Node2D" parent="."]
 script = ExtResource("5_dn68y")
@@ -48,20 +60,39 @@ texture = ExtResource("3_xkjs2")
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5joj1")
 
-[node name="MovementHandler" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+[node name="MovementHandler" type="Node2D" parent="." node_paths=PackedStringArray("player", "L_raycast", "M_raycast", "R_raycast")]
 script = ExtResource("5_lfmf2")
 player = NodePath("..")
+L_raycast = NodePath("CornerCutRight")
+M_raycast = NodePath("CornerCutMiddle")
+R_raycast = NodePath("CornerCutLeft")
 move_speed = 500
+wall_jump_push_distance = 1.25
+wall_jump_height = 3.25
+
+[node name="CornerCutRight" type="RayCast2D" parent="MovementHandler"]
+position = Vector2(35, -50)
+target_position = Vector2(0, -50)
+
+[node name="CornerCutMiddle" type="RayCast2D" parent="MovementHandler"]
+position = Vector2(0, -50)
+target_position = Vector2(0, -50)
+
+[node name="CornerCutLeft" type="RayCast2D" parent="MovementHandler"]
+position = Vector2(-34, -50)
+target_position = Vector2(0, -50)
 
 [node name="InventoryContoller" parent="." instance=ExtResource("17_yoqns")]
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player_character", "IDLING", "WALKING", "JUMPING", "FALLING")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player_character", "IDLING", "WALKING", "JUMPING", "FALLING", "WALL_JUMPING", "WALL_SLIDING")]
 script = ExtResource("2_emkbt")
 player_character = NodePath("..")
 IDLING = NodePath("Idling")
 WALKING = NodePath("Walking")
 JUMPING = NodePath("Jumping")
 FALLING = NodePath("Falling")
+WALL_JUMPING = NodePath("WallJumping")
+WALL_SLIDING = NodePath("WallSliding")
 
 [node name="Idling" type="Node" parent="StateMachine"]
 script = ExtResource("4_hu13h")
@@ -80,6 +111,9 @@ script = ExtResource("10_5htga")
 
 [node name="WallSliding" type="Node" parent="StateMachine"]
 script = ExtResource("11_p5o4e")
+
+[node name="Dashing" type="Node" parent="StateMachine"]
+script = ExtResource("13_gu6f8")
 
 [node name="PlayerInteractArea2D" parent="." instance=ExtResource("10_a0os3")]
 visible = false

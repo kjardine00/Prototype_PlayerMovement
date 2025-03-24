@@ -11,7 +11,7 @@ func exit_state():
 	pass
 	
 func update(_delta: float):
-	pass
+	player.movement_handler.set_x_direction(state_machine.input_direction.x)
 	
 func handle_animation(anim_name : String):
 	pass
@@ -25,5 +25,21 @@ func handle_movement_input(direction):
 func handle_jump_input():
 	if state_machine.current_state == state_machine.WALL_SLIDING:
 		state_machine.change_state(state_machine.WALL_JUMPING)
+			
 	elif state_machine.current_state != state_machine.JUMPING:
 		state_machine.change_state(state_machine.JUMPING)
+
+func handle_wall_slide_tranisition():
+	if !player.is_on_floor() and player.wall_jump:
+		if player.is_on_wall():
+## check if the player is in contact with either wall side and holding the coresponding direction otherwise -> fall state
+			if (state_machine.input_direction == Vector2.LEFT and player.wall_detector.is_colliding()):
+				state_machine.change_state(state_machine.WALL_SLIDING)
+			elif (state_machine.input_direction == Vector2.RIGHT and player.wall_detector.is_colliding()):
+				state_machine.change_state(state_machine.WALL_SLIDING)
+
+func handle_ability_input(ability_type : BodyEquip.AbilityType):
+	match ability_type:
+		BodyEquip.AbilityType.DASH:
+			print_debug("State machine state change to dashing")
+			state_machine.change_state(state_machine.DASHING)

@@ -1,5 +1,5 @@
 extends Node2D
-class_name Input_Controller
+#class_name Input_Controller
 
 signal direction
 

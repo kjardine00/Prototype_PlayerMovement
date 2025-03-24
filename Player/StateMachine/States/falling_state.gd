@@ -3,16 +3,18 @@ extends State
 ## FALL State
 
 func enter_state():
+	#print("Entering FallingState, velocity: ", player.velocity)
 	pass
-	
+
 func exit_state():
 	pass
 	
-func update(_delta: float):
-	handle_animation("fall")
+func update(delta: float):
+	super(delta)
+	handle_wall_slide_tranisition()
 	handle_landing()
-	player.movement_handler.set_x_direction(state_machine.input_direction.x)
-
+	handle_animation("fall")
+	
 func handle_movement_input(direction):
 	super(direction)
 	
@@ -27,9 +29,6 @@ func handle_landing():
 		else:
 			state_machine.change_state(state_machine.IDLING)
 			player.reset_num_jumps()
-	elif player.is_on_wall_only():
-		state_machine.change_state(state_machine.WALL_SLIDING)
-		player.reset_num_jumps()
 
 func handle_jump_released():
 	player.movement_handler.cut_jump()

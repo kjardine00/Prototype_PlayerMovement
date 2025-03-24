@@ -1,5 +1,5 @@
 extends Node2D
-class_name Movement_Controller
+#class_name Movement_Controller
 
 @export var player : Player
 

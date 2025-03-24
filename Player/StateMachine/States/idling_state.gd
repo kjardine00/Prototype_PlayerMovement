@@ -9,7 +9,11 @@ func exit_state():
 	pass
 	
 func update(_delta: float):
-	pass
+	transition_to_falling()
+
+func transition_to_falling():
+	if !player.is_on_floor():
+		state_machine.change_state(state_machine.FALLING)
 
 func handle_movement_input(direction):
 	state_machine.input_direction = direction

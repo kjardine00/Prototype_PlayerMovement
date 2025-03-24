@@ -3,21 +3,22 @@ extends State
 ## WALL_JUMP State
 
 func enter_state():
-	player.movement_handler.wall_jump(state_machine.input_direction)
+	#print("Entering WALL_JUMP, velocity: ", player.velocity)
+	player.movement_handler.wall_jump()
+	#print("Entering WALL_JUMP, velocity after jump: ", player.velocity)
 	
 func exit_state():
 	pass
 	
-func update(_delta: float):
+func update(delta: float):
+	super(delta)
 	handle_animation("wall_jump")
-	transition_logic()
-
-func transition_logic():
-	if player.is_on_wall():
-		state_machine.change_state(state_machine.WALL_SLIDING)
-		player.reset_num_jumps()
-	if player.velocity.y >= 0:
-		state_machine.change_state(state_machine.FALLING)
+	transisition_to_fall_state()
+	handle_wall_slide_tranisition()
 
 func handle_jump_released():
 	player.movement_handler.cut_jump()
+
+func transisition_to_fall_state():
+	if player.velocity.y > 0:
+		player.state_machine.change_state(state_machine.FALLING)
