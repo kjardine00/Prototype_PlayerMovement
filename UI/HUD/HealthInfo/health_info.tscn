@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0jhjqwuqnl7b"]
+[gd_scene load_steps=8 format=3 uid="uid://c0jhjqwuqnl7b"]
 
-[ext_resource type="Texture2D" uid="uid://bh38h7v720wrp" path="res://UI/Assets/coin_icon.png" id="1_oq44w"]
 [ext_resource type="Theme" uid="uid://div8kkl7ao6v8" path="res://UI/Assets/SkizoFontTheme.tres" id="1_pip72"]
+[ext_resource type="Script" uid="uid://c7wqyf5tr5cq2" path="res://UI/HUD/HealthInfo/health_info.gd" id="1_ywu46"]
+[ext_resource type="PackedScene" uid="uid://hhnnnek56o55" path="res://UI/HUD/HealthInfo/Coin_Counter/coin_counter.tscn" id="2_dx2hd"]
 [ext_resource type="Texture2D" uid="uid://crr0n2c0gqck8" path="res://UI/Assets/tile_key.png" id="3_xnb4g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mq1y6"]
@@ -37,6 +38,7 @@ offset_right = -1692.0
 offset_bottom = -991.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ywu46")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -72,32 +74,8 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_re321")
 value = 50.0
 show_percentage = false
 
-[node name="Coins" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Coins" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_dx2hd")]
 layout_mode = 2
-
-[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer/VBoxContainer/Coins"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-dragger_visibility = 1
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Coins"]
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 2
-texture = ExtResource("1_oq44w")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="Amount3" type="Label" parent="MarginContainer/VBoxContainer/Coins"]
-layout_mode = 2
-theme = ExtResource("1_pip72")
-text = "x
-"
-
-[node name="Amount2" type="Label" parent="MarginContainer/VBoxContainer/Coins"]
-layout_mode = 2
-theme = ExtResource("1_pip72")
-text = "98
-"
 
 [node name="Keys" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

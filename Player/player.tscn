@@ -25,7 +25,7 @@ radius = 124.101
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_woubw"]
 size = Vector2(36, 30)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_handler", "anim_controller", "inv_controller", "interact_area", "state_machine", "wall_detector")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_handler", "anim_controller", "inv_controller", "interact_area", "state_machine", "wall_detector") groups=["Player"]]
 collision_layer = 2
 collision_mask = 73
 script = ExtResource("1_20bt8")
@@ -84,7 +84,7 @@ target_position = Vector2(0, -50)
 
 [node name="InventoryContoller" parent="." instance=ExtResource("17_yoqns")]
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player_character", "IDLING", "WALKING", "JUMPING", "FALLING", "WALL_JUMPING", "WALL_SLIDING")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player_character", "IDLING", "WALKING", "JUMPING", "FALLING", "WALL_JUMPING", "WALL_SLIDING", "DASHING")]
 script = ExtResource("2_emkbt")
 player_character = NodePath("..")
 IDLING = NodePath("Idling")
@@ -93,6 +93,7 @@ JUMPING = NodePath("Jumping")
 FALLING = NodePath("Falling")
 WALL_JUMPING = NodePath("WallJumping")
 WALL_SLIDING = NodePath("WallSliding")
+DASHING = NodePath("Dashing")
 
 [node name="Idling" type="Node" parent="StateMachine"]
 script = ExtResource("4_hu13h")

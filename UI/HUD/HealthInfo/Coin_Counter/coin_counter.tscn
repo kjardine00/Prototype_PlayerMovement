@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://hhnnnek56o55"]
+
+[ext_resource type="Script" uid="uid://d1duj6b5cka17" path="res://UI/HUD/HealthInfo/Coin_Counter/coin_counter.gd" id="1_kgqda"]
+[ext_resource type="Texture2D" uid="uid://bh38h7v720wrp" path="res://UI/Assets/coin_icon.png" id="1_sedww"]
+[ext_resource type="Theme" uid="uid://div8kkl7ao6v8" path="res://UI/Assets/SkizoFontTheme.tres" id="2_kgqda"]
+
+[node name="Coins" type="HBoxContainer" node_paths=PackedStringArray("coin_label")]
+script = ExtResource("1_kgqda")
+coin_label = NodePath("Amount2")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="."]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("1_sedww")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="x" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("2_kgqda")
+text = "x
+"
+
+[node name="Amount2" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("2_kgqda")
+text = "98
+"

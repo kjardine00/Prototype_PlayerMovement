@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://4wqt2306pk7j"]
+[gd_scene load_steps=8 format=4 uid="uid://4wqt2306pk7j"]
 
 [ext_resource type="PackedScene" uid="uid://d2brr0cdh08i5" path="res://World/Dungeon/Caves/Assets/cave_tile_map.tscn" id="2_nwbii"]
 [ext_resource type="PackedScene" uid="uid://dpgg3aujritit" path="res://Player/player.tscn" id="3_mwnra"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://de6hp8xbwfydi" path="res://UI/HUD/hud.tscn" id="4_y5qcx"]
 [ext_resource type="PackedScene" uid="uid://2knbqnlw6stu" path="res://Items/Equipment/DashCape/dash_cape.tscn" id="5_l1hbl"]
 [ext_resource type="PackedScene" uid="uid://q7y6tgcdevf5" path="res://Items/Weapons/Spear/spear.tscn" id="6_2yxn8"]
+[ext_resource type="PackedScene" uid="uid://by051m7wyvl2c" path="res://Items/Collectables/Coins/coins.tscn" id="7_ir3ub"]
 
 [node name="PrototypeWorld2" type="Node2D"]
 
@@ -21,11 +22,14 @@ tile_map_data = PackedByteArray("AADw//b/AQAJAAAAAADw//f/AQAJAAEAAADw//j/AQAJAAE
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("4_y5qcx")]
 
-[node name="Hook" parent="." instance=ExtResource("4_2rf7n")]
-position = Vector2(947, 992)
+[node name="Coins" parent="." instance=ExtResource("7_ir3ub")]
+position = Vector2(1122, 1020)
+
+[node name="WallJumpHook" parent="." instance=ExtResource("4_2rf7n")]
+position = Vector2(459, 974)
 
 [node name="DashCape" parent="." instance=ExtResource("5_l1hbl")]
-position = Vector2(533, 957)
+position = Vector2(575, 971)
 
 [node name="Spear" parent="." instance=ExtResource("6_2yxn8")]
-position = Vector2(160, 664)
+position = Vector2(862, 977)

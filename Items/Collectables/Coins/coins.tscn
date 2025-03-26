@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://by051m7wyvl2c"]
+
+[ext_resource type="Script" uid="uid://vtypmprm7ahx" path="res://Items/Collectables/Coins/coins.gd" id="1_vuqrr"]
+[ext_resource type="Texture2D" uid="uid://cvp0g575vbdu4" path="res://Items/Collectables/Coins/coin_icon.png" id="2_vodjg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vodjg"]
+radius = 13.0384
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3mib1"]
+radius = 20.0998
+
+[node name="Coins" type="CharacterBody2D" node_paths=PackedStringArray("hitbox", "coin_sprite")]
+collision_layer = 4
+script = ExtResource("1_vuqrr")
+hitbox = NodePath("Hitbox")
+coin_sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0280797, 0.0280797)
+texture = ExtResource("2_vodjg")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_vodjg")
+
+[node name="CollectionArea2d" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea2d"]
+shape = SubResource("CircleShape2D_3mib1")
+
+[connection signal="body_entered" from="CollectionArea2d" to="." method="_on_collection_area_2d_body_entered"]

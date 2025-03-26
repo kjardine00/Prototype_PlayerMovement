@@ -3,6 +3,11 @@ class_name Inventory_Controller
 
 signal enable_head_ability(ability_type)
 signal enable_body_ability(ability_type: BodyEquip.AbilityType)
+signal coin_collected
+signal active_item_changed
+signal stowed_item_changed
+signal equipment_changed
+signal update_coin_count_ui
 
 #region Inventory Slots
 @onready var active_item_node: Node2D = $ActiveItem
@@ -33,10 +38,12 @@ var charm_icon
 #endregion
 
 var facing : Vector2
+var coin_count : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.player_inventory = self
+	
 
 func _process(_delta: float) -> void:
 	pass
@@ -48,6 +55,7 @@ func set_active(item):
 		active_icon = null
 	else:
 		active_icon = item.icon
+	active_item_changed.emit()
 
 func set_stowed(item):
 	stowed_item = item
@@ -55,13 +63,15 @@ func set_stowed(item):
 		stowed_icon = null
 	else:
 		stowed_icon = item.icon
+	stowed_item_changed.emit()
 
 func set_head_equip(item):
 	head_equip = item
 	if item == null:
-		stowed_icon = null
+		head_icon = null
 	else:
 		head_icon = item.icon
+	equipment_changed.emit()
 
 func set_body_equip(item):
 	body_equip = item
@@ -69,6 +79,7 @@ func set_body_equip(item):
 		body_icon = null
 	else:
 		body_icon = item.icon
+	equipment_changed.emit()
 	
 func set_foot_equip(item):
 	foot_equip = item
@@ -76,6 +87,7 @@ func set_foot_equip(item):
 		foot_icon = null
 	else:
 		foot_icon = item.icon
+	equipment_changed.emit()
 	
 func set_charm_equip(item):
 	charm_equip = item
@@ -83,8 +95,10 @@ func set_charm_equip(item):
 		charm_icon = null
 	else:
 		charm_icon = item.icon
+	equipment_changed.emit()
 #endregion
 
+#region Active & Stowed Actions
 func swap_active():
 	if active_item && stowed_item:
 		var temp_active = active_item
@@ -112,7 +126,6 @@ func swap_active():
 		set_active(temp_stowed)
 		set_stowed(null)
 		
-#region Active & Stowed Actions
 func handle_throw_drop(last_input_dir):
 	if active_item:
 		active_item.throw_drop(last_input_dir)
@@ -132,4 +145,19 @@ func handle_head_abilities(ability):
 func handle_body_abilities(ability: BodyEquip.AbilityType):
 	#print_debug(ability, "signal is being emitted from inventory controller")
 	enable_body_ability.emit(ability)
+#endregion
+
+#region Coin Collection
+func add_coin():
+	coin_count += 1
+	update_coin_count_ui.emit()
+
+func remove_coin():
+	if coin_count > 0:
+		coin_count -= 1
+	else:
+		print_debug("No coins to remove")
+
+func get_coin_count():
+	return coin_count
 #endregion

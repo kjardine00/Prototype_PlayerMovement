@@ -7,9 +7,11 @@ class_name EquipInventoryUI
 @onready var charm_equip_slot: PanelContainer = $VBoxContainer/CharmEquipSlot
 
 func _ready() -> void:
-	update_inventory() 
+	if Global.player_inventory:
+		Global.player_inventory.equipment_changed.connect(_on_equipment_changed)
+	update_inventory()
 
-func _physics_process(_delta: float) -> void:
+func _on_equipment_changed() -> void:
 	update_inventory()
 
 func update_inventory():
