@@ -50,6 +50,7 @@ func _ready() -> void:
 	
 	damage_comp.damage = damage
 	state = states.IDLE
+	interact_component.remove_after_interact
 
 func _gravity():
 	if velocity.y > 0:
@@ -101,6 +102,7 @@ func _pick_up(_interactor):
 		Global.player_inventory.set_active(self)
 		#turns the object in the world off
 		set_physics_process(false)
+		interact_component.set_deferred("monitoring", false)
 		global_position = get_parent().global_position
 		state = states.PICKED_UP
 		hitbox.disabled = true

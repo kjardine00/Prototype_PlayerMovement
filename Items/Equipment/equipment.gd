@@ -7,7 +7,13 @@ class_name Equipment
 @export var sprite: Sprite2D
 
 @export_category("Properties")
-@export_enum("Head", "Body", "Foot", "Charm") var equip_slot : int
+enum Equip_Slot {
+	HEAD, 
+	BODY, 
+	FOOT, 
+	CHARM
+}
+@export var equip_slot : Equip_Slot
 
 @export_group("UI Elements")
 ## Must be a square icon with dimensions 0x0 px
@@ -16,6 +22,7 @@ class_name Equipment
 func _ready() -> void:
 	interact_component.interact.connect(_interaction_signal)
 	interact_component.stop_interact.connect(_stop_interacting_signal)
+	interact_component.remove_after_interact = true
 	
 func _physics_process(delta: float) -> void:
 	pass
@@ -30,34 +37,35 @@ func _stop_interacting_signal():
 
 #region Pick up
 func _pick_up(_interactor):
+	print_debug(self, " ", equip_slot)
 	match equip_slot:
-		0: # Head Slot
+		Equip_Slot.HEAD: # Head Slot
 			if !Global.player_inventory.head_equip:
 				reparent(Global.player_inventory.head_equip_node)
 				Global.player_inventory.set_head_equip(self)
 				set_physics_process(false)
+				interact_component.set_deferred("monitoring", false)
 				global_position = get_parent().global_position
 				hitbox.disabled = true
 				self.visible = false
 				enable_function_on_pickup()
-				print("state function calling enable function")
-		1: # Body Slot
+		Equip_Slot.BODY: # Body Slot
 			if !Global.player_inventory.body_equip:
 				reparent(Global.player_inventory.body_equip_node)
 				Global.player_inventory.set_body_equip(self)
 				set_physics_process(false)
+				interact_component.set_deferred("monitoring", false)
 				global_position = get_parent().global_position
 				hitbox.disabled = true
 				self.visible = false
 				enable_function_on_pickup()
-				print("state function calling enable function")
 			else:
 				pass # TODO: If if feels better to auto stow a new item on pickup if active is full then do that here
 		pass
-		2: # Feet Slot
+		Equip_Slot.FOOT: # Feet Slot
 			if !Global.player_inventory.foot_equip:
 				pass
-		3: # Charm Slot
+		Equip_Slot.CHARM: # Charm Slot
 			if !Global.player_inventory.charm_equip:
 				pass
 				

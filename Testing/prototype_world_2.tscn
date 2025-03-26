@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://4wqt2306pk7j"]
+[gd_scene load_steps=7 format=4 uid="uid://4wqt2306pk7j"]
 
 [ext_resource type="PackedScene" uid="uid://d2brr0cdh08i5" path="res://World/Dungeon/Caves/Assets/cave_tile_map.tscn" id="2_nwbii"]
 [ext_resource type="PackedScene" uid="uid://dpgg3aujritit" path="res://Player/player.tscn" id="3_mwnra"]
 [ext_resource type="PackedScene" uid="uid://o60ge6wetcjc" path="res://Items/Equipment/WallJumpItem/wall_jump_hook.tscn" id="4_2rf7n"]
 [ext_resource type="PackedScene" uid="uid://de6hp8xbwfydi" path="res://UI/HUD/hud.tscn" id="4_y5qcx"]
 [ext_resource type="PackedScene" uid="uid://2knbqnlw6stu" path="res://Items/Equipment/DashCape/dash_cape.tscn" id="5_l1hbl"]
+[ext_resource type="PackedScene" uid="uid://q7y6tgcdevf5" path="res://Items/Weapons/Spear/spear.tscn" id="6_2yxn8"]
 
 [node name="PrototypeWorld2" type="Node2D"]
 
@@ -25,3 +26,6 @@ position = Vector2(947, 992)
 
 [node name="DashCape" parent="." instance=ExtResource("5_l1hbl")]
 position = Vector2(533, 957)
+
+[node name="Spear" parent="." instance=ExtResource("6_2yxn8")]
+position = Vector2(160, 664)

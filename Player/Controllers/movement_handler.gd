@@ -95,7 +95,7 @@ func wall_jump():
 
 func dash():
 	print_debug("Dash")
-	player.velocity.x = dash_velocity
+	#player.velocity.x = dash_velocity
 	
 func v_corner_cutting(cutting_enabled: bool = true, correction_amount : float = 1.5):
 	if cutting_enabled:

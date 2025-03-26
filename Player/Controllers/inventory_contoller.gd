@@ -130,6 +130,6 @@ func handle_head_abilities(ability):
 	enable_head_ability.emit(ability)
 
 func handle_body_abilities(ability: BodyEquip.AbilityType):
-	print_debug(ability, "signal is being emitted from inventory controller")
+	#print_debug(ability, "signal is being emitted from inventory controller")
 	enable_body_ability.emit(ability)
 #endregion
