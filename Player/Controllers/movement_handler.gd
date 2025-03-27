@@ -42,7 +42,7 @@ var coyote_active : bool = false
 @onready var jump_gravity : float = ((-2.0 * (jump_height * tile_size)) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity : float = ((-2.0 * (jump_height * tile_size)) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 @onready var cut_jump_factor: float = 0.5
-@onready var fast_fall_factor: float = cut_jump_factor * 1.5
+@onready var fast_fall_factor: float = 2.0
 @onready var wall_slide_gravity : float = fall_gravity * wall_slide_gravity_multiplier
 
 @onready var wall_jump_push_velociy : float = ((2.0 * (wall_jump_push_distance * tile_size)) / wall_jump_time_to_peak)

@@ -1,9 +1,8 @@
 extends Node2D
 class_name Inventory_Controller
 
-signal enable_head_ability(ability_type)
+signal enable_head_ability(ability_type: HeadEquip.AbilityType)
 signal enable_body_ability(ability_type: BodyEquip.AbilityType)
-signal coin_collected
 signal active_item_changed
 signal stowed_item_changed
 signal equipment_changed
@@ -43,7 +42,6 @@ var coin_count : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.player_inventory = self
-	
 
 func _process(_delta: float) -> void:
 	pass
@@ -134,16 +132,14 @@ func handle_throw_drop(last_input_dir):
 func handle_attack_input(last_input_dir):
 	#TODO Add a cooldown to prevent spamming bugs
 	if active_item:
-		active_item.attack(facing, last_input_dir)
+		active_item.attack(last_input_dir)
 #endregion
 
 #region Handle Equipment Actions
-
-func handle_head_abilities(ability):
+func handle_head_abilities(ability: HeadEquip.AbilityType):
 	enable_head_ability.emit(ability)
 
 func handle_body_abilities(ability: BodyEquip.AbilityType):
-	#print_debug(ability, "signal is being emitted from inventory controller")
 	enable_body_ability.emit(ability)
 #endregion
 

@@ -41,6 +41,7 @@ var applied_terminal_vel: float
 
 enum states {IDLE, PICKED_UP, THROWN}
 var state
+var last_horizontal_direction = Vector2.RIGHT  # Track last horizontal direction
 
 #endregion
 
@@ -108,6 +109,8 @@ func _pick_up(_interactor):
 		hitbox.disabled = true
 		self.visible = false
 		rotation = 0
+		# Update facing direction based on the player's last direction
+		is_facing_right = _interactor.last_direction.x >= 0
 	else:
 		# TODO: If if feels better to auto stow a new item on pickup if active is full then do that here
 		pass
@@ -156,22 +159,26 @@ func _check_idle():
 #endregion
 
 #region Attack Logic
-func attack(facing : Vector2 = Vector2.RIGHT, attack_direction : Vector2 = Vector2.ZERO):
-	#TODO 
-	# Play animation
-	# Toggle on Hitbox with damage info
-	# Toggle
+func attack(attack_direction : Vector2 = Vector2.ZERO):
+	# Update last horizontal direction if a horizontal direction is given
+	if attack_direction.x != 0:
+		last_horizontal_direction = attack_direction
+		is_facing_right = attack_direction.x > 0
+	else:
+		# Use the stored facing direction
+		last_horizontal_direction = Vector2.RIGHT if is_facing_right else Vector2.LEFT
+	
 	match attack_direction:
 		Vector2.ZERO:
-			h_attack(facing)
+			h_attack(last_horizontal_direction)
 		Vector2.UP:
-			pass
+			v_attack(Vector2.UP)
 		Vector2.DOWN:
-			pass
+			v_attack(Vector2.DOWN)
 		Vector2.LEFT:
-			h_attack(attack_direction)
+			h_attack(Vector2.LEFT)
 		Vector2.RIGHT:
-			h_attack(attack_direction)
+			h_attack(Vector2.RIGHT)
 
 func h_attack(dir):
 	if dir == Vector2.LEFT:
@@ -189,8 +196,18 @@ func h_attack(dir):
 	self.visible = false
 
 func v_attack(dir):
+	if dir == Vector2.UP:
+		damage_comp.position = spear_range * Vector2.UP * 1.5
+		rotation = -PI/2  # Rotate 90 degrees counterclockwise for upward attack
+	elif dir == Vector2.DOWN:
+		damage_comp.position = spear_range * Vector2.DOWN * 1.5
+		rotation = PI/2  # Rotate 90 degrees clockwise for downward attack
+	
 	var tween = get_tree().create_tween()
 	self.visible = true
+	tween.tween_property(self, "position", Vector2(0, spear_range) * dir, 0.1)
+	tween.tween_property(self, "position", Vector2(0, 0), 0.1)
 	await get_tree().create_timer(0.2).timeout
 	self.visible = false
+	rotation = 0  # Reset rotation after attack
 #endregion

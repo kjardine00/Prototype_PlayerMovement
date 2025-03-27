@@ -117,7 +117,7 @@ func handle_gameplay_input(event):
 		interact.emit()
 		
 	if Input.is_action_just_pressed("attack"):
-		attack.emit(get_last_dir_input(event))
+		attack.emit(last_direction)
 		
 	if Input.is_action_just_pressed("swap_active"):
 		swap_active.emit()

@@ -74,15 +74,17 @@ func check_state_transitions():
 			# Priority: Falling > Walking
 			if !player_character.is_on_floor():
 				change_state(FALLING)
-			elif input_direction != Vector2.ZERO:
+			elif input_direction.x != 0:  # Only check horizontal input
 				change_state(WALKING)
 		
 		WALKING:
 			# Priority: Falling > Idle
 			if !player_character.is_on_floor():
 				change_state(FALLING)
-			elif input_direction == Vector2.ZERO:
+			elif input_direction.x == 0:  # Only check horizontal input
 				change_state(IDLING)
+			elif player_character.is_on_wall() and player_character.wall_detector.is_colliding() and player_character.head_ability == HeadEquip.AbilityType.WALL_JUMP:
+				change_state(WALL_SLIDING)
 				
 		FALLING:
 			# Priority: Floor Landing > Wall Slide
@@ -93,14 +95,14 @@ func check_state_transitions():
 					change_state(IDLING)
 				else:
 					change_state(WALKING)
-			elif player_character.is_on_wall() && player_character.wall_detector.is_colliding():
+			elif player_character.is_on_wall() and player_character.wall_detector.is_colliding() and player_character.head_ability == HeadEquip.AbilityType.WALL_JUMP:
 				change_state(WALL_SLIDING)
 			elif jump_is_buffered && player_character.movement_handler.coyote_active:
 				change_state(JUMPING)
 
 		JUMPING:
 			# Priority: Wall Slide > Floor Landing > Falling
-			if player_character.is_on_wall() && player_character.wall_detector.is_colliding():
+			if player_character.is_on_wall() && player_character.wall_detector.is_colliding() and player_character.head_ability == HeadEquip.AbilityType.WALL_JUMP:
 				change_state(WALL_SLIDING)
 			elif player_character.is_on_floor():
 				if input_direction == Vector2.ZERO:
@@ -124,7 +126,7 @@ func check_state_transitions():
 
 		WALL_JUMPING:
 			# Priority: Wall Slide > Floor Landing > Falling
-			if player_character.is_on_wall() && player_character.wall_detector.is_colliding():
+			if player_character.is_on_wall() && player_character.wall_detector.is_colliding() and player_character.head_ability == HeadEquip.AbilityType.WALL_JUMP:
 				change_state(WALL_SLIDING)
 			elif player_character.is_on_floor():
 				if input_direction == Vector2.ZERO:
@@ -154,7 +156,7 @@ func check_state_transitions():
 					change_state(IDLING)
 				else:
 					change_state(WALKING)
-			elif player_character.is_on_wall() && player_character.wall_detector.is_colliding():
+			elif player_character.is_on_wall() && player_character.wall_detector.is_colliding() and player_character.head_ability == HeadEquip.AbilityType.WALL_JUMP:
 				change_state(WALL_SLIDING)
 			
 func handle_movement_input(direction):

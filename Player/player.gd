@@ -23,6 +23,9 @@ var last_direction : Vector2 = Vector2.ZERO
 
 #region Apply Ability type
 @export_category("Equipment Abilities")
+@export_group("Head")
+@export var head_ability : HeadEquip.AbilityType
+@export_group("Body")
 @export var body_ability : BodyEquip.AbilityType = BodyEquip.AbilityType.ROLL
 #endregion
 
@@ -87,9 +90,8 @@ func on_use_charm_input(direction):
 #endregion
 
 #region Enable / Disable Abilities
-func handle_enable_head_ability(ability):
-	if ability == "Wall Jump":
-		wall_jump = true
+func handle_enable_head_ability(ability: HeadEquip.AbilityType):
+	head_ability = ability
 	
 func handle_enable_body_ability(ability: BodyEquip.AbilityType):
 	body_ability = ability
