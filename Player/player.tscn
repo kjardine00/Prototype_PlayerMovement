@@ -25,7 +25,7 @@ radius = 124.101
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_woubw"]
 size = Vector2(36, 30)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_handler", "anim_controller", "inv_controller", "interact_area", "state_machine", "wall_detector") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_handler", "anim_controller", "inv_controller", "interact_area", "state_machine", "wall_detector") groups=["player"]]
 collision_layer = 2
 collision_mask = 73
 script = ExtResource("1_20bt8")
@@ -38,6 +38,7 @@ wall_detector = NodePath("WallDetector")
 num_of_available_jumps = 1
 
 [node name="WallDetector" type="RayCast2D" parent="."]
+position = Vector2(0, 50)
 target_position = Vector2(50, 0)
 
 [node name="CurrentState" type="Label" parent="."]
@@ -112,6 +113,8 @@ script = ExtResource("10_5htga")
 
 [node name="WallSliding" type="Node" parent="StateMachine"]
 script = ExtResource("11_p5o4e")
+
+[node name="Rolling" type="Node" parent="StateMachine"]
 
 [node name="Dashing" type="Node" parent="StateMachine"]
 script = ExtResource("13_gu6f8")

@@ -73,7 +73,7 @@ func on_throw_drop_input(direction):
 	inv_controller.handle_throw_drop(direction)
 	
 func on_use_ability_input():
-	state_machine.handle_ability_input()
+	state_machine.handle_ability_input(body_ability)
 	
 func on_use_charm_input(direction):
 	print_debug("Charm Used")

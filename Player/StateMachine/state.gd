@@ -11,35 +11,49 @@ func exit_state():
 	pass
 	
 func update(_delta: float):
-	player.movement_handler.set_x_direction(state_machine.input_direction.x)
-	
-func handle_animation(anim_name : String):
+	handle_animation(state_machine.current_state)
+
+func handle_animation(animation: State):
 	pass
 	#state_machine.player_character.anim_controller.play_anim(anim_name)
 
 func handle_movement_input(direction):
-	state_machine.input_direction = direction
-	if state_machine.input_direction.x == 0 && player.is_on_floor():
-		state_machine.change_state(state_machine.IDLING)
+	player.movement_handler.set_x_direction(direction.x)
+
+	if direction.y < 0:
+		match state_machine.current_state:
+			state_machine.FALLING:
+				player.movement_handler.fast_fall()
+			state_machine.WALL_JUMPING:
+				player.movement_handler.fast_fall()
+			state_machine.JUMPING:
+				player.movement_handler.fast_fall()
+			_:
+				pass
 
 func handle_jump_input():
-	if state_machine.current_state == state_machine.WALL_SLIDING:
-		state_machine.change_state(state_machine.WALL_JUMPING)
-			
-	elif state_machine.current_state != state_machine.JUMPING:
-		state_machine.change_state(state_machine.JUMPING)
+	if player.num_of_available_jumps > 0:
+		if state_machine.current_state == state_machine.WALL_SLIDING:
+			state_machine.change_state(state_machine.WALL_JUMPING)
+			# Clear both jump buffers when wall jumping
+			state_machine.jump_is_buffered = false
+			state_machine.wall_jump_is_buffered = false
+		else:
+			state_machine.change_state(state_machine.JUMPING)
+			# Clear the jump buffer when we successfully jump
+			state_machine.jump_is_buffered = false
 
-func handle_wall_slide_tranisition():
-	if !player.is_on_floor() and player.wall_jump:
-		if player.is_on_wall():
-## check if the player is in contact with either wall side and holding the coresponding direction otherwise -> fall state
-			if (state_machine.input_direction == Vector2.LEFT and player.wall_detector.is_colliding()):
-				state_machine.change_state(state_machine.WALL_SLIDING)
-			elif (state_machine.input_direction == Vector2.RIGHT and player.wall_detector.is_colliding()):
-				state_machine.change_state(state_machine.WALL_SLIDING)
-
-func handle_ability_input(ability_type : BodyEquip.AbilityType):
+func handle_ability_input(ability_type: BodyEquip.AbilityType):
 	match ability_type:
+		BodyEquip.AbilityType.ROLL:
+			state_machine.change_state(state_machine.ROLLING)
 		BodyEquip.AbilityType.DASH:
-			print_debug("State machine state change to dashing")
 			state_machine.change_state(state_machine.DASHING)
+		# BodyEquip.AbilityType.GLIDE:
+		# 	state_machine.change_state(state_machine.GLIDING)
+		# BodyEquip.AbilityType.BLINK:
+		# 	state_machine.change_state(state_machine.BLINKING)
+		# BodyEquip.AbilityType.FLY:
+		# 	state_machine.change_state(state_machine.FLYING)
+		# BodyEquip.AbilityType.BARRIER:
+		# 	state_machine.change_state(state_machine.BARRIER)

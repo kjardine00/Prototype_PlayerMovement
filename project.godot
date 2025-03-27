@@ -48,6 +48,7 @@ folder_colors={
 [global_group]
 
 env_object="If the player should be able to stand on this object and also move it by pushing it"
+player=""
 
 [gui]
 
