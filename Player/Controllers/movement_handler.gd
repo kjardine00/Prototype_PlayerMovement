@@ -61,8 +61,8 @@ func _physics_process(delta: float) -> void:
 	player.velocity.y += get_gravity() * delta
 	
 	# Clamp fall speed
-	if player.velocity.y > max_fall_speed:
-		player.velocity.y = max_fall_speed
+	if player.velocity.y > terminal_fall_velocity:
+		player.velocity.y = terminal_fall_velocity
 	
 	# Update coyote time
 	if player.is_on_floor():

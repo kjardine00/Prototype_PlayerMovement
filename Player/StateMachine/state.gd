@@ -14,8 +14,13 @@ func update(_delta: float):
 	handle_animation(state_machine.current_state)
 
 func handle_animation(animation: State):
-	pass
-	#state_machine.player_character.anim_controller.play_anim(anim_name)
+	state_machine.player_character.anim_controller.play_anim(animation)
+
+func enter_animation(animation: State):
+	state_machine.player_character.anim_controller.enter_animation(animation)
+
+func exit_animation(animation: State):
+	state_machine.player_character.anim_controller.exit_animation(animation)
 
 func handle_movement_input(direction):
 	player.movement_handler.set_x_direction(direction.x)

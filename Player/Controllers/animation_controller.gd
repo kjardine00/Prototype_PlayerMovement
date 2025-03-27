@@ -6,15 +6,32 @@ class_name Animation_Controller
 
 ## Maps state names to animation names
 ## Animation names must be lowercase
-@export_category("Animation Names")
-@export var IDLE_ANIM := "idle"
-@export var WALKING_ANIM := "walk" 
-@export var JUMPING_ANIM := "jump"
-@export var FALLING_ANIM := "fall"
-@export var WALL_JUMPING_ANIM := "wall_jump"
-@export var WALL_SLIDING_ANIM := "wall_slide"
-@export var ROLLING_ANIM := "roll"
-@export var DASHING_ANIM := "dash"
+const IDLE_ANIM := "Idle"
+const WALKING_ANIM := "Walk"
+const JUMPING_ANIM := "Jump"
+const FALLING_ANIM := "JumpFall"
+const WALL_JUMPING_ANIM := "WallJump"
+const WALL_SLIDING_ANIM := "WallSlide"
+## =============================NOT Implemented Yet=============================
+const JUMP_FALL_ANIM := "JumpFall"
+const JUMP_MID_ANIM := "JumpMid"
+const JUMP_RISE_ANIM := "JumpRise"
+
+const LANDING_ANIM := "Land"
+
+const ROLLING_ANIM := "Roll"
+const DASHING_ANIM := "Dash"
+const DASH_START_ANIM := "DashStart"
+const DASH_LOOP_ANIM := "DashLoop"
+const DASH_END_ANIM := "DashEnd"
+const LOOK_UP_ANIM := "LookUp"
+const CROUCH_ANIM := "Crouch"
+const CRAWL_ANIM := "Crawl"
+const LADDER_CLIMB_ANIM := "LadderClimb"
+const LADDER_CLIMB_FINISH_ANIM := "LadderClimbFinish"
+const SLIDE_ANIM := "Slide"
+const SPIN_ANIM := "Spin"
+# const LOOK_DOWN_ANIM := "LookDown" #TODO Create this animation
 
 var facing
 
@@ -40,6 +57,23 @@ func play_anim(state: State) -> void:
 	
 	if anim_player.has_animation(anim_name):
 		anim_player.play(anim_name)
+
+func enter_animation(state: State):
+	var anim_name: String = ""
+	match state:
+		state.state_machine.IDLING:
+			anim_name = IDLE_ANIM
+		state.state_machine.WALKING:
+			anim_name = WALKING_ANIM
+
+func exit_animation(state: State):
+	var anim_name: String = ""
+	match state:
+		state.state_machine.IDLING:
+			anim_name = IDLE_ANIM
+		state.state_machine.WALKING:
+			anim_name = WALKING_ANIM
+
 
 func handle_direction(x_dir):
 	if x_dir != 0:
