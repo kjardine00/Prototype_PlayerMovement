@@ -59,7 +59,7 @@ func _physics_process(_delta: float):
 
 func change_state(next_state):
 	if next_state:
-		print("From: " + prev_state.name + " To: " + current_state.name)
+		# print("From: " + prev_state.name + " To: " + current_state.name)
 		prev_state = current_state
 		current_state = next_state
 		prev_state.exit_state()
@@ -135,19 +135,27 @@ func check_state_transitions():
 				change_state(FALLING)
 
 		ROLLING:
+			# Priority: Floor Landing > Wall Slide > Falling
+			if current_state.roll_timer <= 0:
+			# Roll is complete, transition to appropriate state
+				if !player_character.is_on_floor():
+					change_state(FALLING)
+				elif input_direction == Vector2.ZERO:
+					change_state(IDLING)
+				else:
+					change_state(WALKING)
+
+		DASHING:
 			# Priority: Floor Landing > Wall Slide > Falling | Jumping is handled in state.gd
-			if player_character.is_on_floor():
-				if input_direction == Vector2.ZERO:
+			if current_state.dash_timer <= 0:
+				if !player_character.is_on_floor():
+					change_state(FALLING)
+				elif input_direction == Vector2.ZERO:
 					change_state(IDLING)
 				else:
 					change_state(WALKING)
 			elif player_character.is_on_wall() && player_character.wall_detector.is_colliding():
 				change_state(WALL_SLIDING)
-			elif player_character.velocity.y >= 0:
-				change_state(FALLING)
-
-		# DASHING:
-			## To Falling, Idle, Walking, Wall Sliding, Jumping, Dashing
 			
 func handle_movement_input(direction):
 	input_direction = direction
@@ -174,8 +182,13 @@ func handle_jump_released():
 			if player_character.velocity.y < 0:
 				player_character.movement_handler.cut_jump()
 
-func handle_ability_input(ability_type : BodyEquip.AbilityType):
+func handle_ability_input(ability_type : BodyEquip.AbilityType, direction : Vector2):
 	match ability_type:
+		BodyEquip.AbilityType.ROLL:
+			if player_character.is_on_floor():
+				ROLLING.last_direction = direction
+				change_state(ROLLING)
 		BodyEquip.AbilityType.DASH:
+			DASHING.last_direction = direction
 			change_state(DASHING)
 #endregion

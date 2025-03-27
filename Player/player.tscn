@@ -2342,7 +2342,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_8mwp6"]
 length = 0.2
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2354,6 +2353,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [35, 36]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"debug"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_qemgg"]
@@ -2406,7 +2419,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_76lrf"]
 length = 0.7
-loop_mode = 1
+step = 0.059
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2414,14 +2427,14 @@ tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.07, 0.14, 0.21, 0.28, 0.35, 0.42, 0.49, 0.56, 0.63),
+"times": PackedFloat32Array(0.00333333, 0.0733333, 0.143333, 0.213333, 0.283333, 0.353333, 0.423333, 0.493333, 0.563333, 0.633333),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [65, 66, 67, 68, 69, 70, 71, 72, 73, 74]
 }
 
 [sub_resource type="Animation" id="Animation_efx54"]
-length = 0.79
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2430,7 +2443,7 @@ tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.27, 0.34, 0.41, 0.48, 0.58, 0.65, 0.72),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.766667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 75, 76, 77, 78, 29, 30, 31, 0]
@@ -3040,6 +3053,7 @@ interact_area = NodePath("PlayerInteractArea2D")
 state_machine = NodePath("StateMachine")
 wall_detector = NodePath("WallDetector")
 num_of_available_jumps = 1
+body_ability = 1
 
 [node name="WallDetector" type="RayCast2D" parent="."]
 position = Vector2(0, 25)
@@ -3052,15 +3066,17 @@ offset_right = 58.0
 offset_bottom = -59.6667
 text = "State"
 
-[node name="AnimationController" type="Node2D" parent="."]
+[node name="AnimationController" type="Node2D" parent="." node_paths=PackedStringArray("player_character")]
 script = ExtResource("5_dn68y")
+player_character = NodePath("..")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimationController"]
 visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_h0jdf")
-animation = &"LedgeHang"
+animation = &"Spin"
 autoplay = "Idle"
+frame_progress = 0.992732
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false,
 "layer_section": true,
@@ -3093,6 +3109,7 @@ scale = Vector2(2, 2)
 texture = SubResource("PortableCompressedTexture2D_gu6f8")
 hframes = 16
 vframes = 16
+frame = 77
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": true,
 "layer_section": true,
@@ -3142,7 +3159,7 @@ target_position = Vector2(0, -25)
 
 [node name="InventoryContoller" parent="." instance=ExtResource("17_yoqns")]
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player_character", "IDLING", "WALKING", "JUMPING", "FALLING", "WALL_JUMPING", "WALL_SLIDING", "DASHING")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player_character", "IDLING", "WALKING", "JUMPING", "FALLING", "WALL_JUMPING", "WALL_SLIDING", "ROLLING", "DASHING")]
 script = ExtResource("2_emkbt")
 player_character = NodePath("..")
 IDLING = NodePath("Idling")
@@ -3151,6 +3168,7 @@ JUMPING = NodePath("Jumping")
 FALLING = NodePath("Falling")
 WALL_JUMPING = NodePath("WallJumping")
 WALL_SLIDING = NodePath("WallSliding")
+ROLLING = NodePath("Rolling")
 DASHING = NodePath("Dashing")
 
 [node name="Idling" type="Node" parent="StateMachine"]

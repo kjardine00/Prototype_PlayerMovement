@@ -32,6 +32,9 @@ var direction := Vector2.ZERO
 
 @export_group("Gravity Variables")
 @export var wall_slide_gravity_multiplier : float = 0.33
+
+var coyote_timer : float = 0.0
+var coyote_active : bool = false
 #endregion
 
 #region Gravity and Jump Calculations
@@ -47,14 +50,16 @@ var direction := Vector2.ZERO
 @onready var terminal_fall_velocity := max_fall_speed * tile_size  
 #endregion
 
-var coyote_timer : float = 0.0
-var coyote_active : bool = false
+#region Ability Settings
+@export_category("Ability Settings")
+var pause_movement: bool = false
+@export var roll_distance: float = 1.5 #Number of tiles the player will roll
+@export var roll_duration: float = 0.3 # seconds to reach the distance of the roll
+@onready var roll_velocity: float = (roll_distance * tile_size) / roll_duration #px/s * direction
 
-#region Dash / Ability Settings
-@export_category("Dashing and other abilities")
-@export var dash_length: float = 4 #Number of tiles the player will dash
-@export var dash_duration: float = 0.5 # seconds to reach the distance of the dash
-@onready var dash_velocity: float = (dash_length * tile_size) / dash_duration #px/s * direction
+@export var dash_distance: float = 3.5 #Number of tiles the player will dash
+@export var dash_duration: float = 0.4 # seconds to reach the distance of the dash
+@onready var dash_velocity: float = (dash_distance * tile_size) / dash_duration #px/s * direction
 #endregion
 
 func _physics_process(delta: float) -> void:
@@ -64,7 +69,6 @@ func _physics_process(delta: float) -> void:
 	if player.velocity.y > terminal_fall_velocity:
 		player.velocity.y = terminal_fall_velocity
 	
-	# Update coyote time
 	if player.is_on_floor():
 		coyote_active = true
 		coyote_timer = coyote_time
@@ -72,8 +76,10 @@ func _physics_process(delta: float) -> void:
 		coyote_timer -= delta
 		if coyote_timer <= 0:
 			coyote_active = false
-	
-	player.velocity.x = direction.x * move_speed
+
+	if !pause_movement:
+		player.velocity.x = direction.x * move_speed
+
 	player.move_and_slide()
 	
 func get_gravity() -> float:
@@ -125,9 +131,20 @@ func wall_jump():
 		await get_tree().create_timer(0.1).timeout
 		direction.x = current_direction
 
-func dash():
-	print_debug("Dash")
-	#player.velocity.x = dash_velocity
+func roll(last_direction : Vector2):
+	player.velocity.y = 0
+	_pause_movement_timer(roll_duration)
+	if direction.x == 0:
+		player.velocity.x = roll_velocity * last_direction.x
+	else:
+		player.velocity.x = roll_velocity * direction.x
+
+func dash(last_direction : Vector2):
+	_pause_movement_timer(dash_duration)
+	if direction.x == 0:
+		player.velocity.x = dash_velocity * last_direction.x
+	else:
+		player.velocity.x = dash_velocity * direction.x
 	
 func v_corner_cutting(cutting_enabled: bool = true, correction_amount : float = 1.5):
 	if cutting_enabled:
@@ -135,3 +152,8 @@ func v_corner_cutting(cutting_enabled: bool = true, correction_amount : float = 
 			player.position.x += correction_amount
 		if player.velocity.y < 0 and !L_raycast.is_colliding() and R_raycast.is_colliding() and !M_raycast.is_colliding():
 			player.position.x -= correction_amount
+
+func _pause_movement_timer(duration: float):
+	pause_movement = true
+	await get_tree().create_timer(duration).timeout
+	pause_movement = false

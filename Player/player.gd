@@ -16,6 +16,7 @@ class_name Player
 @export_category("Properties")
 @export var max_jumps : int = 1
 @export var num_of_available_jumps : int
+var last_direction : Vector2 = Vector2.ZERO
 
 @export_category("Boolean Modifiers")
 @export var wall_jump : bool = false
@@ -24,6 +25,9 @@ class_name Player
 @export_category("Equipment Abilities")
 @export var body_ability : BodyEquip.AbilityType = BodyEquip.AbilityType.ROLL
 #endregion
+
+func debug():
+	print_debug("Player Debug")
 
 func _ready() -> void:
 	reset_num_jumps()
@@ -53,9 +57,11 @@ func on_movement_input(direction):
 	anim_controller.handle_direction(direction.x)
 	
 	if direction.x > 0:
-		wall_detector.target_position.x = 50
+		wall_detector.target_position.x = 50	
+		last_direction = Vector2.RIGHT
 	elif direction.x < 0: 
 		wall_detector.target_position.x = -50
+		last_direction = Vector2.LEFT
 
 func on_jump_input():
 	state_machine.handle_jump_input()
@@ -73,7 +79,7 @@ func on_throw_drop_input(direction):
 	inv_controller.handle_throw_drop(direction)
 	
 func on_use_ability_input():
-	state_machine.handle_ability_input(body_ability)
+	state_machine.handle_ability_input(body_ability, last_direction)
 	
 func on_use_charm_input(direction):
 	print_debug("Charm Used")

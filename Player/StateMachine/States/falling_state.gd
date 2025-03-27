@@ -2,11 +2,9 @@ extends State
 
 ## FALL State
 
-func enter_state():
-	pass
-
-func update(_delta: float):
+func update(delta: float):
 	# Check for fast fall input
+	super(delta)
 	if Input.is_action_pressed("move_down"):
 		player.movement_handler.fast_fall()
 

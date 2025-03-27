@@ -1,6 +1,8 @@
 extends Node2D
 class_name Animation_Controller
 
+@export var player_character: Player
+
 @onready var anim_player: AnimationPlayer = $PlayerAnimations
 @onready var player_sprite: Sprite2D = $PlayerSprite
 
@@ -8,17 +10,16 @@ class_name Animation_Controller
 ## Animation names must be lowercase
 const IDLE_ANIM := "Idle"
 const WALKING_ANIM := "Walk"
-const JUMPING_ANIM := "Jump"
-const FALLING_ANIM := "JumpFall"
 const WALL_JUMPING_ANIM := "WallJump"
 const WALL_SLIDING_ANIM := "WallSlide"
-## =============================NOT Implemented Yet=============================
 const JUMP_FALL_ANIM := "JumpFall"
 const JUMP_MID_ANIM := "JumpMid"
 const JUMP_RISE_ANIM := "JumpRise"
 
 const LANDING_ANIM := "Land"
+const SPIN_ANIM := "Spin"
 
+## =============================NOT Implemented Yet=============================
 const ROLLING_ANIM := "Roll"
 const DASHING_ANIM := "Dash"
 const DASH_START_ANIM := "DashStart"
@@ -30,22 +31,29 @@ const CRAWL_ANIM := "Crawl"
 const LADDER_CLIMB_ANIM := "LadderClimb"
 const LADDER_CLIMB_FINISH_ANIM := "LadderClimbFinish"
 const SLIDE_ANIM := "Slide"
-const SPIN_ANIM := "Spin"
 # const LOOK_DOWN_ANIM := "LookDown" #TODO Create this animation
 
 var facing
 
-func play_anim(state: State) -> void:
+func play_anim(state: State, idle_for_awhile: bool = false) -> void:
 	var anim_name: String = ""
 	match state:
 		state.state_machine.IDLING:
-			anim_name = IDLE_ANIM
+			if idle_for_awhile:
+				anim_name = SPIN_ANIM
+			else:
+				anim_name = IDLE_ANIM
 		state.state_machine.WALKING:
 			anim_name = WALKING_ANIM
 		state.state_machine.JUMPING:
-			anim_name = JUMPING_ANIM
+			if player_character.velocity.y < 0:
+				anim_name = JUMP_RISE_ANIM
+			elif player_character.velocity.y == 0:
+				anim_name = JUMP_MID_ANIM
+			else:
+				anim_name = JUMP_FALL_ANIM
 		state.state_machine.FALLING:
-			anim_name = FALLING_ANIM
+			anim_name = JUMP_FALL_ANIM
 		state.state_machine.WALL_JUMPING:
 			anim_name = WALL_JUMPING_ANIM
 		state.state_machine.WALL_SLIDING:
@@ -58,22 +66,16 @@ func play_anim(state: State) -> void:
 	if anim_player.has_animation(anim_name):
 		anim_player.play(anim_name)
 
-func enter_animation(state: State):
+func transition_animation(prev_state: State, next_state: State):
 	var anim_name: String = ""
-	match state:
-		state.state_machine.IDLING:
-			anim_name = IDLE_ANIM
-		state.state_machine.WALKING:
-			anim_name = WALKING_ANIM
-
-func exit_animation(state: State):
-	var anim_name: String = ""
-	match state:
-		state.state_machine.IDLING:
-			anim_name = IDLE_ANIM
-		state.state_machine.WALKING:
-			anim_name = WALKING_ANIM
-
+	match prev_state:
+		prev_state.state_machine.FALLING:
+			if next_state.state_machine.IDLING or next_state.state_machine.WALKING:
+				anim_name = LANDING_ANIM
+	
+	if anim_player.has_animation(anim_name):
+		anim_player.play(anim_name)
+		await anim_player.animation_finished
 
 func handle_direction(x_dir):
 	if x_dir != 0:
