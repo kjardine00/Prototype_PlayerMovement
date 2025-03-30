@@ -129,10 +129,10 @@ func handle_throw_drop(last_input_dir):
 		active_item.throw_drop(last_input_dir)
 		set_active(null)
 	
-func handle_attack_input(last_input_dir):
+func handle_attack_input(last_input_dir, last_horizontal_direction):
 	#TODO Add a cooldown to prevent spamming bugs
 	if active_item:
-		active_item.attack(last_input_dir)
+		active_item.attack(last_input_dir, last_horizontal_direction)
 #endregion
 
 #region Handle Equipment Actions

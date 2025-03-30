@@ -13,7 +13,7 @@ func enter_state():
 func exit_state():
 	idle_for_awhile = false
 
-func update(delta: float):
+func update(_delta: float):
 	if idle_for_awhile:
 		player.anim_controller.play_anim(state_machine.current_state, true)
 	else: 

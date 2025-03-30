@@ -11,13 +11,11 @@ signal active_device_changed(device)
 
 #region Gameplay Signals
 ## ====================== Gameplay Signals ====================================
-signal h_move(direction : Vector2)
-signal v_move(direction: Vector2)
 signal movement_input(direction: Vector2)
 signal jump
 signal jump_released
 signal interact
-signal attack(direction : Vector2)
+signal attack(direction : Vector2, last_h_direction : Vector2)
 signal swap_active
 signal throw_drop(direction : Vector2)
 signal use_ability
@@ -48,6 +46,7 @@ var device_map = {
 	}
 
 var last_direction = Vector2.ZERO
+var last_horizontal_direction = Vector2.RIGHT
 
 func _input(event):
 	var new_device = detect_device(event)
@@ -79,7 +78,7 @@ func set_context(new_context):
 	current_context = new_context
 	#print("Switched to new context: ", current_context)
 
-func get_last_dir_input(event) -> Vector2:
+func get_last_dir_input(_event) -> Vector2:
 	if Input.is_action_pressed("move_up"):
 		return Vector2.UP
 	elif Input.is_action_pressed("move_down"):
@@ -90,6 +89,13 @@ func get_last_dir_input(event) -> Vector2:
 		return Vector2.RIGHT
 	else:
 		return Vector2.ZERO
+
+
+func get_last_h_dir(direction : Vector2) -> Vector2:
+	if direction.x > 0:
+		return Vector2.RIGHT
+	else:
+		return Vector2.LEFT
 
 #region handle input based on context
 func handle_gameplay_input(event):
@@ -106,6 +112,9 @@ func handle_gameplay_input(event):
 	if direction != last_direction:
 		last_direction = direction
 		movement_input.emit(last_direction)
+		# Only update last_horizontal_direction when there is actual movement
+		if direction.x != 0:
+			last_horizontal_direction = get_last_h_dir(direction)
 	
 	if Input.is_action_just_pressed("jump"):
 		jump.emit()
@@ -117,7 +126,8 @@ func handle_gameplay_input(event):
 		interact.emit()
 		
 	if Input.is_action_just_pressed("attack"):
-		attack.emit(last_direction)
+		attack.emit(last_direction, last_horizontal_direction)
+		print_debug(last_direction, last_horizontal_direction)
 		
 	if Input.is_action_just_pressed("swap_active"):
 		swap_active.emit()
@@ -134,13 +144,13 @@ func handle_gameplay_input(event):
 	#if Input.is_action_just_pressed("extra_btn"):
 		#extra_btn.emit(get_last_dir_input(event))
 
-func handle_menu_input(event):
+func handle_menu_input(_event):
 	pass
 
-func handle_dialogue_input(event):
+func handle_dialogue_input(_event):
 	pass
 	
-func handle_cutscene_input(event):
+func handle_cutscene_input(_event):
 	pass
 	
 #endregion

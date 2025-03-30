@@ -14,9 +14,9 @@ func _ready():
 	player = get_parent()
 
 ## The player interacts with the obj on press of the interact button
-func interact(player):
+func interact(player_character: Player):
 	if selected_interactable:
-		selected_interactable.interaction_signal(player)
+		selected_interactable.interaction_signal(player_character)
 
 		if selected_interactable.remove_after_interact:
 			# Temporarily store the reference

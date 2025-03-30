@@ -72,8 +72,8 @@ func on_jump_input():
 func on_jump_released_input():
 	state_machine.handle_jump_released()
 
-func on_attack_input(direction):
-	inv_controller.handle_attack_input(direction)
+func on_attack_input(direction, last_horizontal_direction):
+	inv_controller.handle_attack_input(direction, last_horizontal_direction)
 
 func on_swap_active_input():
 	inv_controller.swap_active()
@@ -84,7 +84,7 @@ func on_throw_drop_input(direction):
 func on_use_ability_input():
 	state_machine.handle_ability_input(body_ability, last_direction)
 	
-func on_use_charm_input(direction):
+func on_use_charm_input(_direction):
 	print_debug("Charm Used")
 	pass
 #endregion

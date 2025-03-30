@@ -23,9 +23,6 @@ func _ready() -> void:
 	interact_component.interact.connect(_interaction_signal)
 	interact_component.stop_interact.connect(_stop_interacting_signal)
 	interact_component.remove_after_interact = true
-	
-func _physics_process(delta: float) -> void:
-	pass
 
 #region Interaction Signal Handling
 func _interaction_signal(interactor: Player) -> void:

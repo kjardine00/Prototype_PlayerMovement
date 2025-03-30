@@ -18,6 +18,7 @@ Dungeon Generation:
 - Create Doors to prevent invalid room transitions [World/Dungeon/RoomGenerator/level_generator.gd]
 - Improve room transition smoothness [World/Dungeon/Caves/Rooms/Components/Doorways/doorways.gd]
 - Add different room types (SECRET, REWARD, etc.) [World/Dungeon/Caves/Rooms/Components/room.gd]
+- Add one way platforms to be able to hit down and move downward through them
 
 Items & Equipment:
 - Add chest that opens on player interaction and spawns coins/items [README.md]
@@ -27,6 +28,7 @@ Items & Equipment:
 - Add thud sound and object shake for equipment [z.Depreciated/Interactable/equip_obj.gd]
 
 Player & Combat:
+- Add Climbing function
 - Add i-frames to rolling state [Player/StateMachine/States/state_rolling.gd]
 - Create LookDown animation [Player/Controllers/animation_controller.gd]
 - Rename last button input to match its function before implementation [input_handler.gd]

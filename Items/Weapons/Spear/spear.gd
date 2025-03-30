@@ -41,7 +41,6 @@ var applied_terminal_vel: float
 
 enum states {IDLE, PICKED_UP, THROWN}
 var state
-var last_horizontal_direction = Vector2.RIGHT  # Track last horizontal direction
 
 #endregion
 
@@ -51,7 +50,6 @@ func _ready() -> void:
 	
 	damage_comp.damage = damage
 	state = states.IDLE
-	interact_component.remove_after_interact
 
 func _gravity():
 	if velocity.y > 0:
@@ -109,8 +107,6 @@ func _pick_up(_interactor):
 		hitbox.disabled = true
 		self.visible = false
 		rotation = 0
-		# Update facing direction based on the player's last direction
-		is_facing_right = _interactor.last_direction.x >= 0
 	else:
 		# TODO: If if feels better to auto stow a new item on pickup if active is full then do that here
 		pass
@@ -159,15 +155,9 @@ func _check_idle():
 #endregion
 
 #region Attack Logic
-func attack(attack_direction : Vector2 = Vector2.ZERO):
+func attack(attack_direction : Vector2, last_horizontal_direction : Vector2):
 	# Update last horizontal direction if a horizontal direction is given
-	if attack_direction.x != 0:
-		last_horizontal_direction = attack_direction
-		is_facing_right = attack_direction.x > 0
-	else:
-		# Use the stored facing direction
-		last_horizontal_direction = Vector2.RIGHT if is_facing_right else Vector2.LEFT
-	
+	print_debug(attack_direction, last_horizontal_direction)
 	match attack_direction:
 		Vector2.ZERO:
 			h_attack(last_horizontal_direction)

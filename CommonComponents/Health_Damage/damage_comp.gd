@@ -2,7 +2,7 @@ extends Area2D
 class_name DamageComp
 
 @export_category("Properties")
-@export var damage: int
+@export var damage: float
 @export_enum("Blunt", "Piercing", "Slashing", "Magic") var damage_type_enum : int
 var damage_type : String
 
