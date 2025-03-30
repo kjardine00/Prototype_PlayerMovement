@@ -11,14 +11,13 @@ class_name State_Machine
 @export var WALL_JUMPING : State
 @export var WALL_SLIDING : State
 @export var ROLLING : State
-
 @export var DASHING : State
-#@export var CLIMB : State
+@export var CLIMB : State
 
 var current_state: State
 var prev_state: State
 
-var input_direction : Vector2
+var input_direction : Vector2 ## This is the input direction at time of input not to be confused with the last input direction
 var input_jump: bool
 
 @onready var state_label: Label = $"../CurrentState"
@@ -83,8 +82,6 @@ func check_state_transitions():
 				change_state(FALLING)
 			elif input_direction.x == 0:  # Only check horizontal input
 				change_state(IDLING)
-			elif player_character.is_on_wall() and player_character.wall_detector.is_colliding() and player_character.head_ability == HeadEquip.AbilityType.WALL_JUMP:
-				change_state(WALL_SLIDING)
 				
 		FALLING:
 			# Priority: Floor Landing > Wall Slide
@@ -158,7 +155,9 @@ func check_state_transitions():
 					change_state(WALKING)
 			elif player_character.is_on_wall() && player_character.wall_detector.is_colliding() and player_character.head_ability == HeadEquip.AbilityType.WALL_JUMP:
 				change_state(WALL_SLIDING)
-			
+#endregion
+
+#region Handle Inputs
 func handle_movement_input(direction):
 	input_direction = direction
 	current_state.handle_movement_input(input_direction)
@@ -176,11 +175,9 @@ func handle_jump_input():
 func handle_jump_released():
 	match current_state:
 		JUMPING:
-			# Cut the jump short when button is released during upward motion
-			if player_character.velocity.y < 0:  # Moving upward
+			if player_character.velocity.y < 0:
 				player_character.movement_handler.cut_jump()
 		WALL_JUMPING:
-			# Same for wall jumps
 			if player_character.velocity.y < 0:
 				player_character.movement_handler.cut_jump()
 

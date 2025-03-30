@@ -8,11 +8,11 @@ class_name MovementHandler
 @export var R_raycast : RayCast2D
 
 ##NOTE: This direction is more dynamic that just the H values, it also is getting the Y values
-var direction := Vector2.ZERO
+var input_direction := Vector2.ZERO
 
 @export_category("General Properties")
 @export var move_speed := 200
-@export var max_fall_speed := 10
+@export var max_fall_speed := 8
 @export var tile_size : int = 128
 
 #region Jumping and Gravity
@@ -55,11 +55,11 @@ var coyote_active : bool = false
 var pause_movement: bool = false
 @export var roll_distance: float = 1.5 #Number of tiles the player will roll
 @export var roll_duration: float = 0.3 # seconds to reach the distance of the roll
-@onready var roll_velocity: float = (roll_distance * tile_size) / roll_duration #px/s * direction
+@onready var roll_velocity: float = (roll_distance * tile_size) / roll_duration #px/s * input_direction
 
 @export var dash_distance: float = 3.5 #Number of tiles the player will dash
 @export var dash_duration: float = 0.4 # seconds to reach the distance of the dash
-@onready var dash_velocity: float = (dash_distance * tile_size) / dash_duration #px/s * direction
+@onready var dash_velocity: float = (dash_distance * tile_size) / dash_duration #px/s * input_direction
 #endregion
 
 func _physics_process(delta: float) -> void:
@@ -77,8 +77,9 @@ func _physics_process(delta: float) -> void:
 		if coyote_timer <= 0:
 			coyote_active = false
 
+	# Only apply input_direction-based movement when not paused
 	if !pause_movement:
-		player.velocity.x = direction.x * move_speed
+		player.velocity.x = input_direction.x * move_speed
 
 	player.move_and_slide()
 	
@@ -98,7 +99,7 @@ func get_gravity() -> float:
 
 ## Call this function to set the direction of movement to the player, if ZERO the player will not move
 func set_x_direction(x_direction : float):
-	direction.x = x_direction
+	input_direction.x = x_direction
 
 ## pass a value if you want to modify the jump amount from default
 func jump(double_jump_modifier: float = 1):
@@ -108,10 +109,11 @@ func jump(double_jump_modifier: float = 1):
 		coyote_active = false  # Reset coyote time when jumping
 
 func cut_jump():
-	player.velocity.y *= cut_jump_factor
+	player.velocity.y = abs(cut_jump_factor * player.velocity.y)
 
 func fast_fall():
-	player.velocity.y *= fast_fall_factor
+	if player.velocity.y > 0:  # Only apply fast fall when falling (positive velocity)
+		player.velocity.y = abs(fast_fall_factor * player.velocity.y)
 
 func wall_jump():
 	if player.num_of_available_jumps > 0:
@@ -120,32 +122,26 @@ func wall_jump():
 	var wall_normal = player.get_wall_normal()
 	
 	if wall_normal.x != 0:
-		var current_direction = direction.x
+		var current_direction = input_direction.x
 		# Set both velocity and direction for initial push
 		player.velocity = Vector2(
 			wall_jump_push_velociy * wall_normal.x , 
 			wall_jump_height_velocity
 		)
-		direction = Vector2(wall_normal.x, 0)
+		input_direction = Vector2(wall_normal.x, 0)
 		# Reset direction after a short delay to allow player control
 		await get_tree().create_timer(0.1).timeout
-		direction.x = current_direction
+		input_direction.x = current_direction
 
 func roll(last_direction : Vector2):
 	player.velocity.y = 0
 	_pause_movement_timer(roll_duration)
-	if direction.x == 0:
-		player.velocity.x = roll_velocity * last_direction.x
-	else:
-		player.velocity.x = roll_velocity * direction.x
+	player.velocity.x = roll_velocity * (input_direction.x if input_direction.x != 0 else last_direction.x)
 
 func dash(last_direction : Vector2):
 	_pause_movement_timer(dash_duration)
-	if direction.x == 0:
-		player.velocity.x = dash_velocity * last_direction.x
-	else:
-		player.velocity.x = dash_velocity * direction.x
-	
+	player.velocity.x = dash_velocity * (input_direction.x if input_direction.x != 0 else last_direction.x)
+
 func v_corner_cutting(cutting_enabled: bool = true, correction_amount : float = 1.5):
 	if cutting_enabled:
 		if player.velocity.y < 0 and L_raycast.is_colliding() and !R_raycast.is_colliding() and !M_raycast.is_colliding():

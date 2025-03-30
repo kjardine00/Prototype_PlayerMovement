@@ -136,7 +136,7 @@ func handle_gameplay_input(event):
 		throw_drop.emit(get_last_dir_input(event))
 		
 	if Input.is_action_just_pressed("use_ability"):
-		use_ability.emit()
+		use_ability.emit(last_horizontal_direction)
 		
 	if Input.is_action_just_pressed("use_charm"):
 		use_charm.emit(get_last_dir_input(event))

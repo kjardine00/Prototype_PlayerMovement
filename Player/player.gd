@@ -81,8 +81,8 @@ func on_swap_active_input():
 func on_throw_drop_input(direction):
 	inv_controller.handle_throw_drop(direction)
 	
-func on_use_ability_input():
-	state_machine.handle_ability_input(body_ability, last_direction)
+func on_use_ability_input(last_horizontal_direction):
+	state_machine.handle_ability_input(body_ability, last_horizontal_direction)
 	
 func on_use_charm_input(_direction):
 	print_debug("Charm Used")

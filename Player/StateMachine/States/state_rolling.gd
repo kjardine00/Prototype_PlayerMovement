@@ -19,11 +19,8 @@ func update(delta: float):
 
 ##TODO: Add i_frames to the rolling state
 
-#region Ignore Movement Input
+#region Ignore Inputs
 func handle_movement_input(_direction: Vector2):
-	pass
-
-func handle_jump_input():
 	pass
 
 func handle_ability_input(_ability_type: BodyEquip.AbilityType):

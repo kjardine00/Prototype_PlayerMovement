@@ -13,17 +13,14 @@ func enter_state():
 
 func exit_state():
 	dash_timer = 0.0
-	player.velocity.x = 0  # Reset horizontal velocity after roll
+	player.velocity.x = 0 
 
 func update(delta: float):
 	dash_timer -= delta
 
-##TODO: Add i_frames to the rolling state
+##TODO: Add i_frames to the dashing state
 
-#region Ignore Movement Input
-func handle_movement_input(_direction: Vector2):
-	pass
-
+#region Ignore Inputs
 func handle_ability_input(_ability_type: BodyEquip.AbilityType):
 	pass
 #endregion

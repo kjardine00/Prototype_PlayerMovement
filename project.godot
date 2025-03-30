@@ -41,6 +41,7 @@ folder_colors={
 "res://Testing/": "purple",
 "res://UI/": "yellow",
 "res://World/": "green",
+"res://World/Dungeon/Caves/Rooms/": "red",
 "res://z.Depreciated/": "pink",
 "res://z.Depreciated/Interactable/": "red",
 "res://z.Depreciated/Interactable/NPCs/": "yellow",
