@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bedhesjsub46j" path="res://Items/Equipment/DashCape/Dash_cape.png" id="1_ocnw5"]
 [ext_resource type="Script" uid="uid://b6h24vl4wafqh" path="res://Items/Equipment/DashCape/dash_cape.gd" id="1_yax2r"]
-[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/Object_Interaction_Area2d/interactable_obj_component.tscn" id="3_yax2r"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/ObjectInteractionArea2d/interactable_obj_component.tscn" id="3_yax2r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yax2r"]
 radius = 55.0

@@ -34,12 +34,14 @@ theme = ExtResource("1_wrnbp")
 text = "New Game"
 
 [node name="Continue" type="Button" parent="PanelContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("1_wrnbp")
 text = "Continue"
 
 [node name="Settings" type="Button" parent="PanelContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("1_wrnbp")

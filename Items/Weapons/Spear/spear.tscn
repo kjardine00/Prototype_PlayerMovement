@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c0yfavire7ysg" path="res://Items/Weapons/Spear/spear.gd" id="1_ikk5o"]
 [ext_resource type="Texture2D" uid="uid://c7ihsukhfx37b" path="res://Items/Weapons/Spear/item_spear.png" id="1_mul4c"]
 [ext_resource type="Texture2D" uid="uid://b76fmfouawcg2" path="res://Items/Weapons/Spear/spear_icon.png" id="2_5vdul"]
-[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/Object_Interaction_Area2d/interactable_obj_component.tscn" id="2_q3kns"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/ObjectInteractionArea2d/interactable_obj_component.tscn" id="2_q3kns"]
 [ext_resource type="PackedScene" uid="uid://cqd2j7t4fapen" path="res://CommonComponents/Health_Damage/damage_comp.tscn" id="5_4bi3n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_372fv"]

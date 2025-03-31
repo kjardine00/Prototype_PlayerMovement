@@ -12,43 +12,49 @@ var is_dialog_active: bool = false
 var can_advance_line = false
 
 func handle_interact(lines: Array[String], position: Vector2) -> void:
-    if is_dialog_active:
-        continue_dialog()
-    else:
-        start_dialog(lines, position)
+	if is_dialog_active:
+		continue_dialog()
+	else:
+		start_dialog(lines, position)
 
 func start_dialog(lines: Array[String], position: Vector2) -> void:
-    if is_dialog_active:
-        return
+	if is_dialog_active:
+		return
 
-    dialog_lines = lines
-    text_box_position = position
-    _show_dialog_box()
-    
-    is_dialog_active = true
-    current_line_index = 0
+	dialog_lines = lines
+	text_box_position = position
+	_show_dialog_box()
+	
+	is_dialog_active = true
+	current_line_index = 0
 
 func _show_dialog_box() -> void:
-    text_box = dialog_box.instantiate()
-    text_box.finished_displaying_text.connect(_on_dialog_box_finished_displaying_text)
-    get_tree().current_scene.add_child(text_box)
-    text_box.global_position = text_box_position
-    text_box.display_text(dialog_lines[current_line_index])
+	text_box = dialog_box.instantiate()
+	text_box.finished_displaying_text.connect(_on_dialog_box_finished_displaying_text)
+	get_tree().current_scene.add_child(text_box)
+	text_box.global_position = text_box_position
+	text_box.display_text(dialog_lines[current_line_index])
 
-    can_advance_line = false
+	can_advance_line = false
 
 func _on_dialog_box_finished_displaying_text() -> void:
-    can_advance_line = true
+	can_advance_line = true
 
 func continue_dialog():
-    if is_dialog_active and can_advance_line:
-        text_box.queue_free()
+	if is_dialog_active and can_advance_line:
+		text_box.queue_free()
 
-        current_line_index += 1
+		current_line_index += 1
 
-        if current_line_index >= dialog_lines.size():
-            is_dialog_active = false
-            current_line_index = 0
-            return
-        
-        _show_dialog_box()
+		if current_line_index >= dialog_lines.size():
+			is_dialog_active = false
+			current_line_index = 0
+			return
+		
+		_show_dialog_box()
+
+func close_dialog() -> void:
+	if is_dialog_active:
+		text_box.queue_free()
+		is_dialog_active = false
+		current_line_index = 0

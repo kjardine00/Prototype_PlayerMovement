@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://d3elvafodw025" path="res://World/WorldObjects/WoodSign/Sign.png" id="1_0jm3f"]
 [ext_resource type="Script" uid="uid://d0x5784ch042d" path="res://World/WorldObjects/WoodSign/wooden_sign.gd" id="2_qh10h"]
-[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/Object_Interaction_Area2d/interactable_obj_component.tscn" id="3_73ake"]
-[ext_resource type="Texture2D" uid="uid://db08ufddejhse" path="res://CommonComponents/Object_Interaction_Area2d/UI_interact.tres" id="4_73ake"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/ObjectInteractionArea2d/interactable_obj_component.tscn" id="3_73ake"]
+[ext_resource type="Texture2D" uid="uid://db08ufddejhse" path="res://CommonComponents/ObjectInteractionArea2d/UI_interact.tres" id="4_73ake"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_73ake"]
 radius = 663.93

@@ -9,7 +9,6 @@ class_name Player
 @export var anim_controller: Animation_Controller
 @export var inv_controller: Inventory_Controller
 @export var interact_area: Player_Interaction_Area2D
-#@export var attack_component: Attack_Component
 @export var state_machine: State_Machine
 @export var wall_detector: RayCast2D
 
@@ -28,9 +27,6 @@ var last_direction : Vector2 = Vector2.ZERO
 @export_group("Body")
 @export var body_ability : BodyEquip.AbilityType = BodyEquip.AbilityType.ROLL
 #endregion
-
-func debug():
-	print_debug("Player Debug")
 
 func _ready() -> void:
 	reset_num_jumps()

@@ -40,7 +40,7 @@ func interact(player_character: Player):
 func _on_area_entered(area: Area2D) -> void:
 	if area is InteractComponent:
 		nearby_interactables.push_back(area)
-		area.can_interact.emit(true)
+		area.toggle_interact_icon.emit(true)
 
 		if (selected_interactable  == null):
 			selected_interactable = nearby_interactables[0]

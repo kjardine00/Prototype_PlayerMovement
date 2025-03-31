@@ -4,11 +4,11 @@ class_name DungeonEntrance
 @export var interact_component: InteractComponent
 @export var interact_icon: Sprite2D
 
-const DUNGEON_SCENE: String = "res://World/Dungeon/RoomGenerator/level_generator.tscn"
+const DUNGEON_SCENE: String = ""
 
 func _ready() -> void:
 	interact_component.interact.connect(on_interact)
-	interact_component.can_interact.connect(interact_toggle)
+	interact_component.toggle_interact_icon.connect(interact_toggle)
 	interact_icon.visible = false
 
 func on_interact(_player: Player) -> void:

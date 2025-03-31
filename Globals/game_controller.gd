@@ -43,9 +43,9 @@ func change_ui_scene(
 	seconds: float = 1.0
 	):
 
-	if transition:
-		transition_controller.transition(transition_out, seconds)
-		await transition_controller.animation_player.animation_finished
+	# if transition:
+	# 	transition_controller.transition(transition_out, seconds)
+	# 	await transition_controller.animation_player.animation_finished
 	if current_ui_scene:
 		if delete:
 			current_ui_scene.queue_free()
@@ -57,5 +57,5 @@ func change_ui_scene(
 	var new = load(new_scene).instantiate()
 	ui.add_child(new)
 	current_ui_scene = new
-	transition_controller.transition(transition_in, seconds)
+	# transition_controller.transition(transition_in, seconds)
 #endregion
