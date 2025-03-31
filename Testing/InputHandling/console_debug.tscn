@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://calj8fm6adtbl"]
+
+[ext_resource type="Script" uid="uid://dhx1df0cr2y8" path="res://Testing/InputHandling/testing_input_handler.gd" id="1_rgebw"]
+[ext_resource type="Script" uid="uid://buhwjcjribusm" path="res://Globals/input_handler.gd" id="2_1d0qo"]
+
+[node name="ConsoleDebug" type="Node"]
+script = ExtResource("1_rgebw")
+
+[node name="InputHandler" type="Node" parent="."]
+script = ExtResource("2_1d0qo")

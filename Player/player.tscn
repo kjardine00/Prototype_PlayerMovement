@@ -3037,7 +3037,7 @@ radius = 19.0
 height = 84.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hm74x"]
-radius = 124.101
+radius = 66.0076
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_woubw"]
 size = Vector2(36, 30)
@@ -3197,7 +3197,6 @@ script = ExtResource("13_dkpta")
 script = ExtResource("13_gu6f8")
 
 [node name="PlayerInteractArea2D" parent="." instance=ExtResource("10_a0os3")]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInteractArea2D"]
 shape = SubResource("CircleShape2D_hm74x")

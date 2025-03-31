@@ -11,15 +11,17 @@ config_version=5
 [application]
 
 config/name="Tales of Mud & Steel"
-run/main_scene="res://World/a.Main/game_controller.tscn"
+run/main_scene="res://the_game.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Events="*res://World/Managers/events.gd"
-Global="*res://global.gd"
-InputHandler="*res://input_handler.gd"
+Events="*res://Globals/events.gd"
+Global="*res://Globals/global.gd"
+InputHandler="*res://Globals/input_handler.gd"
+ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+DialogManager="*res://UI/DialogBox/dialog_manager.gd"
 
 [display]
 
@@ -29,7 +31,7 @@ window/size/resizable=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/controller_icons/plugin.cfg")
 
 [file_customization]
 
@@ -41,13 +43,10 @@ folder_colors={
 "res://Testing/": "purple",
 "res://UI/": "yellow",
 "res://World/": "green",
-"res://World/Dungeon/Caves/Rooms/": "red",
+"res://World/Dungeon/Caves/Rooms/": "green",
 "res://z.Depreciated/": "pink",
 "res://z.Depreciated/Interactable/": "red",
-"res://z.Depreciated/Interactable/NPCs/": "yellow",
-"res://z.Depreciated/Interactable/Pickup_able/": "orange",
-"res://z.Depreciated/Inventory/": "teal",
-"res://z.Depreciated/sword attack stuff/": "pink"
+"res://z.Depreciated/Interactable/Pickup_able/": "pink"
 }
 
 [global_group]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://cn0kasnlxbntm"]
+
+[ext_resource type="Texture2D" uid="uid://d3elvafodw025" path="res://World/WorldObjects/WoodSign/Sign.png" id="1_0jm3f"]
+[ext_resource type="Script" uid="uid://d0x5784ch042d" path="res://World/WorldObjects/WoodSign/wooden_sign.gd" id="2_qh10h"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/Object_Interaction_Area2d/interactable_obj_component.tscn" id="3_73ake"]
+[ext_resource type="Texture2D" uid="uid://db08ufddejhse" path="res://CommonComponents/Object_Interaction_Area2d/UI_interact.tres" id="4_73ake"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_73ake"]
+radius = 663.93
+
+[node name="WoodenSign" type="Sprite2D" node_paths=PackedStringArray("interact_component", "interaction_icon")]
+position = Vector2(-7, 1)
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("1_0jm3f")
+script = ExtResource("2_qh10h")
+interact_component = NodePath("InteractableObjComponent")
+interaction_icon = NodePath("InteractIcon")
+
+[node name="InteractableObjComponent" parent="." instance=ExtResource("3_73ake")]
+position = Vector2(0, -5.55556)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObjComponent"]
+shape = SubResource("CircleShape2D_73ake")
+
+[node name="InteractIcon" type="Sprite2D" parent="."]
+position = Vector2(16.6667, -600)
+scale = Vector2(4.11111, 4.11111)
+texture = ExtResource("4_73ake")
+
+[connection signal="body_exited" from="InteractableObjComponent" to="InteractableObjComponent" method="_on_body_exited"]

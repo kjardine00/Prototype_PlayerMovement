@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvduw4jwlo3s5"]
-
-[ext_resource type="Texture2D" uid="uid://bmotl65p58n2c" path="res://z.Depreciated/Interactable/StaticObjects/Entrances/DungeonEntrance/Dungeon_Entrance_.png" id="1_tosjv"]
-
-[node name="DungeonEntrance" type="Node2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.23, 0.23)
-texture = ExtResource("1_tosjv")

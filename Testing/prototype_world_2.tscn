@@ -20,10 +20,6 @@ tile_map_data = PackedByteArray("AADw//b/AQAJAAAAAADw//f/AQAJAAEAAADw//j/AQAJAAE
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("4_y5qcx")]
-offset_left = -123.0
-offset_top = 23.0
-offset_right = -123.0
-offset_bottom = 23.0
 
 [node name="Coins" parent="." instance=ExtResource("4_2rf7n")]
 position = Vector2(861, 982)

@@ -101,7 +101,7 @@ func place_start_room():
 	rooms.erase(starting_room_pos)
 	
 	## TODO Create Doors here so that if there isn't a room adjacent the player can't go that direction
-	
+	dadad
 func place_normal_rooms():
 	for location in rooms: 
 		var inst = NORMAL_ROOMS.pick_random().instantiate()

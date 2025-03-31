@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://6bulxcvjpc13"]
+
+[ext_resource type="Script" uid="uid://coyxwquibpkny" path="res://UI/DialogBox/dialog_box.gd" id="1_qjb3k"]
+[ext_resource type="Texture2D" uid="uid://cnosomkne52kv" path="res://UI/DialogBox/texture_dialog_box.png" id="2_283bg"]
+[ext_resource type="FontFile" uid="uid://d044rl4wllgtt" path="res://UI/Assets/SkizoCrispyFont-Regular.ttf" id="3_oe37i"]
+
+[node name="DialogBox" type="MarginContainer" node_paths=PackedStringArray("dialog_label", "timer")]
+offset_right = 32.0
+offset_bottom = 34.0
+script = ExtResource("1_qjb3k")
+dialog_label = NodePath("MarginContainer/Label")
+timer = NodePath("LetterDisplayTimer")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_283bg")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_oe37i")
+vertical_alignment = 1
+uppercase = true
+
+[node name="LetterDisplayTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="LetterDisplayTimer" to="." method="_on_letter_display_timer_timeout"]
