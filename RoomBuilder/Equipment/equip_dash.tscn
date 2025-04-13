@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://2knbqnlw6stu"]
+
+[ext_resource type="Script" uid="uid://b6h24vl4wafqh" path="res://ObjectScripts/Equipment/equip_dash.gd" id="1_yax2r"]
+[ext_resource type="Texture2D" uid="uid://b4dea7cl7spov" path="res://Assets/Visual/Icons/icon-p-equipment.png" id="2_f85o4"]
+[ext_resource type="Texture2D" uid="uid://ul0iuhesy2q3" path="res://Assets/Visual/p-equip-item.png" id="3_fjofj"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/ObjectInteractionArea2d/interactable_obj_component.tscn" id="3_yax2r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yax2r"]
+radius = 13.9284
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fjofj"]
+radius = 143.0
+
+[node name="EquipDash" type="CharacterBody2D" node_paths=PackedStringArray("interact_component", "hitbox", "sprite")]
+collision_layer = 4
+script = ExtResource("1_yax2r")
+interact_component = NodePath("InteractableObjComponent")
+hitbox = NodePath("Hitbox")
+sprite = NodePath("Sprite2D")
+equip_slot = 1
+icon = ExtResource("2_f85o4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0.172549, 1, 1)
+texture_filter = 1
+texture = ExtResource("3_fjofj")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yax2r")
+
+[node name="InteractableObjComponent" parent="." instance=ExtResource("3_yax2r")]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObjComponent"]
+shape = SubResource("CircleShape2D_fjofj")
+debug_color = Color(0.974492, 0, 0.426382, 0.42)

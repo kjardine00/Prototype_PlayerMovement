@@ -11,9 +11,9 @@ class_name MovementHandler
 var input_direction := Vector2.ZERO
 
 @export_category("General Properties")
-@export var move_speed := 200
+@export var move_speed := 250
 @export var max_fall_speed := 8
-@export var tile_size : int = 128
+@export var tile_size : int = 32
 
 #region Jumping and Gravity
 @export_category("Jumping and Gravity")

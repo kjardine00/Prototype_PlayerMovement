@@ -3,5 +3,5 @@
 [ext_resource type="Texture2D" uid="uid://db08ufddejhse" path="res://CommonComponents/ObjectInteractionArea2d/UI_interact.tres" id="1_ytkyf"]
 
 [node name="InteractIcon" type="Sprite2D"]
-scale = Vector2(4.11111, 4.11111)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_ytkyf")

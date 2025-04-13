@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://qqlps73mejru"
+path="res://.godot/imported/p-item.aseprite-169b2213383594353e8b0286f5423fc5.res"
+
+[deps]
+
+source_file="res://Assets/Visual/AespriteFiles/p-item.aseprite"
+dest_files=["res://.godot/imported/p-item.aseprite-169b2213383594353e8b0286f5423fc5.res"]
+
+[params]
+

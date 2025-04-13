@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=5 format=3 uid="uid://cp68w82wv11hv"]
 
-[ext_resource type="FontFile" uid="uid://d044rl4wllgtt" path="res://UI/Assets/SkizoCrispyFont-Regular.ttf" id="1_gdkxo"]
+[ext_resource type="FontFile" uid="uid://d044rl4wllgtt" path="res://Assets/Fonts/SkizoCrispyFont-Regular.ttf" id="1_gdkxo"]
 [ext_resource type="StyleBox" uid="uid://bx45rawt7nn6p" path="res://UI/Themes/button_stylebox_flat.tres" id="2_glqgh"]
 [ext_resource type="StyleBox" uid="uid://chahg4jos2q70" path="res://UI/Themes/style_box_flat_pannel_container.tres" id="3_faxuc"]
 

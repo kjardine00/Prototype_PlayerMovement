@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bky3owklv4i7s" path="res://Player/Components/player_interact_area_2d.tscn" id="10_a0os3"]
 [ext_resource type="Script" uid="uid://biq3j4pbkii2v" path="res://Player/StateMachine/States/wall_sliding_state.gd" id="11_p5o4e"]
 [ext_resource type="Script" uid="uid://dij23cm2ysusj" path="res://Player/StateMachine/States/state_rolling.gd" id="13_dkpta"]
-[ext_resource type="Script" uid="uid://c7hrqv7xc7g6x" path="res://Player/dashing_state.gd" id="13_gu6f8"]
+[ext_resource type="Script" uid="uid://c7hrqv7xc7g6x" path="res://Player/StateMachine/States/dashing_state.gd" id="13_gu6f8"]
 [ext_resource type="PackedScene" uid="uid://ch3cspvl5qxdy" path="res://Player/Controllers/inventory_contoller.tscn" id="17_yoqns"]
 
 [sub_resource type="Animation" id="Animation_maysp"]
@@ -852,16 +852,16 @@ _data = PackedByteArray("AAADAAUAAAABAAAAAAYAAEAFAAAIZwAAUklGRgBnAABXRUJQVlA4TPR
 size_override = Vector2(1536, 1344)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5joj1"]
-radius = 19.0
-height = 84.0
+height = 44.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hm74x"]
-radius = 50.01
+radius = 43.0116
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_woubw"]
 size = Vector2(36, 18)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_handler", "anim_controller", "inv_controller", "interact_area", "state_machine", "wall_detector") groups=["player"]]
+texture_filter = 1
 collision_layer = 2
 collision_mask = 73
 script = ExtResource("1_20bt8")
@@ -874,7 +874,7 @@ wall_detector = NodePath("WallDetector")
 num_of_available_jumps = 1
 
 [node name="WallDetector" type="RayCast2D" parent="."]
-position = Vector2(0, 25)
+position = Vector2(0, 21)
 target_position = Vector2(50, 0)
 
 [node name="CurrentState" type="Label" parent="."]
@@ -897,8 +897,7 @@ autoplay = "Idle"
 
 [node name="PlayerSprite" type="Sprite2D" parent="AnimationController"]
 texture_filter = 1
-position = Vector2(0, -42)
-scale = Vector2(2, 2)
+position = Vector2(0, -21)
 texture = SubResource("PortableCompressedTexture2D_gu6f8")
 hframes = 16
 vframes = 16
@@ -933,21 +932,20 @@ player = NodePath("..")
 L_raycast = NodePath("CornerCutRight")
 M_raycast = NodePath("CornerCutMiddle")
 R_raycast = NodePath("CornerCutLeft")
-move_speed = 500
 wall_jump_height = 3.25
 wall_jump_push_distance = 1.25
 
 [node name="CornerCutRight" type="RayCast2D" parent="MovementHandler"]
-position = Vector2(17, -35)
-target_position = Vector2(0, -25)
+position = Vector2(11, -17)
+target_position = Vector2(0, -15)
 
 [node name="CornerCutMiddle" type="RayCast2D" parent="MovementHandler"]
-position = Vector2(0, -35)
-target_position = Vector2(0, -25)
+position = Vector2(0, -17)
+target_position = Vector2(0, -15)
 
 [node name="CornerCutLeft" type="RayCast2D" parent="MovementHandler"]
-position = Vector2(-17, -35)
-target_position = Vector2(0, -25)
+position = Vector2(-11, -17)
+target_position = Vector2(0, -15)
 
 [node name="InventoryContoller" parent="." instance=ExtResource("17_yoqns")]
 
@@ -988,7 +986,6 @@ script = ExtResource("13_dkpta")
 script = ExtResource("13_gu6f8")
 
 [node name="PlayerInteractArea2D" parent="." instance=ExtResource("10_a0os3")]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInteractArea2D"]
 shape = SubResource("CircleShape2D_hm74x")

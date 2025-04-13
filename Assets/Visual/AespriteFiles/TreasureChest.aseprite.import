@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cc5ty1vi1kr60"
+path="res://.godot/imported/TreasureChest.aseprite-0dd56ad59daa07cf7f1570453e010dcd.res"
+
+[deps]
+
+source_file="res://Assets/Visual/AespriteFiles/TreasureChest.aseprite"
+dest_files=["res://.godot/imported/TreasureChest.aseprite-0dd56ad59daa07cf7f1570453e010dcd.res"]
+
+[params]
+

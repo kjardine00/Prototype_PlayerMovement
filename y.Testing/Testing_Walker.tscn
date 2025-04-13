@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3ypdrfxj3erb"]
+
+[ext_resource type="Script" uid="uid://duyu3wx4w01sb" path="res://World/DepreciatedDungeon/LevelGenerator/level_generator.gd" id="1_preuf"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_preuf")

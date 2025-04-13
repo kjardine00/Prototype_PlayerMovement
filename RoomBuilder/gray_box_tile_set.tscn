@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ciobbtkdsqdej"]
+
+[ext_resource type="Texture2D" uid="uid://heqf1ggc8674" path="res://Assets/Visual/tileset-greybox32.png" id="2_rs1jf"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ikleo"]
+texture = ExtResource("2_rs1jf")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, -16, 16, 16, -16, 16, -16, -16)
+
+[sub_resource type="TileSet" id="TileSet_ikleo"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_ikleo")
+
+[node name="GrayBoxTileSet" type="TileMapLayer"]
+tile_set = SubResource("TileSet_ikleo")

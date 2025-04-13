@@ -43,9 +43,6 @@ var coin_count : int = 0
 func _ready() -> void:
 	Global.player_inventory = self
 
-func _process(_delta: float) -> void:
-	pass
-
 #region Inventory Node Setters
 func set_active(item):
 	active_item = item

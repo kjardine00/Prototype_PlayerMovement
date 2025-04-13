@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvduw4jwlo3s5"]
+
+[ext_resource type="Script" uid="uid://ba8ic5vnctg21" path="res://ObjectScripts/Enviroment/dungeon_entrance.gd" id="1_hevft"]
+[ext_resource type="Texture2D" uid="uid://bmotl65p58n2c" path="res://Assets/Visual/enviroment-dungeon-entrance.png" id="1_tosjv"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/ObjectInteractionArea2d/interactable_obj_component.tscn" id="3_hevft"]
+[ext_resource type="Texture2D" uid="uid://db08ufddejhse" path="res://CommonComponents/ObjectInteractionArea2d/UI_interact.tres" id="4_6n5b0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6n5b0"]
+radius = 156.0
+height = 312.0
+
+[node name="DungeonEntrance" type="Node2D" node_paths=PackedStringArray("interact_component", "interact_icon")]
+script = ExtResource("1_hevft")
+interact_component = NodePath("InteractableObjComponent")
+interact_icon = NodePath("InteractIcon")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.23, 0.23)
+texture = ExtResource("1_tosjv")
+
+[node name="InteractableObjComponent" parent="." instance=ExtResource("3_hevft")]
+position = Vector2(-22, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObjComponent"]
+shape = SubResource("CapsuleShape2D_6n5b0")
+
+[node name="InteractIcon" type="Sprite2D" parent="."]
+position = Vector2(-21, -182)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_6n5b0")

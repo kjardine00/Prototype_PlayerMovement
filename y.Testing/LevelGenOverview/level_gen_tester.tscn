@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://cc0jv48kjrnvd"]
+
+[ext_resource type="Script" uid="uid://cb7lkpihjr15k" path="res://y.Testing/LevelGenOverview/level_gen_tester.gd" id="1_2dgb8"]
+[ext_resource type="PackedScene" uid="uid://brjvj7uj3ono0" path="res://World/DepreciatedDungeon/LevelGenerator/level_generator.tscn" id="2_66bxt"]
+[ext_resource type="Script" uid="uid://dgfexfeyqu03j" path="res://y.Testing/LevelGenOverview/level_gen_tester_camera.gd" id="3_iphvb"]
+[ext_resource type="Script" uid="uid://dlfp252rdvb8f" path="res://World/LevelAreas/RoomGeneration/room_generator.gd" id="3_rij4o"]
+[ext_resource type="PackedScene" uid="uid://c5j4gyoexyl7c" path="res://World/LevelAreas/Area1/Rooms-Normal/blank_room.tscn" id="4_mxeys"]
+
+[node name="LevelGenTester" type="Node2D" node_paths=PackedStringArray("room_generator")]
+script = ExtResource("1_2dgb8")
+room_generator = NodePath("LevelGenerator")
+
+[node name="LevelGenerator" parent="." instance=ExtResource("2_66bxt")]
+script = ExtResource("3_rij4o")
+EMPTY_ROOMS = ExtResource("4_mxeys")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "LEVEL GENERATION TESTER"
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_top = 32.0
+offset_right = 89.0
+offset_bottom = 63.0
+text = "GENERATE"
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
+zoom = Vector2(0.1, 0.1)
+script = ExtResource("3_iphvb")
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

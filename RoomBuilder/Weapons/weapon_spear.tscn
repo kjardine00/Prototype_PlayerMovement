@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://q7y6tgcdevf5"]
+
+[ext_resource type="Script" uid="uid://c0yfavire7ysg" path="res://ObjectScripts/Weapons/weapon_spear.gd" id="1_2v17y"]
+[ext_resource type="Texture2D" uid="uid://b76fmfouawcg2" path="res://Assets/Visual/Icons/icon-weapon-spear.png" id="2_mt7nl"]
+[ext_resource type="Texture2D" uid="uid://c7ihsukhfx37b" path="res://Assets/Visual/weapon-spear.png" id="3_vhoo2"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/ObjectInteractionArea2d/interactable_obj_component.tscn" id="4_5hp8h"]
+[ext_resource type="PackedScene" uid="uid://cqd2j7t4fapen" path="res://CommonComponents/Health_Damage/damage_comp.tscn" id="5_67eft"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_372fv"]
+height = 116.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_frt6n"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nv7b1"]
+radius = 7.0
+
+[node name="Spear" type="CharacterBody2D" node_paths=PackedStringArray("interact_component", "hitbox", "sprite", "damage_comp")]
+collision_layer = 4
+collision_mask = 93
+script = ExtResource("1_2v17y")
+interact_component = NodePath("InteractableObjComponent")
+hitbox = NodePath("Hitbox")
+sprite = NodePath("Sprite2D")
+damage_comp = NodePath("DamageComp")
+icon = ExtResource("2_mt7nl")
+damage = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_vhoo2")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CapsuleShape2D_372fv")
+
+[node name="InteractableObjComponent" parent="." instance=ExtResource("4_5hp8h")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObjComponent"]
+shape = SubResource("CircleShape2D_frt6n")
+
+[node name="DamageComp" parent="." instance=ExtResource("5_67eft")]
+position = Vector2(25, 0)
+damage = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageComp"]
+shape = SubResource("CircleShape2D_nv7b1")
+debug_color = Color(0.98047, 0, 0.379398, 0.42)

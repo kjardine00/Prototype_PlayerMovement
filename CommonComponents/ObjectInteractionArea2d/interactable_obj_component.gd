@@ -27,3 +27,8 @@ func toggle_area2d_monitoring():
 		monitoring = false
 	else:
 		monitoring = true
+
+## TODO: Create a function that disables the area2d and refactor all the objects that do that in their own scripts
+func disable_area2d():
+	set_deferred("monitoring", false)
+	set_deferred("monitorable", false)

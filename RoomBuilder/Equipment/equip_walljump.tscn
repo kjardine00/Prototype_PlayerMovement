@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://o60ge6wetcjc"]
+
+[ext_resource type="Script" uid="uid://cwvwmj2bb5hil" path="res://ObjectScripts/Equipment/equip_walljump.gd" id="1_lfg7h"]
+[ext_resource type="Texture2D" uid="uid://ul0iuhesy2q3" path="res://Assets/Visual/p-equip-item.png" id="2_47y07"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/ObjectInteractionArea2d/interactable_obj_component.tscn" id="3_hwbxd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wrr86"]
+radius = 33.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cc5yv"]
+radius = 94.0053
+
+[node name="WallJumpHook" type="CharacterBody2D" node_paths=PackedStringArray("interact_component", "hitbox", "sprite")]
+script = ExtResource("1_lfg7h")
+interact_component = NodePath("InteractableObjComponent")
+hitbox = NodePath("Hitbox")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.882353, 0.160784, 0.0352941, 1)
+texture_filter = 1
+texture = ExtResource("2_47y07")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wrr86")
+
+[node name="InteractableObjComponent" parent="." instance=ExtResource("3_hwbxd")]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObjComponent"]
+shape = SubResource("CircleShape2D_cc5yv")
+debug_color = Color(0.967162, 0, 0.476001, 0.42)

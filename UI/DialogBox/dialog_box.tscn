@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://coyxwquibpkny" path="res://UI/DialogBox/dialog_box.gd" id="1_qjb3k"]
 [ext_resource type="Texture2D" uid="uid://cnosomkne52kv" path="res://UI/DialogBox/texture_dialog_box.png" id="2_283bg"]
-[ext_resource type="FontFile" uid="uid://d044rl4wllgtt" path="res://UI/Assets/SkizoCrispyFont-Regular.ttf" id="3_oe37i"]
+[ext_resource type="FontFile" uid="uid://d044rl4wllgtt" path="res://Assets/Fonts/SkizoCrispyFont-Regular.ttf" id="3_oe37i"]
 
 [node name="DialogBox" type="MarginContainer" node_paths=PackedStringArray("dialog_label", "timer")]
 offset_right = 32.0

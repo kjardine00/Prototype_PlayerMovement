@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://nibi20vyre40"]
+
+[ext_resource type="Script" uid="uid://pqy3kgxmyprw" path="res://y.Testing/prototype_dungeon.gd" id="1_xyfaj"]
+[ext_resource type="PackedScene" uid="uid://brjvj7uj3ono0" path="res://World/DepreciatedDungeon/LevelGenerator/level_generator.tscn" id="2_1jrbx"]
+[ext_resource type="PackedScene" uid="uid://dpgg3aujritit" path="res://Player/player.tscn" id="3_lql8v"]
+[ext_resource type="PackedScene" uid="uid://bl16yukjou057" path="res://Player/Components/player_camera.tscn" id="4_ooa4v"]
+
+[node name="PrototypeDungeon" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_xyfaj")
+player = NodePath("Player")
+
+[node name="LevelGenerator" parent="." instance=ExtResource("2_1jrbx")]
+
+[node name="Player" parent="." instance=ExtResource("3_lql8v")]
+
+[node name="PlayerCamera" parent="Player" instance=ExtResource("4_ooa4v")]
+zoom = Vector2(3, 3)

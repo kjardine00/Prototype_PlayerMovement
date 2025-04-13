@@ -52,6 +52,7 @@ grow_vertical = 2
 scale = Vector2(2, 2)
 
 [node name="MiniMap" parent="." instance=ExtResource("4_kyail")]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0

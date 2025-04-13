@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cio0652ris8i4"
+path="res://.godot/imported/coin_silver.ase-c2e6ca3962d2d118c04eb696894e358b.res"
+
+[deps]
+
+source_file="res://Assets/Visual/AespriteFiles/coin_silver.ase"
+dest_files=["res://.godot/imported/coin_silver.ase-c2e6ca3962d2d118c04eb696894e358b.res"]
+
+[params]
+

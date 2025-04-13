@@ -1,9 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0jhjqwuqnl7b"]
+[gd_scene load_steps=6 format=3 uid="uid://c0jhjqwuqnl7b"]
 
-[ext_resource type="Theme" uid="uid://div8kkl7ao6v8" path="res://UI/Assets/SkizoFontTheme.tres" id="1_pip72"]
 [ext_resource type="Script" uid="uid://c7wqyf5tr5cq2" path="res://UI/HUD/HealthInfo/health_info.gd" id="1_ywu46"]
 [ext_resource type="PackedScene" uid="uid://hhnnnek56o55" path="res://UI/HUD/HealthInfo/Coin_Counter/coin_counter.tscn" id="2_dx2hd"]
-[ext_resource type="Texture2D" uid="uid://crr0n2c0gqck8" path="res://UI/Assets/tile_key.png" id="3_xnb4g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mq1y6"]
 bg_color = Color(0.28485, 0.28485, 0.28485, 1)
@@ -76,30 +74,3 @@ show_percentage = false
 
 [node name="Coins" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_dx2hd")]
 layout_mode = 2
-
-[node name="Keys" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer/VBoxContainer/Keys"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-dragger_visibility = 1
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Keys"]
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 2
-texture = ExtResource("3_xnb4g")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="Amount4" type="Label" parent="MarginContainer/VBoxContainer/Keys"]
-layout_mode = 2
-theme = ExtResource("1_pip72")
-text = "x
-"
-
-[node name="Amount2" type="Label" parent="MarginContainer/VBoxContainer/Keys"]
-layout_mode = 2
-theme = ExtResource("1_pip72")
-text = "98
-"

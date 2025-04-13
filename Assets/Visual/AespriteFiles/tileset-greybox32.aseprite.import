@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ck1380ly72urk"
+path="res://.godot/imported/tileset-greybox32.aseprite-03959921a8ccbeb597dae9fd811a8224.res"
+
+[deps]
+
+source_file="res://Assets/Visual/AespriteFiles/tileset-greybox32.aseprite"
+dest_files=["res://.godot/imported/tileset-greybox32.aseprite-03959921a8ccbeb597dae9fd811a8224.res"]
+
+[params]
+

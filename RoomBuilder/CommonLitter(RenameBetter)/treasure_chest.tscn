@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://l8xxoavrxwth"]
+
+[ext_resource type="Script" uid="uid://chocncpu63qbg" path="res://ObjectScripts/Enviroment/environment_treasure_chest.gd" id="1_ywll3"]
+[ext_resource type="PackedScene" uid="uid://by051m7wyvl2c" path="res://RoomBuilder/CommonLitter(RenameBetter)/coin_silver.tscn" id="2_j38to"]
+[ext_resource type="Texture2D" uid="uid://cjtc3wussg4tv" path="res://Assets/Visual/SpriteSheets/environment-treasure-chest.png" id="2_n6e52"]
+[ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/ObjectInteractionArea2d/interactable_obj_component.tscn" id="2_t71gf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6e52"]
+size = Vector2(33, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j38to"]
+radius = 55.0364
+
+[node name="TreasureChest" type="Area2D" node_paths=PackedStringArray("chest_sprite", "interaction_component", "hitbox")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_ywll3")
+chest_sprite = NodePath("Sprite2D")
+interaction_component = NodePath("InteractableObjComponent")
+hitbox = NodePath("Hitbox")
+coin_scene = ExtResource("2_j38to")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-11, -2)
+texture = ExtResource("2_n6e52")
+hframes = 2
+frame = 1
+region_rect = Rect2(0, 0, 44, 30)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-6.5, 4)
+shape = SubResource("RectangleShape2D_n6e52")
+
+[node name="InteractableObjComponent" parent="." instance=ExtResource("2_t71gf")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObjComponent"]
+shape = SubResource("CircleShape2D_j38to")

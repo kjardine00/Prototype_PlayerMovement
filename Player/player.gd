@@ -1,9 +1,6 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var hitbox: CollisionShape2D = $Hitbox
-@onready var camera_2d: Camera2D = $Camera2D
-
 @export_category("Connect Nodes")
 @export var movement_handler: MovementHandler
 @export var anim_controller: Animation_Controller
@@ -23,7 +20,7 @@ var last_direction : Vector2 = Vector2.ZERO
 #region Apply Ability type
 @export_category("Equipment Abilities")
 @export_group("Head")
-@export var head_ability : HeadEquip.AbilityType
+@export var head_ability : HeadEquip.AbilityType = HeadEquip.AbilityType.NONE
 @export_group("Body")
 @export var body_ability : BodyEquip.AbilityType = BodyEquip.AbilityType.ROLL
 #endregion
