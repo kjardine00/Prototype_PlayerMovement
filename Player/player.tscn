@@ -926,6 +926,7 @@ metadata/_aseprite_wizard_source_file_hash_ = "0a486ec62ea1d823eeeca0bc6eca0405"
 shape = SubResource("CapsuleShape2D_5joj1")
 
 [node name="MovementHandler" type="Node2D" parent="." node_paths=PackedStringArray("player", "L_raycast", "M_raycast", "R_raycast")]
+position = Vector2(-1, -1)
 script = ExtResource("5_lfmf2")
 player = NodePath("..")
 L_raycast = NodePath("CornerCutRight")

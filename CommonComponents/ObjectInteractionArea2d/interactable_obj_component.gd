@@ -4,7 +4,6 @@ class_name InteractComponent
 signal interact
 signal stop_interact
 signal toggle_interact_icon
-signal close_dialog
 
 var remove_after_interact : bool = false
 
@@ -20,7 +19,6 @@ func interaction_signal(interactor: CharacterBody2D):
 func stop_interacting(_interactor: CharacterBody2D):
 	stop_interact.emit()
 	toggle_interact_icon.emit(false)
-	close_dialog.emit()
 	
 func toggle_area2d_monitoring():
 	if monitoring:

@@ -25,7 +25,7 @@ func _ready():
 	chest_sprite.frame = 0
 
 func _open_chest(_interactor: Player):
-	print("opening chest")
+	# print("opening chest")
 	is_open = true
 	chest_sprite.frame = 1
 	hitbox.shape.size = open_chest_hitbox_dimensions
@@ -45,7 +45,7 @@ func spawn_item(item_scene: PackedScene, angle: float, num_items: int = 1):
 
 func empty_chest():
 	if num_coins > 0:
-		print_debug("spawning coins: ", num_coins)
+		# print_debug("spawning coins: ", num_coins)
 		var angle = randf_range(-spread_angle, spread_angle)
 		spawn_item(coin_scene, angle, num_coins)
 		num_coins = 0

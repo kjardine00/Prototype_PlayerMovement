@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=4 uid="uid://dhw4etag65ocb"]
+[gd_scene load_steps=10 format=4 uid="uid://dhw4etag65ocb"]
 
 [ext_resource type="PackedScene" uid="uid://de6hp8xbwfydi" path="res://UI/HUD/hud.tscn" id="1_1qkcy"]
+[ext_resource type="Script" uid="uid://c5d0upusywdb1" path="res://y.Testing/prototype_room_build.gd" id="1_w3fvd"]
 [ext_resource type="PackedScene" uid="uid://dpgg3aujritit" path="res://Player/player.tscn" id="2_yl8qa"]
 [ext_resource type="PackedScene" uid="uid://ciobbtkdsqdej" path="res://RoomBuilder/gray_box_tile_set.tscn" id="3_k7p62"]
 [ext_resource type="PackedScene" uid="uid://2knbqnlw6stu" path="res://RoomBuilder/Equipment/equip_dash.tscn" id="4_yl8qa"]
@@ -9,7 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://l8xxoavrxwth" path="res://RoomBuilder/CommonLitter(RenameBetter)/treasure_chest.tscn" id="7_s4rod"]
 [ext_resource type="PackedScene" uid="uid://cn0kasnlxbntm" path="res://RoomBuilder/CommonLitter(RenameBetter)/environment-sign.tscn" id="8_5hgo2"]
 
-[node name="PrototypeRoomBuild" type="Node2D"]
+[node name="PrototypeRoomBuild" type="Node2D" node_paths=PackedStringArray("HUD")]
+script = ExtResource("1_w3fvd")
+HUD = NodePath("CanvasLayer/HUD")
 
 [node name="GrayBoxTileSet" parent="." instance=ExtResource("3_k7p62")]
 tile_map_data = PackedByteArray("AAD2/wMAAAAAAAAAAAD3/wMAAAAAAAAAAAD4/wMAAAAAAAAAAAD5/wMAAAAAAAAAAAD6/wMAAAAAAAAAAAD7/wMAAAAAAAAAAAD8/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD+/wMAAAAAAAAAAAD//wMAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAKAAMAAAAAAAAAAAALAAMAAAAAAAAAAAAMAAMAAAAAAAAAAAANAAMAAAAAAAAAAAAOAAMAAAAAAAAAAAAPAAMAAAAAAAAAAAAQAAMAAAAAAAAAAAAQAPv/AAAAAAAAAAAQAPz/AAAAAAAAAAAQAP3/AAAAAAAAAAAQAP7/AAAAAAAAAAAQAP//AAAAAAAAAAAQAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAQAAIAAAAAAAAAAAAMAPv/AAAAAAAAAAAMAPz/AAAAAAAAAAAMAP3/AAAAAAAAAAAMAP7/AAAAAAAAAAAMAP//AAAAAAAAAAAMAPf/AAAAAAAAAAAMAPj/AAAAAAAAAAAMAPn/AAAAAAAAAAAMAPr/AAAAAAAAAAANAPf/AAAAAAAAAAAOAPf/AAAAAAAAAAAPAPf/AAAAAAAAAAAQAPf/AAAAAAAAAAARAPf/AAAAAAAAAAASAPf/AAAAAAAAAAATAPf/AAAAAAAAAAAUAPf/AAAAAAAAAAARAPv/AAAAAAAAAAASAPv/AAAAAAAAAAATAPv/AAAAAAAAAAAUAPv/AAAAAAAAAAAVAPv/AAAAAAAAAAAWAPv/AAAAAAAAAAAXAPv/AAAAAAAAAAAYAPv/AAAAAAAAAAAZAPv/AAAAAAAAAAAVAPf/AAAAAAAAAAAWAPf/AAAAAAAAAAAXAPf/AAAAAAAAAAAYAPf/AAAAAAAAAAAZAPf/AAAAAAAAAAA=")
