@@ -55,8 +55,8 @@ func display_text(text_to_display: String) -> void:
 				var key = text.substr(start, i - start + 1)
 				if key in ui_textures:
 					# Add the rich text element as a single unit
-					display_text_array.append("[img=16]" + ui_textures[key] + "[/img]")
-					full_text += "[img=16]" + ui_textures[key] + "[/img]"
+					display_text_array.append("[img=14]" + ui_textures[key] + "[/img]")
+					full_text += "[img=14]" + ui_textures[key] + "[/img]"
 				else:
 					display_text_array.append(key)
 					full_text += key
@@ -96,13 +96,16 @@ func _display_letter() -> void:
 	var current_element = display_text_array[letter_index]
 	
 	# Add the current element to the display
-	dialog_label.text += current_element
+	if current_element == "  ":  # This is a UI texture placeholder
+		var key = text.substr(text.find("%", letter_index), text.find("%", letter_index + 1) - text.find("%", letter_index) + 1)
+		dialog_label.text += "[img=14]" + ui_textures[key] + "[/img]"
+	else:
+		dialog_label.text += current_element
 	
 	# Set timer for next element
 	if letter_index + 1 < display_text_array.size():
 		var next_element = display_text_array[letter_index + 1]
-		if next_element.begins_with("[img="):
-			# Slightly longer pause for UI textures
+		if next_element == "  ":  # UI texture placeholder
 			timer.start(letter_timer * 2)
 		elif next_element == " ":
 			timer.start(space_timer)

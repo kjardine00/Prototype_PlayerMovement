@@ -1,59 +1,56 @@
-[gd_scene load_steps=3 format=3 uid="uid://djqhknww5vwgg"]
+[gd_scene load_steps=2 format=3 uid="uid://x1i5jkisrkxx"]
 
-[ext_resource type="Script" uid="uid://ddvn1ded0bnph" path="res://UI/Menu/main_menu.gd" id="1_niepr"]
-[ext_resource type="Theme" uid="uid://cp68w82wv11hv" path="res://UI/Themes/menu_theme.tres" id="1_wrnbp"]
+[ext_resource type="Theme" uid="uid://cp68w82wv11hv" path="res://UI/Themes/menu_theme.tres" id="2_e82tk"]
 
-[node name="MainMenu" type="CenterContainer"]
+[node name="PauseMenu" type="CenterContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_niepr")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
-theme = ExtResource("1_wrnbp")
+theme = ExtResource("2_e82tk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
-theme = ExtResource("1_wrnbp")
+theme = ExtResource("2_e82tk")
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("1_wrnbp")
-text = "Main Menu"
+theme = ExtResource("2_e82tk")
+text = "Paused"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="NewGame" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme = ExtResource("1_wrnbp")
-text = "New Game"
+theme = ExtResource("2_e82tk")
+text = "Resume"
 
-[node name="Continue" type="Button" parent="PanelContainer/VBoxContainer"]
-visible = false
+[node name="Reset" type="Button" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme = ExtResource("1_wrnbp")
-text = "Continue"
+theme = ExtResource("2_e82tk")
+text = "Reset
+"
 
 [node name="Settings" type="Button" parent="PanelContainer/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme = ExtResource("1_wrnbp")
+theme = ExtResource("2_e82tk")
 text = "Settings"
 
 [node name="Quit" type="Button" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme = ExtResource("1_wrnbp")
+theme = ExtResource("2_e82tk")
 text = "Quit"
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

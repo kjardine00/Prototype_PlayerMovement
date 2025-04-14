@@ -140,7 +140,10 @@ func handle_gameplay_input(event):
 		
 	if Input.is_action_just_pressed("use_charm"):
 		use_charm.emit(get_last_dir_input(event))
-		
+
+	if Input.is_action_just_pressed("pause"):
+		Global.game_controller.pause_game()
+
 	#if Input.is_action_just_pressed("extra_btn"):
 		#extra_btn.emit(get_last_dir_input(event))
 

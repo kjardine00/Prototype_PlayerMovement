@@ -11,7 +11,8 @@
 script = ExtResource("1_vhi0t")
 
 [node name="DungeonEntrance" parent="." instance=ExtResource("2_wki78")]
-position = Vector2(581, -90)
+position = Vector2(626, -38)
+scale = Vector2(0.57, 0.57)
 
 [node name="WoodenSign" parent="." instance=ExtResource("3_a4j63")]
 position = Vector2(223, 13)
@@ -23,3 +24,4 @@ tile_map_data = PackedByteArray("AADj//v/AAAAAAAAAADj//z/AAAAAAAAAADj//3/AAAAAAA
 [node name="Player" parent="." instance=ExtResource("4_qe7tq")]
 
 [node name="PlayerCamera" parent="Player" instance=ExtResource("5_dgoxs")]
+zoom = Vector2(2.5, 2.5)

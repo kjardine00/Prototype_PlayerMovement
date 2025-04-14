@@ -45,6 +45,8 @@
     `There is something happening when there are two pickup objects in the interactables array`
 [] There is an issue recognizing the playstation controller dynamically
     `This might be a controller issue and not a code issue`
+[] There is a bug with the dialog box where when the rich text loads the texture it shifts the text downward a little not sure what the issue is
+    `the issue wasn't centering the vertical aligment`
 
 --- TO GET TO A PUBLISH-ABLE STATE FOR v.0.0.1
 
