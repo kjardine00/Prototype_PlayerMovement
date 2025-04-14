@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3elvafodw025"
-path="res://.godot/imported/environment-sign-wood.png-11fcc4d3145a73b5e757e2f9ab44c9b3.ctex"
+uid="uid://d1p3ldgvhikiy"
+path="res://.godot/imported/env-sign-wood.png-b73d565f920a578487ea3c8f9977a3aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/environment-sign-wood.png"
-dest_files=["res://.godot/imported/environment-sign-wood.png-11fcc4d3145a73b5e757e2f9ab44c9b3.ctex"]
+source_file="res://Assets/Visual/env-sign-wood.png"
+dest_files=["res://.godot/imported/env-sign-wood.png-b73d565f920a578487ea3c8f9977a3aa.ctex"]
 
 [params]
 

@@ -5,7 +5,7 @@ signal finished_displaying_text
 @export var dialog_label: Label
 @export var timer: Timer
 
-@export var amount_to_offset_above_character: int = 100
+@export var amount_to_offset_above_character: int = 50
 
 const MAX_WIDTH = 1000
 const MAX_HEIGHT = 1000

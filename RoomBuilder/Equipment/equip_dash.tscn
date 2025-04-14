@@ -9,7 +9,7 @@
 radius = 13.9284
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fjofj"]
-radius = 143.0
+radius = 40.0
 
 [node name="EquipDash" type="CharacterBody2D" node_paths=PackedStringArray("interact_component", "hitbox", "sprite")]
 collision_layer = 4
@@ -29,7 +29,6 @@ texture = ExtResource("3_fjofj")
 shape = SubResource("CircleShape2D_yax2r")
 
 [node name="InteractableObjComponent" parent="." instance=ExtResource("3_yax2r")]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObjComponent"]
 shape = SubResource("CircleShape2D_fjofj")

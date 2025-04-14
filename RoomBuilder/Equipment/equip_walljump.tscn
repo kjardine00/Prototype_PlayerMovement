@@ -5,12 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/ObjectInteractionArea2d/interactable_obj_component.tscn" id="3_hwbxd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wrr86"]
-radius = 33.0
+radius = 14.0357
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cc5yv"]
-radius = 94.0053
+radius = 40.0
 
 [node name="WallJumpHook" type="CharacterBody2D" node_paths=PackedStringArray("interact_component", "hitbox", "sprite")]
+scale = Vector2(0.988081, 0.964777)
+collision_layer = 4
 script = ExtResource("1_lfg7h")
 interact_component = NodePath("InteractableObjComponent")
 hitbox = NodePath("Hitbox")
@@ -25,7 +27,6 @@ texture = ExtResource("2_47y07")
 shape = SubResource("CircleShape2D_wrr86")
 
 [node name="InteractableObjComponent" parent="." instance=ExtResource("3_hwbxd")]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObjComponent"]
 shape = SubResource("CircleShape2D_cc5yv")

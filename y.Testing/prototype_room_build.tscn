@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=4 uid="uid://dhw4etag65ocb"]
+[gd_scene load_steps=9 format=4 uid="uid://dhw4etag65ocb"]
 
 [ext_resource type="PackedScene" uid="uid://de6hp8xbwfydi" path="res://UI/HUD/hud.tscn" id="1_1qkcy"]
 [ext_resource type="PackedScene" uid="uid://dpgg3aujritit" path="res://Player/player.tscn" id="2_yl8qa"]
 [ext_resource type="PackedScene" uid="uid://ciobbtkdsqdej" path="res://RoomBuilder/gray_box_tile_set.tscn" id="3_k7p62"]
 [ext_resource type="PackedScene" uid="uid://2knbqnlw6stu" path="res://RoomBuilder/Equipment/equip_dash.tscn" id="4_yl8qa"]
 [ext_resource type="PackedScene" uid="uid://by051m7wyvl2c" path="res://RoomBuilder/CommonLitter(RenameBetter)/coin_silver.tscn" id="5_k7p62"]
+[ext_resource type="PackedScene" uid="uid://o60ge6wetcjc" path="res://RoomBuilder/Equipment/equip_walljump.tscn" id="6_jygkw"]
+[ext_resource type="PackedScene" uid="uid://l8xxoavrxwth" path="res://RoomBuilder/CommonLitter(RenameBetter)/treasure_chest.tscn" id="7_s4rod"]
+[ext_resource type="PackedScene" uid="uid://cn0kasnlxbntm" path="res://RoomBuilder/CommonLitter(RenameBetter)/environment-sign.tscn" id="8_5hgo2"]
 
 [node name="PrototypeRoomBuild" type="Node2D"]
 
@@ -15,6 +18,8 @@ tile_map_data = PackedByteArray("AAD2/wMAAAAAAAAAAAD3/wMAAAAAAAAAAAD4/wMAAAAAAAA
 position = Vector2(-2, 71)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+scale = Vector2(1.00112, 1)
+zoom = Vector2(2.535, 2.535)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -22,7 +27,18 @@ position = Vector2(-2, 71)
 visible = false
 
 [node name="EquipDash" parent="." instance=ExtResource("4_yl8qa")]
-position = Vector2(161, 61)
+position = Vector2(195, 68)
 
 [node name="Coins" parent="." instance=ExtResource("5_k7p62")]
 position = Vector2(-275, 74)
+
+[node name="WallJumpHook" parent="." instance=ExtResource("6_jygkw")]
+position = Vector2(97, 66)
+
+[node name="TreasureChest" parent="." instance=ExtResource("7_s4rod")]
+position = Vector2(-108, 83)
+num_coins = 2
+
+[node name="WoodenSign" parent="." instance=ExtResource("8_5hgo2")]
+position = Vector2(296, 78)
+scale = Vector2(0.995399, 1.00862)

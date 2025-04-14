@@ -7,6 +7,6 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("1_3w3mc")
 path = "interact"
-show_mode = 0
+show_mode = 1
 force_type = 0
 metadata/_custom_type_script = "uid://1xtek7imh58l"

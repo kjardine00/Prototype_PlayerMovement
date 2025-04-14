@@ -33,16 +33,16 @@
             [ ] Sprite
         [x] HUD Icons
         [ ] DungeonEntrance (Probably should just redo this as a door and then re-use for other transitions)
-        [ ] Sign
+        [x] Sign
         [ ] Treasure Chest
 
 
 
 --- BUGS
-
 [] Dash & Roll needs to be fixed. 
     `Probably some velocity needs to be reset before leaving state or entering state? some wall jump combos are weird`
-
+[] Debug with the interaction system.
+    `There is something happening when there are two pickup objects in the interactables array`
 
 --- TO GET TO A PUBLISH-ABLE STATE FOR v.0.0.1
 

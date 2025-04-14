@@ -855,7 +855,7 @@ size_override = Vector2(1536, 1344)
 height = 44.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hm74x"]
-radius = 43.0116
+radius = 45.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_woubw"]
 size = Vector2(36, 18)
@@ -931,7 +931,6 @@ player = NodePath("..")
 L_raycast = NodePath("CornerCutRight")
 M_raycast = NodePath("CornerCutMiddle")
 R_raycast = NodePath("CornerCutLeft")
-move_speed = 500
 wall_jump_height = 3.25
 wall_jump_push_distance = 1.25
 
@@ -986,6 +985,7 @@ script = ExtResource("13_dkpta")
 script = ExtResource("13_gu6f8")
 
 [node name="PlayerInteractArea2D" parent="." instance=ExtResource("10_a0os3")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInteractArea2D"]
 shape = SubResource("CircleShape2D_hm74x")
@@ -997,7 +997,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentObjDetector"]
-position = Vector2(0, 51)
+position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_woubw")
 debug_color = Color(0.368899, 0.478102, 1, 0.42)
 
