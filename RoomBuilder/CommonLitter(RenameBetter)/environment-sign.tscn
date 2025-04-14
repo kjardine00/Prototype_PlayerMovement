@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cn0kasnlxbntm"]
 
-[ext_resource type="Texture2D" uid="uid://d3elvafodw025" path="res://Assets/environment-sign-wood.png" id="1_0jm3f"]
+[ext_resource type="Texture2D" uid="uid://d3elvafodw025" path="res://Assets/Visual/environment-sign-wood.png" id="1_0jm3f"]
 [ext_resource type="Script" uid="uid://d0x5784ch042d" path="res://ObjectScripts/Enviroment/environment-sign.gd" id="2_qh10h"]
 [ext_resource type="PackedScene" uid="uid://beio544i7xoy1" path="res://CommonComponents/ObjectInteractionArea2d/interactable_obj_component.tscn" id="3_73ake"]
 [ext_resource type="Texture2D" uid="uid://db08ufddejhse" path="res://CommonComponents/ObjectInteractionArea2d/UI_interact.tres" id="4_73ake"]

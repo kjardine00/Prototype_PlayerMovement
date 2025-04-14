@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be0tkmfjafi5x"
-path="res://.godot/imported/Character base.png-390df9f0bd77130699e0a7643b1d9436.ctex"
+uid="uid://d3elvafodw025"
+path="res://.godot/imported/environment-sign-wood.png-11fcc4d3145a73b5e757e2f9ab44c9b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Assets/Character base.png"
-dest_files=["res://.godot/imported/Character base.png-390df9f0bd77130699e0a7643b1d9436.ctex"]
+source_file="res://Assets/Visual/environment-sign-wood.png"
+dest_files=["res://.godot/imported/environment-sign-wood.png-11fcc4d3145a73b5e757e2f9ab44c9b3.ctex"]
 
 [params]
 

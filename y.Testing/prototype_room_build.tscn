@@ -19,6 +19,7 @@ position = Vector2(-2, 71)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("1_1qkcy")]
+visible = false
 
 [node name="EquipDash" parent="." instance=ExtResource("4_yl8qa")]
 position = Vector2(161, 61)
