@@ -2,12 +2,13 @@ extends Sprite2D
 
 @export var interact_component: InteractComponent
 @export var interaction_icon: Sprite2D
+@export var sign_text: Array[String]
 
 const lines: Array[String] = [
 	"Hello, world!",
-	"This is a test.",
-	"This is another test.",
-	"This is the last test."
+	"Missing Text",
+	"Missing Text",
+	"Missing Text"
 ]
 
 func _ready() -> void:
@@ -23,7 +24,9 @@ func interact_toggle(can_interact: bool = false) -> void:
 		interaction_icon.visible = false
 
 func player_is_interacting(_player: Player) -> void:
-	DialogManager.handle_interact(lines, self.global_position)
+	if sign_text.size() < 1:
+		sign_text = lines
+	DialogManager.handle_interact(sign_text, self.global_position)
 
 func stop_interacting() -> void:
 	interact_toggle(false)

@@ -1,14 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://6bulxcvjpc13"]
+[gd_scene load_steps=5 format=3 uid="uid://6bulxcvjpc13"]
 
 [ext_resource type="Script" uid="uid://coyxwquibpkny" path="res://UI/DialogBox/dialog_box.gd" id="1_qjb3k"]
 [ext_resource type="Texture2D" uid="uid://cnosomkne52kv" path="res://UI/DialogBox/texture_dialog_box.png" id="2_283bg"]
+[ext_resource type="Theme" uid="uid://div8kkl7ao6v8" path="res://Assets/Fonts/SkizoFontTheme.tres" id="3_283bg"]
 [ext_resource type="FontFile" uid="uid://d044rl4wllgtt" path="res://Assets/Fonts/SkizoCrispyFont-Regular.ttf" id="3_oe37i"]
 
 [node name="DialogBox" type="MarginContainer" node_paths=PackedStringArray("dialog_label", "timer")]
 offset_right = 32.0
 offset_bottom = 34.0
 script = ExtResource("1_qjb3k")
-dialog_label = NodePath("MarginContainer/Label")
+dialog_label = NodePath("MarginContainer/RichTextLabel")
 timer = NodePath("LetterDisplayTimer")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
@@ -27,12 +28,15 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_oe37i")
-vertical_alignment = 1
-uppercase = true
+theme = ExtResource("3_283bg")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_oe37i")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
 [node name="LetterDisplayTimer" type="Timer" parent="."]
 one_shot = true

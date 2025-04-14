@@ -4,3 +4,4 @@
 
 [resource]
 default_font = ExtResource("1_457h6")
+RichTextLabel/font_sizes/mono_font_size = 16

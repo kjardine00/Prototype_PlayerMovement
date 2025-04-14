@@ -21,10 +21,10 @@ hitbox = NodePath("Hitbox")
 coin_scene = ExtResource("2_j38to")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(-11, -2)
 texture = ExtResource("2_n6e52")
 hframes = 2
-frame = 1
 region_rect = Rect2(0, 0, 44, 30)
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
@@ -32,6 +32,7 @@ position = Vector2(-6.5, 4)
 shape = SubResource("RectangleShape2D_n6e52")
 
 [node name="InteractableObjComponent" parent="." instance=ExtResource("2_t71gf")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObjComponent"]
 shape = SubResource("CircleShape2D_j38to")

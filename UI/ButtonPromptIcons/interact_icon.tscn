@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dqs7fr81lsy6m"]
 
-[ext_resource type="Texture2D" uid="uid://db08ufddejhse" path="res://CommonComponents/ObjectInteractionArea2d/UI_interact.tres" id="1_ytkyf"]
+[ext_resource type="Texture2D" uid="uid://db08ufddejhse" path="res://Assets/UIActionPrompts/UI_interact.tres" id="1_ytkyf"]
 
 [node name="InteractIcon" type="Sprite2D"]
 scale = Vector2(0.25, 0.25)

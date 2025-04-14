@@ -15,10 +15,11 @@ script = ExtResource("1_w3fvd")
 HUD = NodePath("CanvasLayer/HUD")
 
 [node name="GrayBoxTileSet" parent="." instance=ExtResource("3_k7p62")]
+position = Vector2(2, -73)
 tile_map_data = PackedByteArray("AAD2/wMAAAAAAAAAAAD3/wMAAAAAAAAAAAD4/wMAAAAAAAAAAAD5/wMAAAAAAAAAAAD6/wMAAAAAAAAAAAD7/wMAAAAAAAAAAAD8/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD+/wMAAAAAAAAAAAD//wMAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAKAAMAAAAAAAAAAAALAAMAAAAAAAAAAAAMAAMAAAAAAAAAAAANAAMAAAAAAAAAAAAOAAMAAAAAAAAAAAAPAAMAAAAAAAAAAAAQAAMAAAAAAAAAAAAQAPv/AAAAAAAAAAAQAPz/AAAAAAAAAAAQAP3/AAAAAAAAAAAQAP7/AAAAAAAAAAAQAP//AAAAAAAAAAAQAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAQAAIAAAAAAAAAAAAMAPv/AAAAAAAAAAAMAPz/AAAAAAAAAAAMAP3/AAAAAAAAAAAMAP7/AAAAAAAAAAAMAP//AAAAAAAAAAAMAPf/AAAAAAAAAAAMAPj/AAAAAAAAAAAMAPn/AAAAAAAAAAAMAPr/AAAAAAAAAAANAPf/AAAAAAAAAAAOAPf/AAAAAAAAAAAPAPf/AAAAAAAAAAAQAPf/AAAAAAAAAAARAPf/AAAAAAAAAAASAPf/AAAAAAAAAAATAPf/AAAAAAAAAAAUAPf/AAAAAAAAAAARAPv/AAAAAAAAAAASAPv/AAAAAAAAAAATAPv/AAAAAAAAAAAUAPv/AAAAAAAAAAAVAPv/AAAAAAAAAAAWAPv/AAAAAAAAAAAXAPv/AAAAAAAAAAAYAPv/AAAAAAAAAAAZAPv/AAAAAAAAAAAVAPf/AAAAAAAAAAAWAPf/AAAAAAAAAAAXAPf/AAAAAAAAAAAYAPf/AAAAAAAAAAAZAPf/AAAAAAAAAAA=")
 
 [node name="Player" parent="." instance=ExtResource("2_yl8qa")]
-position = Vector2(-2, 71)
+position = Vector2(0, -2)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 scale = Vector2(1.00112, 1)
@@ -30,18 +31,19 @@ zoom = Vector2(2.535, 2.535)
 visible = false
 
 [node name="EquipDash" parent="." instance=ExtResource("4_yl8qa")]
-position = Vector2(195, 68)
+position = Vector2(247, -218)
 
 [node name="Coins" parent="." instance=ExtResource("5_k7p62")]
-position = Vector2(-275, 74)
+position = Vector2(-273, 1)
 
 [node name="WallJumpHook" parent="." instance=ExtResource("6_jygkw")]
-position = Vector2(97, 66)
+position = Vector2(403, -15)
 
 [node name="TreasureChest" parent="." instance=ExtResource("7_s4rod")]
-position = Vector2(-108, 83)
+position = Vector2(-106, 10)
 num_coins = 2
 
 [node name="WoodenSign" parent="." instance=ExtResource("8_5hgo2")]
-position = Vector2(296, 78)
+position = Vector2(127, 5)
 scale = Vector2(0.995399, 1.00862)
+sign_text = Array[String](["Welcome to the Dungeon", "You can pick up equipment with %UI_interact%", "Press %UI_use_ability% to use your equipment"])
