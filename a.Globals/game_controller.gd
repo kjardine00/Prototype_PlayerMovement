@@ -3,25 +3,15 @@ class_name GameController
 
 @export var world_2d: Node2D
 @export var ui: Control
+
 @export var transition_controller: SceneTransitionController
-
-const SCENES_2D = {
-	"AREA_HUB": "res://World/HubArea/area_hub.tscn",
-	"PROTO_DUNGEON": "res://World/ProtoDungeon/proto_dungeon.tscn"
-}
-
-const SCENES_UI = {
-	"HUD": "res://UI/HUD/hud.tscn",
-	"MAIN_MENU": "res://UI/Menu/main_menu.tscn", 
-	"PAUSE_MENU": "res://UI/Menu/pause_menu.tscn",
-}
 
 var current_2d_scene : Node
 var current_ui_scene : Node
 
 func _ready() -> void:
 	Global.game_controller = self
-	change_ui_scene(Global.MAIN_MENU, false, false, false)
+	change_ui_scene(SceneMap.MAIN_MENU, false, false)
 
 #region 2D Scene Tranistions
 func change_2d_scene(
@@ -47,19 +37,13 @@ func change_2d_scene(
 func change_ui_scene(
 	new_scene: String, 
 	delete: bool = true, 
-	keep_running: bool = false,
-	transition: bool = true,
-	# transition_in : String = "Fade In", 
-	# transition_out : String = "Fade Out", 
-	# seconds: float = 1.0
+	keep_running: bool = false
 	):
 
-	# if transition:
-	# 	transition_controller.transition(transition_out, seconds)
-	# 	await transition_controller.animation_player.animation_finished
 	if current_ui_scene:
 		if new_scene in ui.get_children():
-			new_scene.visible = true
+			# new_scene.visible = true
+			pass
 		else:
 			if delete:
 				current_ui_scene.queue_free()
@@ -73,31 +57,38 @@ func change_ui_scene(
 	current_ui_scene = new
 	# transition_controller.transition(transition_in, seconds)
 
-func open_inventory() -> void:
-	pass
-
-func close_inventory() -> void:
-	pass
-
 func pause_game() -> void:
 	get_tree().paused = true
-	change_ui_scene(Global.PAUSE_MENU, false, true, false)
+	change_ui_scene(SceneMap.PAUSE_MENU, false, false)
 
-func resume_game(current_scene: Node = current_ui_scene) -> void:
-	get_tree().paused = false
-	change_ui_scene(Global.HUD, false, true, false)
+#region Main Menu Actions
+## Main Menu -> HUD, NONE -> AreaHub
+func new_game() -> void:
+	change_ui_scene(SceneMap.HUD, false, false)
+	change_2d_scene(SceneMap.AREA_HUB, false, false)
 
-func open_settings() -> void:
+## TODO: Save Feature needs to be implemented for this to be a feature
+func continue_game() -> void:
 	pass
 
-func close_settings() -> void:
+## TODO: Build a settings menu that can be accessed from the main menu and the pause menu
+func open_settings_main_menu() -> void:
 	pass
-
-
 #endregion
+
+#region Pause Menu Actions
+## Pause Menu -> HUD, 2D stays the same
+func resume_game() -> void:
+	get_tree().paused = false
+	change_ui_scene(SceneMap.HUD, false, false)
 
 func reset_game() -> void:
 	print_debug("Resetting game")
-	# change_2d_scene(Global.AREA_HUB, false, false)
-	# change_ui_scene(Global.HUD, false, false, false)
+
+func open_settings_pause_menu() -> void:
 	pass
+#endregion
+
+func quit_game() -> void:
+	get_tree().quit()
+

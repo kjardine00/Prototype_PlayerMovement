@@ -11,8 +11,8 @@ func exit_state():
 	pass
 	
 func update(_delta: float):
-	
-	handle_animation("climb")
+	pass
+	# handle_animation("climb")
 
 
 func handle_climb_movement():

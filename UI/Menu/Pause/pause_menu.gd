@@ -8,6 +8,7 @@ func _ready() -> void:
 		resume.grab_focus()
 
 func _on_resume_pressed() -> void:
+	print_debug("Resuming game")
 	Global.game_controller.resume_game()
 
 func _on_reset_pressed() -> void:

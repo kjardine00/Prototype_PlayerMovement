@@ -11,11 +11,11 @@
 script = ExtResource("1_vhi0t")
 
 [node name="DungeonEntrance" parent="." instance=ExtResource("2_wki78")]
-position = Vector2(626, -38)
-scale = Vector2(0.57, 0.57)
+position = Vector2(260, -6)
+scale = Vector2(0.3, 0.3)
 
 [node name="WoodenSign" parent="." instance=ExtResource("3_a4j63")]
-position = Vector2(223, 13)
+position = Vector2(73, 14)
 sign_text = Array[String](["Hello There!", "Thank you for playing my game!", "Use [J] to attack", "[K] to throw", "and [SHIFT] to roll"])
 
 [node name="GrayBoxTileSet" parent="." instance=ExtResource("2_a4j63")]

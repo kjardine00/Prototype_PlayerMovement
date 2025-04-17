@@ -1,13 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://djqhknww5vwgg"]
+[gd_scene load_steps=3 format=3 uid="uid://djqhknww5vwgg"]
 
+[ext_resource type="Script" uid="uid://xaktpsyssoph" path="res://UI/Menu/Main/main_menu.gd" id="1_21qks"]
 [ext_resource type="Theme" uid="uid://cp68w82wv11hv" path="res://UI/Themes/menu_theme.tres" id="1_wrnbp"]
 
-[node name="MainMenu" type="CenterContainer"]
+[node name="MainMenu" type="CenterContainer" node_paths=PackedStringArray("new_game")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 1.0
+offset_right = 6.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_21qks")
+new_game = NodePath("PanelContainer/VBoxContainer/NewGame")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(300, 300)

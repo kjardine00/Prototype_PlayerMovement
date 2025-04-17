@@ -26,6 +26,7 @@ position = Vector2(-1, 1)
 shape = SubResource("CapsuleShape2D_6n5b0")
 
 [node name="InteractIcon" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-21, -182)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_6n5b0")
