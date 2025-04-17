@@ -76,7 +76,7 @@ func detect_device(event: InputEvent) -> DEVICE:
 
 func set_context(new_context):
 	current_context = new_context
-	#print("Switched to new context: ", current_context)
+	print_debug("Switched to new context: ", current_context)
 
 func get_last_dir_input(_event) -> Vector2:
 	if Input.is_action_pressed("move_up"):
@@ -89,7 +89,6 @@ func get_last_dir_input(_event) -> Vector2:
 		return Vector2.RIGHT
 	else:
 		return Vector2.ZERO
-
 
 func get_last_h_dir(direction : Vector2) -> Vector2:
 	if direction.x > 0:
@@ -143,17 +142,21 @@ func handle_gameplay_input(event):
 
 	if Input.is_action_just_pressed("pause"):
 		Global.game_controller.pause_game()
-
+		set_context(CONTEXT.MENU)
+		
 	#if Input.is_action_just_pressed("extra_btn"):
 		#extra_btn.emit(get_last_dir_input(event))
 
 func handle_menu_input(_event):
+	## TODO: How to handle input based on context. Right now using the built in ui_<name> input actions
 	pass
 
 func handle_dialogue_input(_event):
+	## TODO: How to handle input based on context. Right now using the built in ui_<name> input actions
 	pass
 	
 func handle_cutscene_input(_event):
+	## TODO: How to handle input based on context. Right now using the built in ui_<name> input actionss
 	pass
 	
 #endregion

@@ -58,8 +58,11 @@ func change_ui_scene(
 	# transition_controller.transition(transition_in, seconds)
 
 func pause_game() -> void:
-	get_tree().paused = true
-	change_ui_scene(SceneMap.PAUSE_MENU, false, false)
+	if current_ui_scene is MainMenu:
+		return
+	else:
+		get_tree().paused = true
+		change_ui_scene(SceneMap.PAUSE_MENU, false, false)
 
 #region Main Menu Actions
 ## Main Menu -> HUD, NONE -> AreaHub
